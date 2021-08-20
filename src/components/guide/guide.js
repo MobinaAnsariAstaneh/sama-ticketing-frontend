@@ -1,3 +1,4 @@
+import "./guide.css";
 import Head from "../header/header";
 import { Layout, Breadcrumb } from "antd";
 import { Helmet } from "react-helmet";
@@ -216,32 +217,6 @@ function Guide() {
             <img src={imagelogin} alt="" />
           </div>
         </Content>
-        {/* <Footer className="footer_content">
-          <a href="https://arashweb.com/fa/blog/">
-            <img src={logo}></img>
-            <h4 className="white">Arashweb Company</h4>
-          </a>
-          <div>
-            <div className="footer_content">
-              <p>
-                front-end developer : <b>Mobina Ansari Astaneh</b>
-              </p>
-            </div>
-            <div className="footer_content">
-              <p>
-                back-end developer : <b>Atta Attarian</b>
-              </p>
-            </div>
-            <div className="footer_content">
-              <a href="info@arashweb.ir">Email: info@arashweb.ir</a>
-            </div>
-            <div className="footer_content">
-              <a href="https://arashweb.com/fa/blog/">
-                Email: info@arashweb.ir
-              </a>
-            </div>
-          </div>
-        </Footer> */}
       </Layout>
     </>
   );

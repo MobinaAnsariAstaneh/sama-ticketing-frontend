@@ -1,0 +1,78 @@
+.arashweb {
+  padding-top: 20px;
+}
+.ant-layout-content {
+  background-color: white !important;
+}
+.goal {
+  padding-top: 30px;
+  color: purple;
+}
+.goal_context {
+  color: #2a2a2a;
+}
+.white {
+  color: white;
+}
+Footer img {
+  padding: 10px 80px 20px 75px;
+}
+.layout {
+  background-color: white !important;
+}
+.card-center {
+  text-align: center;
+  text-align: -webkit-center;
+}
+.language-left {
+  text-align: left;
+}
+.language-margin {
+  margin: 5px 10px 0px 0px;
+}
+a {
+  color: #b53471 !important;
+}
+.programmers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ProgrammingLanguages {
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn_purple {
+  color: black !important;
+  background-color: #d980fa !important;
+  border: purple !important;
+}
+.m-t {
+  margin-top: -98px !important;
+}
+.or {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #dee3e4;
+  position: relative;
+  margin: 35px 0;
+}
+.or:before {
+  width: 40px;
+  height: 18px;
+  position: absolute;
+  top: -5px;
+  right: calc(50% - 20px);
+  background-color: #fff;
+  text-align: center;
+  line-height: 10px;
+  color: #555;
+}
+@media screen and (max-width: 767px) {
+  main.ant-layout-content {
+    padding: 0 30px;
+  }
+}
