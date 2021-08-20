@@ -1,0 +1,75 @@
+.left-border{
+    border-left:1px solid purple;
+}
+.button{
+    border: 1px solid purple !important;
+    color: black !important;
+    padding: 5px 30px !important;
+    margin-bottom: 30px;
+}
+
+h2{
+    margin-bottom: 25px !important;
+    text-align: center;
+}
+
+.btn-position{
+    display: flex;
+    justify-content: center;
+}
+
+.ant-icon{
+    color: purple !important;
+}
+.layout{
+    background-color: gainsboro !important;
+}
+
+.ant-input-affix-wrapper{
+    border: 1px solid purple !important;
+}
+
+.avatar{
+    display: flex;
+    justify-content: center;
+}
+.ant-avatar-circle{
+    background-color: purple !important;
+}
+.avatar-icon{
+    color: #fff !important;
+}
+p{
+    text-align: center;
+}
+
+.user-name{
+    color: purple;
+    font-size: large;
+    margin-top: 40px;
+}
+.form-con{
+    margin: 50px 50px 50px 0;
+}
+.CustomAvatar-image{
+    border-radius: 50%;
+    overflow: hidden;
+}
+@media (max-width:767px){
+    .left-border{
+        border-left:0px ;
+        display: none;
+    }
+    .form-con{
+        margin: 40px auto auto 0 !important;
+    }
+}
+@media (max-width:878px) {
+    .left-border {
+        border-left: 0px;
+        display: none;
+    }
+    .form-con {
+        margin: 40px auto auto 0 !important;
+    }
+}

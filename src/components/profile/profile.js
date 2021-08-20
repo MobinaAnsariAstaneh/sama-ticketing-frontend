@@ -1,3 +1,4 @@
+import './profile.css';
 import Head from "../header/header";
 import { Layout, message } from "antd";
 import { Row, Col } from "antd";
