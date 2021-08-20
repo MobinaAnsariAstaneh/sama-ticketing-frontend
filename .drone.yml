@@ -1,0 +1,20 @@
+---
+kind: pipeline
+type: ssh
+name: default
+
+server:
+  host: 65.21.111.176
+  user: parham
+  password:
+    from_secret: password
+steps:
+  - name: build
+    commands:
+      - cd /mnt/HC_Volume_6876833/ticketing.tempserver.ir
+      - git pull
+      - yarn
+      - yarn build
+    when:
+      branch:
+        - drone
