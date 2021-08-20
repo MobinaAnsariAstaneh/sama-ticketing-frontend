@@ -1,4 +1,5 @@
 import Head from "../header/header";
+import "./dashboard.css";
 import { Layout, Breadcrumb } from "antd";
 import { Table, Tag } from "antd";
 import { Row, Col } from "antd";
