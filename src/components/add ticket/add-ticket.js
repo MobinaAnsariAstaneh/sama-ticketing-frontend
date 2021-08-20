@@ -1,3 +1,4 @@
+import "./add-ticket.css";
 import { Modal, Button } from "antd";
 import React, { useState } from "react";
 import { Input } from "antd";

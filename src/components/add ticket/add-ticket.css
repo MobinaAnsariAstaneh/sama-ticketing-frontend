@@ -1,0 +1,34 @@
+.ant-modal-title {
+  text-align: center;
+}
+.m-r {
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+.align-text {
+  font-weight: bold;
+}
+.ant-radio-checked .ant-radio-inner {
+  border-color: purple !important;
+}
+.ant-radio-inner::after {
+  background-color: purple !important;
+}
+.b-border {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(218, 214, 214);
+}
+.btn-modal {
+  background-color: white !important;
+  border: 1px solid purple !important;
+  color: purple !important;
+}
+.btn-cancel {
+  border: none !important;
+}
+.jodit-toolbar-editor-collection .jodit-toolbar-button {
+  display: grid;
+}
+.jodit-workplace {
+  min-height: 114px !important;
+}
