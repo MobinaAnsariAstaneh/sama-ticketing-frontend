@@ -1,3 +1,4 @@
+import "./forgot.css";
 import React, { useState } from "react";
 import { Layout, message } from "antd";
 import { Row, Col } from "antd";
