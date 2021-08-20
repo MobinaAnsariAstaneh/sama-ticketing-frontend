@@ -1,3 +1,4 @@
+import './register.css';
 import { Layout } from "antd";
 import { Row, Col } from "antd";
 import imgLogin from "../../assets/login.jpg";
