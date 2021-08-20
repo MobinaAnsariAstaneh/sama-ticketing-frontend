@@ -1,3 +1,4 @@
+import "./open-ticket.css";
 import { Drawer, Button, Spin } from "antd";
 import React, { useState, useEffect, memo } from "react";
 import { Comment, Avatar, message } from "antd";
@@ -240,7 +241,10 @@ function OpenTicket(props) {
             </div>
             <div>
               <span>
-                <Button onClick={() => answered("inprogres")} className="ant-tag-purple">
+                <Button
+                  onClick={() => answered("inprogres")}
+                  className="ant-tag-purple"
+                >
                   In Progress
                 </Button>
               </span>

@@ -1,0 +1,98 @@
+.p-align {
+  text-align: left !important;
+}
+.color-name {
+  color: #1890ff;
+}
+.font-span {
+  font-size: 13px;
+  color: gray;
+}
+.ant-drawer-header,
+.ant-drawer-body {
+  border-bottom: 1px solid rgb(236, 32, 236);
+}
+.btn-drwer {
+  background-color: white !important;
+  border: 1px solid purple !important;
+  color: purple !important;
+}
+.btn-cancel {
+  border: none !important;
+}
+.align-text {
+  text-align: left;
+  font-weight: bold;
+}
+.ant-comment-nested {
+  padding: 5px 15px;
+  background-color: rgb(255, 230, 230);
+}
+.b-color {
+  background-color: gray !important;
+}
+.ant-drawer-body {
+  padding-bottom: 10px !important;
+  padding-top: 0px !important;
+}
+.ant-comment.active {
+  background-color: rgba(246, 68, 68, 0.1);
+  padding: 0 10px;
+}
+.icon-back {
+  margin: 1px 20px 0px 5px;
+}
+.ant-drawer-close {
+  display: none !important;
+}
+.ant-comment-content-author {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ticket-id {
+  color: #999;
+  font-size: 14px;
+}
+.openTicket__subject {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.ant-tag-yellow {
+  color: yellow;
+  background-color: rgba(255, 255, 0, 0.479);
+  border-color: yellow;
+}
+.ant-tag-blue {
+  color: blue;
+  background-color: rgba(0, 0, 255, 0.514);
+  border-color: blue;
+}
+.ant-tag-purple {
+  color: purple;
+  background-color: rgba(187, 14, 135, 0.514);
+  border-color: purple;
+}
+.ant-tag-purple:hover {
+  color: #ffffff !important;
+  background: #9212a3 !important;
+  border-color: #4c0870 !important;
+}
+.header_open_ticket {
+  display: flex;
+  justify-content: space-between;
+}
+.pending {
+  margin-right: 15px;
+}
+@media screen and (max-width: 767px) {
+  .ant-drawer-content-wrapper {
+    width: 100% !important;
+  }
+}
+@media screen and (max-height: 450px) {
+  .ant-drawer-body {
+    overflow: unset !important;
+  }
+}
