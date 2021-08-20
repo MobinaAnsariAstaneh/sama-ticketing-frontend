@@ -4,6 +4,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import React from "react";
+import "./header.css";
 import { Layout } from "antd";
 import { Row, Col } from "antd";
 import image from "../../assets/MS_header.svg";

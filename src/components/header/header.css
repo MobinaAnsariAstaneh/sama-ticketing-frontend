@@ -1,0 +1,33 @@
+Header,
+.ant-menu {
+  background-color: purple !important;
+}
+.display {
+  display: flex;
+  justify-content: space-between !important;
+  flex-wrap: wrap-reverse !important;
+}
+.icons-list {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.ant-layout-header {
+  height: 50px !important;
+  line-height: 50px !important;
+}
+.ant-dropdown,
+.ant-dropdown-placement-bottomCenter,
+.ant-dropdown-hidden {
+  padding-top: 5px !important;
+  min-width: 175px !important;
+}
+.username-style {
+  font-size: 15px;
+  padding: 0px 0px 0px 10px;
+}
+@media screen and (max-width: 767px) {
+  .ant-layout-header {
+    padding: 0 20px !important;
+  }
+}
