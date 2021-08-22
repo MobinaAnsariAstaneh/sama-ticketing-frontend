@@ -232,22 +232,6 @@ function Home() {
     {
       title: "Type",
       dataIndex: "type",
-      // eslint-disable-next-line react/display-name
-      // render: (tag) => {
-      //     var color = "green";
-      //     if (tag === "task") {
-      //       color = "blue";
-      //     } else if (tag === "issue") {
-      //       color = "red";
-      //     }
-      //   return(
-      //   <span>
-      //         <Tag color={color} key={tag}>
-      //           {tag.toUpperCase()}
-      //         </Tag>
-      //   </span>
-      // )},
-
       filters: [
         {
           text: "Issue",
@@ -486,7 +470,7 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>Ticketing - Dashboard</title>
+        <title>SAMA - Dashboard</title>
       </Helmet>
       <Layout className="layout">
         <Header>

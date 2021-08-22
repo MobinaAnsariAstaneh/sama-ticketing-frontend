@@ -93,7 +93,7 @@ function Profile() {
   return (
     <>
       <Helmet>
-        <title>Ticketing - Profile Page</title>
+        <title>SAMA - Profile Page</title>
       </Helmet>
       <Layout className="layout">
         <Header>

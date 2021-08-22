@@ -201,7 +201,7 @@ function Forgot() {
   return (
     <>
       <Helmet>
-        <title>Ticketing - Forgotten Password Page</title>
+        <title>SAMA - Forgotten Password Page</title>
       </Helmet>
       <Layout>
         <Content>

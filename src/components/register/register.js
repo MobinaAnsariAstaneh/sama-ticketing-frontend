@@ -17,7 +17,7 @@ function Register() {
   return (
     <>
       <Helmet>
-        <title>Ticketing - Register Page</title>
+        <title>SAMA - Register Page</title>
       </Helmet>
 
       <Layout>

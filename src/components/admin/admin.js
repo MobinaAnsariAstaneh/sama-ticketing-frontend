@@ -248,7 +248,7 @@ function Admin() {
     <>
       {redirectelem}
       <Helmet>
-        <title>Ticketing - admin</title>
+        <title>SAMA - Admin</title>
       </Helmet>
       <Layout className="layout">
         <Header>

@@ -44,7 +44,7 @@ function Guide() {
   return (
     <>
       <Helmet>
-        <title>Ticketing - Guide Page</title>
+        <title>SAMA - Guide Page</title>
       </Helmet>
       <Layout className="layout">
         <Header>
