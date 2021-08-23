@@ -1,11 +1,9 @@
 import "./login.css";
 import React, { useState, useEffect } from "react";
-import { Layout, message } from "antd";
-import { Row, Col } from "antd";
+import { useHistory } from "react-router-dom";
+import { Layout, message, Row, Col, Form, Input, Button, Checkbox } from "antd";
 import imgLogin from "../../assets/login.jpg";
 import imagelogin from "../../assets/MS.svg";
-import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";

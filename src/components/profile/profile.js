@@ -1,15 +1,11 @@
 import './profile.css';
 import Head from "../header/header";
-import { Layout, message } from "antd";
-import { Row, Col } from "antd";
-import { Input } from "antd";
-import { LockOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 import { useState, useEffect } from "react";
+import { Layout, message, Row, Col, Input, Button} from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
-import axios from "../../axios";
 import Gravatar from "react-gravatar";
-import { UserOutlined } from "@ant-design/icons";
+import axios from "../../axios";
 
 const { Header, Content } = Layout;
 

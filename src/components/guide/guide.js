@@ -1,10 +1,8 @@
 import "./guide.css";
 import Head from "../header/header";
-import { Layout, Breadcrumb } from "antd";
-import { Helmet } from "react-helmet";
-import { Card, Col, Row } from "antd";
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Helmet } from "react-helmet";
+import { Layout, Breadcrumb, Card, Col, Row, Modal, Button, Typography} from "antd";
 import {
   PhoneOutlined,
   SendOutlined,
@@ -19,7 +17,6 @@ import Ansari from "../../assets/Ansari.jpg";
 import front from "../../assets/Front_End.jpg";
 import back from "../../assets/Back_End.png";
 import imagelogin from "../../assets/MS_logo.svg";
-import { Typography } from "antd";
 
 const { Header, Content } = Layout;
 const { Paragraph } = Typography;

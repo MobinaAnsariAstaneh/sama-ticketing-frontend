@@ -1,10 +1,8 @@
 import './register.css';
-import { Layout } from "antd";
-import { Row, Col } from "antd";
+import { Layout, Row, Col, Form, Input, Button } from "antd";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import imgLogin from "../../assets/login.jpg";
 import imagelogin from "../../assets/MS.svg";
-import { Form, Input, Button } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";
 

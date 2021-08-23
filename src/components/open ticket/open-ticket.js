@@ -1,12 +1,10 @@
 import "./open-ticket.css";
-import { Drawer, Button, Spin } from "antd";
-import React, { useState, useEffect, memo } from "react";
-import { Comment, Avatar, message } from "antd";
-import { useRef } from "react";
+import { Drawer, Button, Spin, Comment, Avatar, message} from "antd";
+import React, { useState, useEffect, useRef, memo } from "react";
 import JoditEditor from "jodit-react";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import axios from "../../axios";
 import Gravatar from "react-gravatar";
+import axios from "../../axios";
 
 const ExampleComment1 = (props) => {
   let usernameSet = localStorage.getItem("username"),

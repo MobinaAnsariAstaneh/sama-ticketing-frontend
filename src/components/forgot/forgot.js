@@ -1,18 +1,16 @@
 import "./forgot.css";
 import React, { useState } from "react";
-import { Layout, message } from "antd";
-import { Row, Col } from "antd";
-import imgLogin from "../../assets/login.jpg";
-import imagelogin from "../../assets/MS.svg";
-import { Form, Input, Button } from "antd";
 import { useHistory } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import axios from "../../axios";
+import { Layout, message, Row, Col, Form, Input, Button } from "antd";
 import {
   MailOutlined,
   FileProtectOutlined,
   LockOutlined,
 } from "@ant-design/icons";
+import imgLogin from "../../assets/login.jpg";
+import imagelogin from "../../assets/MS.svg";
+import { Helmet } from "react-helmet";
+import axios from "../../axios";
 
 const { Content } = Layout;
 

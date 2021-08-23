@@ -1,18 +1,15 @@
+import { React, useState } from "react";
+import { useHistory, Link } from "react-router-dom";
+import "./header.css";
 import {
   PlusSquareOutlined,
   QuestionCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import React from "react";
-import "./header.css";
-import { Layout } from "antd";
-import { Row, Col } from "antd";
+import { Layout, Row, Col, Menu, Dropdown, message, Popconfirm } from "antd";
 import image from "../../assets/MS_header.svg";
-import { Menu, Dropdown, message } from "antd";
 import AddTicket from "../add ticket/add-ticket";
-import { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { Popconfirm } from "antd";
+
 const { Header } = Layout;
 
 function Head(props) {
