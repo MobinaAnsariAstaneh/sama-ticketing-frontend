@@ -188,7 +188,7 @@ function OpenTicket(props) {
       />
       <br />
       <Button onClick={deletingTicket} className="btn-drwer btn-cancel ">
-        Close
+        Done
       </Button>
       <Button
         onClick={onClose}

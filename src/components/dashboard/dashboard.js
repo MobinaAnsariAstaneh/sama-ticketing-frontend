@@ -114,7 +114,6 @@ function Home() {
           description: find.description,
           priority: find.priority,
           task: find.task,
-          team: find.team,
           status: [find.tag],
           subject: find.subject,
           created: find.created_at,
@@ -263,14 +262,6 @@ function Home() {
       ),
     },
     {
-      title: "Customer",
-      dataIndex: "customer",
-    },
-    {
-      title: "Team",
-      dataIndex: "team",
-    },
-    {
       title: "Updated",
       dataIndex: "updated",
       sorter: (a, b) => a.updated2 - b.updated2,
@@ -284,12 +275,12 @@ function Home() {
           <>
             <Space size="middle" style={{ color: "#3699FF" }}>
               <Popconfirm
-                title="Do you want to delete this ticket?"
+                title="Do you want to Done this ticket?"
                 onConfirm={() => {
                   deletTicket(record.key);
                 }}
               >
-                <a>Delete {record.name}</a>
+                <a>Done {record.name}</a>
               </Popconfirm>
               <a
                 onClick={() => {
@@ -355,8 +346,6 @@ function Home() {
             created: val.created_at.split(".")[0],
             created2: +new Date(val.created_at.split(".")[0]),
             requester: val.user.username,
-            team: val.team.title,
-            customer: "Main",
             updated: val.updated_at.split(".")[0],
             updated2: +new Date(val.updated_at.split(".")[0]),
           });
@@ -438,8 +427,6 @@ function Home() {
               created: val.created_at,
               created2: +new Date(val.created_at),
               requester: val.user.username,
-              team: val.team.title,
-              customer: "Main",
               updated: val.updated_at,
               updated2: +new Date(val.updated_at),
             });

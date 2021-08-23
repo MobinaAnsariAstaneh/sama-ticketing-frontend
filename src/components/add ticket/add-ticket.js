@@ -10,10 +10,15 @@ import axios from "axios";
 
 function AddTicket(props) {
   const [value1, setValue1] = React.useState("normal");
+  const [value2, setValue2] = React.useState(1);
   const [value3, setValue3] = React.useState("");
   const onChange1 = (e) => {
     setValue1(e.target.value);
   };
+  const onChange2 = (e) => {
+    setValue2(e.target.value);
+  };
+
   const editor = useRef(null);
   const [content, setContent] = useState("");
 
@@ -118,10 +123,10 @@ function AddTicket(props) {
         <br />
         <div className="b-border">
           <span className="m-r">Priority : </span>
-          <Radio.Group onChange={onChange1} value={value1}>
+          <Radio.Group onChange={onChange2} value={value2}>
             <Radio value={"normal"}>Normal</Radio>
             <Radio value={"urgent"}>Urgent</Radio>
-            <Radio value={"critical"}>critical</Radio>
+            <Radio value={"critical"}>Critical</Radio>
           </Radio.Group>
         </div>
         <br />

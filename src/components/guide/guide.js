@@ -5,7 +5,15 @@ import { Helmet } from "react-helmet";
 import { Card, Col, Row } from "antd";
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
-import { PhoneOutlined, SendOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  PhoneOutlined,
+  SendOutlined,
+  MailOutlined,
+  AliwangwangOutlined,
+  LinkedinOutlined,
+  InstagramOutlined,
+  SkypeOutlined,
+} from "@ant-design/icons";
 import Maghami from "../../assets/Maghami.jpg";
 import Ansari from "../../assets/Ansari.jpg";
 import front from "../../assets/Front_End.jpg";
@@ -19,6 +27,15 @@ const { Paragraph } = Typography;
 function Guide() {
   const [isModalVisible1, setIsModalVisible1] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
+  const [visible, setVisible] = React.useState(false);
+  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [modalText, setModalText] = React.useState(
+    "All ways of virtual communication with the programming group"
+  );
+
+  const showModal = () => {
+    setVisible(true);
+  };
 
   const showModal1 = () => {
     setIsModalVisible1(true);
@@ -39,6 +56,22 @@ function Guide() {
   };
   const handleCancel2 = () => {
     setIsModalVisible2(false);
+  };
+
+  const handleOk = () => {
+    setModalText(
+      "All ways of virtual communication with the programming group"
+    );
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setVisible(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    console.log("Clicked cancel button");
+    setVisible(false);
   };
 
   return (
@@ -71,7 +104,7 @@ function Guide() {
             </div>
             <div className="or"></div>
 
-            <div className="programmers">
+            <div>
               <Button className="btn_purple" onClick={showModal1}>
                 programmers
               </Button>
@@ -104,6 +137,21 @@ function Guide() {
                       <SendOutlined style={{ padding: "1px 6px 4px 0px" }} />
                       Telegram :{" "}
                       <Paragraph copyable>@M_Ansari_Astaneh</Paragraph>
+                      <InstagramOutlined
+                        style={{ padding: "1px 6px 4px 0px" }}
+                      />
+                      Instagram : <br />
+                      <Paragraph copyable>m_ansari_astaneh</Paragraph>
+                      <SkypeOutlined style={{ padding: "1px 6px 4px 0px" }} />
+                      Skype : <br />
+                      <Paragraph copyable>live:.cid.4d6d9e1e3adbb47a</Paragraph>
+                      <LinkedinOutlined
+                        style={{ padding: "1px 6px 4px 0px" }}
+                      />
+                      Linkedin : <br />
+                      <Paragraph copyable>
+                        https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/
+                      </Paragraph>
                     </Card>
                   </Col>
                   <Col flex={1}>
@@ -125,6 +173,21 @@ function Guide() {
                       <SendOutlined style={{ padding: "1px 6px 4px 0px" }} />
                       Telegram :{" "}
                       <Paragraph copyable>@S_darban_maghami</Paragraph>
+                      <InstagramOutlined
+                        style={{ padding: "1px 6px 4px 0px" }}
+                      />
+                      Instagram : <br />
+                      <Paragraph copyable>sepideh.dm</Paragraph>
+                      <SkypeOutlined style={{ padding: "1px 6px 4px 0px" }} />
+                      Skype : <br />
+                      <Paragraph copyable>live:sepideh.1378.dm</Paragraph>
+                      <LinkedinOutlined
+                        style={{ padding: "1px 6px 4px 0px" }}
+                      />
+                      Linkedin : <br />
+                      <Paragraph copyable>
+                        https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/
+                      </Paragraph>
                     </Card>
                   </Col>
                 </Row>
@@ -215,6 +278,40 @@ function Guide() {
             </div>
             <div className="or"></div>
             <img src={imagelogin} alt="" />
+            <div className="center">
+              <Button onClick={showModal} className="btn_purple">
+                How to contact with supporter?
+              </Button>
+              <Modal
+                title="Contact with us : "
+                visible={visible}
+                onOk={handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+              >
+                <p>{modalText}</p> <br />
+                <AliwangwangOutlined
+                  style={{ padding: "1px 6px 4px 0px", color: "red" }}
+                />
+                Email : <br />
+                <Paragraph copyable>mobinaansariit@gmail.com</Paragraph>
+                <Paragraph copyable>sepideh@gmail.com</Paragraph>
+                <SendOutlined
+                  style={{ padding: "1px 6px 4px 0px", color: "red" }}
+                />
+                Telegram : <br />
+                <Paragraph copyable>@M_Ansari_Astaneh</Paragraph>
+                <Paragraph copyable>@S_darban_maghami</Paragraph>
+                <LinkedinOutlined style={{ padding: "1px 6px 4px 0px", color: "red" }} />
+                Linkedin : <br />
+                <Paragraph copyable>
+                  https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/
+                </Paragraph>
+                <Paragraph copyable>
+                  https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/
+                </Paragraph>
+              </Modal>
+            </div>
           </div>
         </Content>
       </Layout>
