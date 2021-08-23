@@ -209,19 +209,17 @@ function Forgot() {
               <div>
                 <img
                   src={imgLogin}
-                  className="loginImag"
+                  className="rgbimage loginImag"
                   width="100%"
                   height="721vh"
                   alt=""
                 />
                 <p className="para">
-                  <span>
-                    Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Egestas purus viverra
-                    accumsan in nisl nisi. Arcu cursus vitae congue mauris
-                    rhoncus aenean vel elit scelerisque. In egestas erat
-                    imperdiet sed euismod nisi porta lorem mollis.{" "}
-                  </span>
+                  <span>SAMA WEB</span>
+                  <div>
+                    A good platform for communication between employers and the
+                    programming team
+                  </div>
                 </p>
               </div>
             </Col>

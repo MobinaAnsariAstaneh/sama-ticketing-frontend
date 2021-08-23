@@ -52,7 +52,7 @@ function Profile() {
   };
   useEffect(() => {
     axios
-      .get("api/users/")
+      .put("api/user/")
       .then((res) => {
         if (res.status === 200) {
           return res.data;

@@ -49,8 +49,12 @@ a {
   background-color: #d980fa !important;
   border: purple !important;
 }
-.m-t {
-  margin-top: -98px !important;
+.logo {
+    width: 250px !important;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 30px;
 }
 .or {
   display: block;

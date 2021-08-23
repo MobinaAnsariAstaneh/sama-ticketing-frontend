@@ -50,7 +50,7 @@ function Login() {
       })
       .then((res) => {
         localStorage.setItem("auth", "true");
-        localStorage.setItem("token", res.access);
+        localStorage.setItem("token", res.token);
         return localStorage.setItem("username", email);
       })
       .then(() => {

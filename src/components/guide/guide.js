@@ -2,13 +2,11 @@ import "./guide.css";
 import Head from "../header/header";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Layout, Breadcrumb, Card, Col, Row, Modal, Button, Typography} from "antd";
+import { Layout, Card, Col, Row, Modal, Button, Typography} from "antd";
 import {
   PhoneOutlined,
   SendOutlined,
   MailOutlined,
-  AliwangwangOutlined,
-  LinkedinOutlined,
   InstagramOutlined,
   SkypeOutlined,
 } from "@ant-design/icons";
@@ -16,7 +14,7 @@ import Maghami from "../../assets/Maghami.jpg";
 import Ansari from "../../assets/Ansari.jpg";
 import front from "../../assets/Front_End.jpg";
 import back from "../../assets/Back_End.png";
-import imagelogin from "../../assets/MS_logo.svg";
+import imagelogin from "../../assets/MS.png";
 
 const { Header, Content } = Layout;
 const { Paragraph } = Typography;
@@ -82,9 +80,6 @@ function Guide() {
         </Header>
 
         <Content style={{ padding: "0 100px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            {/* <Breadcrumb.Item style={{ fontWeight: 'bold' }}>Guide</Breadcrumb.Item> */}
-          </Breadcrumb>
           <div className="site-layout-content">
             <div>
               <h4 className="goal">Team&apos;s Goal : </h4>
@@ -111,8 +106,8 @@ function Guide() {
                 onOk={handleCheckOut1}
                 onCancel={handleCancel1}
                 width={1000}
-                className="m-t"
-              >
+                centered
+                >
                 <Row className="card-center">
                   <Col flex={1}>
                     <Card
@@ -122,18 +117,9 @@ function Guide() {
                       style={{ width: 240 }}
                       cover={<img alt="Mobina Ansari" src={Ansari} />}
                     >
-                      <h6>
-                        <a href={"./profile"}>Mobina Ansari Astaneh</a>
-                      </h6>
-                      <MailOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Email :{" "}
-                      <Paragraph copyable>mobinaansariit@gmail.com</Paragraph>
-                      <PhoneOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Phone Number :{" "}
-                      <Paragraph copyable>+98 915 445 0822</Paragraph>
-                      <SendOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Telegram :{" "}
-                      <Paragraph copyable>@M_Ansari_Astaneh</Paragraph>
+                      <h4>
+                        <a href={"https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/"}>Mobina Ansari Astaneh</a>
+                      </h4>
                       <InstagramOutlined
                         style={{ padding: "1px 6px 4px 0px" }}
                       />
@@ -142,13 +128,6 @@ function Guide() {
                       <SkypeOutlined style={{ padding: "1px 6px 4px 0px" }} />
                       Skype : <br />
                       <Paragraph copyable>live:.cid.4d6d9e1e3adbb47a</Paragraph>
-                      <LinkedinOutlined
-                        style={{ padding: "1px 6px 4px 0px" }}
-                      />
-                      Linkedin : <br />
-                      <Paragraph copyable>
-                        https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/
-                      </Paragraph>
                     </Card>
                   </Col>
                   <Col flex={1}>
@@ -159,17 +138,9 @@ function Guide() {
                       style={{ width: 240 }}
                       cover={<img alt="Sepideh Maghami" src={Maghami} />}
                     >
-                      <h6>
-                        <a href={"./profile"}>Sepideh Darban Maghami</a>
-                      </h6>
-                      <MailOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Email : <Paragraph copyable>sepideh@gmail.com</Paragraph>
-                      <PhoneOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Phone Number :{" "}
-                      <Paragraph copyable>+98 915 066 0935</Paragraph>
-                      <SendOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Telegram :{" "}
-                      <Paragraph copyable>@S_darban_maghami</Paragraph>
+                      <h4>
+                        <a href={"https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"}>Sepideh Darban Maghami</a>
+                      </h4>
                       <InstagramOutlined
                         style={{ padding: "1px 6px 4px 0px" }}
                       />
@@ -178,13 +149,6 @@ function Guide() {
                       <SkypeOutlined style={{ padding: "1px 6px 4px 0px" }} />
                       Skype : <br />
                       <Paragraph copyable>live:sepideh.1378.dm</Paragraph>
-                      <LinkedinOutlined
-                        style={{ padding: "1px 6px 4px 0px" }}
-                      />
-                      Linkedin : <br />
-                      <Paragraph copyable>
-                        https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/
-                      </Paragraph>
                     </Card>
                   </Col>
                 </Row>
@@ -274,7 +238,7 @@ function Guide() {
               </Modal>
             </div>
             <div className="or"></div>
-            <img src={imagelogin} alt="" />
+            <img src={imagelogin} alt="" className="logo"/>
             <div className="center">
               <Button onClick={showModal} className="btn_purple">
                 How to contact with supporter?
@@ -287,26 +251,18 @@ function Guide() {
                 onCancel={handleCancel}
               >
                 <p>{modalText}</p> <br />
-                <AliwangwangOutlined
-                  style={{ padding: "1px 6px 4px 0px", color: "red" }}
-                />
+                <MailOutlined style={{ padding: "1px 6px 4px 0px", color: "red"  }} />
                 Email : <br />
                 <Paragraph copyable>mobinaansariit@gmail.com</Paragraph>
                 <Paragraph copyable>sepideh@gmail.com</Paragraph>
-                <SendOutlined
-                  style={{ padding: "1px 6px 4px 0px", color: "red" }}
-                />
+                <PhoneOutlined style={{ padding: "1px 6px 4px 0px", color: "red"  }} />
+                      Phone Number :{" "}
+                      <Paragraph copyable>+98 915 445 0822</Paragraph>
+                      <Paragraph copyable>+98 915 066 0935</Paragraph>
+                      <SendOutlined style={{ padding: "1px 6px 4px 0px" , color: "red" }} />
                 Telegram : <br />
                 <Paragraph copyable>@M_Ansari_Astaneh</Paragraph>
                 <Paragraph copyable>@S_darban_maghami</Paragraph>
-                <LinkedinOutlined style={{ padding: "1px 6px 4px 0px", color: "red" }} />
-                Linkedin : <br />
-                <Paragraph copyable>
-                  https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/
-                </Paragraph>
-                <Paragraph copyable>
-                  https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/
-                </Paragraph>
               </Modal>
             </div>
           </div>

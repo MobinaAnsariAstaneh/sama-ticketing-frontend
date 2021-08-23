@@ -14,12 +14,13 @@ import {
   Col,
   Button,
 } from "antd";
-import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
-import axios from "axios";
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Bar } from "react-chartjs-2";
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Bar } from "react-chartjs-2";
+
+import axios from "axios";
 
 const { Header, Content } = Layout; // Layout , Header, Content, Footer for ant design
 const data = {

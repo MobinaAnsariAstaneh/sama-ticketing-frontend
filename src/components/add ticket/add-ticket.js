@@ -1,9 +1,8 @@
 import "./add-ticket.css";
-import { Modal, Button } from "antd";
-import React, { useState } from "react";
-import { Input, Radio, message, useRef } from "antd";
+import { Modal, Button, message, Radio, Input } from "antd";
+import React, { useState, useRef } from "react";
 import JoditEditor from "jodit-react"; // description
-import axios from "axios"; // API
+import axios from "../../axios"; // API
 
 function AddTicket(props) {
   const [value1, setValue1] = useState("issue"); // type
@@ -36,41 +35,29 @@ function AddTicket(props) {
       return false;
     }
 
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     const dataset = {
-      type: value1,
+      type: value1 == 'issue' ? false : true,
       priority: value2,
       subject: value3,
-      description: content
+      content: content
     };
-
     axios
       .post(
-        "https://api.ticket.tempserver.ir/api/ticket/",
+        "api/ticket",
         {
           ...dataset,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-            AUTHORIZATION: "Bearer " + token,
-          },
         }
       )
-      .then((res) => {
+      .then(() => {
         setContent(""); // description
         setValue3(""); // subject
-        if (res.status === 201 || res.status === 200) {
           message.success("Tickets added");
           props.changeTicket(); //!
-          return res.data; 
-        } else {
-          message.error("something wrong");
-          return res;
-        }
+          // return res.data;
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch(() => {
+        message.error("something wrong");
       });
     props.hidefunc();
   }
