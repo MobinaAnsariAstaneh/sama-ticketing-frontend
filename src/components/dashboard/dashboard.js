@@ -1,17 +1,12 @@
 import Head from "../header/header";
 import "./dashboard.css";
-import { Layout, Breadcrumb } from "antd";
-import { Table, Tag } from "antd";
-import { Row, Col } from "antd";
-import { Pagination, message } from "antd";
-import { Input, Space, Popconfirm } from "antd";
+import { Layout, Breadcrumb, Table, Tag, Row, Col, Pagination, message, Input, Space, Popconfirm, Button} from "antd";
 import { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import OpenTicket from "../open ticket/open-ticket";
 import { Helmet } from "react-helmet";
-import { useHistory, useLocation } from "react-router-dom";
-import axios from "axios";
 import debounce from "lodash/debounce";
-import { Button } from "antd";
+import axios from "../../axios";
 
 const { Header, Content } = Layout;
 const { Search } = Input;
@@ -26,18 +21,10 @@ function Home() {
   const [commentTicket, setcommentTicket] = useState();
   const [curentData, setcurentData] = useState();
   const [archive, setarchive] = useState(true);
-  const [url, seturl] = useState(
-    "https://api.ticket.tempserver.ir/api/ticket/"
-  );
-  var token = localStorage.getItem("token");
+  const [url, seturl] = useState("api/ticket");
   const deletTicket = (id) => {
     axios
-      .get("https://api.ticket.tempserver.ir/api/close/" + id + "/", {
-        headers: {
-          "content-type": "application/json",
-          AUTHORIZATION: "Bearer " + token,
-        },
-      })
+      .delete("api/ticket/" + id + "/")
       .then((res) => res.data)
       .then((result) => {
         if (result.message === "OK") {
@@ -52,12 +39,7 @@ function Home() {
   };
   const addArchive = (id) => {
     axios
-      .get(`https://api.ticket.tempserver.ir/api/archive/${id}/`, {
-        headers: {
-          "content-type": "application/json",
-          AUTHORIZATION: "Bearer " + token,
-        },
-      })
+      .post(`api/ticket/${id}/`)
       .then((res) => {
         if (res.status === 200) {
           return res.data;
@@ -75,7 +57,7 @@ function Home() {
 
   const showArchive = () => {
     const urlArchive = archive ? "ticketarchive/" : "ticket/";
-    seturl("https://api.ticket.tempserver.ir/api/" + urlArchive);
+    seturl("api/" + urlArchive);
     setchange((prev) => !prev);
     setarchive((prev) => !prev);
   };
@@ -83,14 +65,7 @@ function Home() {
   const openTicketfunc = (id) => {
     axios
       .get(
-        "https://api.ticket.tempserver.ir/api/ticket/?limit=10000&offset=0",
-        {
-          headers: {
-            "content-type": "application/json",
-            AUTHORIZATION: "Bearer " + token,
-          },
-        }
-      )
+        "/api/ticket/" + id )
       .then((res) => {
         if (res.status === 200) {
           return res.data;
@@ -99,12 +74,8 @@ function Home() {
         }
       })
       .then((result) => {
+        console.log(result);
         return result.results;
-      })
-      .then((result) => {
-        const resul = [...result];
-        const find = resul.find((val) => Number(id) === val.id);
-        return find;
       })
       .then((find) => {
         history.push("/" + id);
@@ -312,13 +283,9 @@ function Home() {
   var arr = [];
   useEffect(() => {
     axios
-      .get(url, {
-        headers: {
-          "content-type": "application/json",
-          AUTHORIZATION: "Bearer " + token,
-        },
-      })
+      .get(url)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           return res.data;
         } else {
@@ -394,14 +361,8 @@ function Home() {
     if (value.target.value.trim() !== "") {
       axios
         .get(
-          "https://api.ticket.tempserver.ir/api/ticket/?limit=10000&search=" +
+          "api/ticket/?limit=10000&search=" +
             value.target.value,
-          {
-            headers: {
-              "content-type": "application/json",
-              AUTHORIZATION: "Bearer " + token,
-            },
-          }
         )
         .then((res) => {
           if (res.status === 200) {
@@ -448,9 +409,8 @@ function Home() {
     let ofset = (curent - 1) * 10;
     const urlArchive = archive ? "ticket/" : "ticketarchive/";
     seturl(
-      `https://api.ticket.tempserver.ir/api/${urlArchive}?limit=10&offset=` +
-        ofset
-    );
+      `api/${urlArchive}?limit=10&offset=${ofset}`
+       );
     setchange((prev) => !prev);
   };
   const textArchive = archive ? "Archive" : "Ticket";

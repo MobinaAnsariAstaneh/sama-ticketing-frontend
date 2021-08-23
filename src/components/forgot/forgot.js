@@ -7,7 +7,7 @@ import imagelogin from "../../assets/MS.svg";
 import { Form, Input, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import axios from "../../axios";
 import {
   MailOutlined,
   FileProtectOutlined,
@@ -27,14 +27,9 @@ function Forgot() {
   const onFinished = (values) => {
     axios
       .post(
-        "https://api.ticket.tempserver.ir/api/reset-password/",
+        "api/password_reset_email",
         {
           email: values.email,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-          },
         }
       )
       .then((res) => {
@@ -54,16 +49,11 @@ function Forgot() {
   const onFinished2 = (values) => {
     axios
       .post(
-        "https://api.ticket.tempserver.ir/api/confirm-password/",
+        "api/reset_password",
         {
           token: values.token,
-          uid: values.uid,
+          email: values.email,
           password: values.password,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-          },
         }
       )
       .then((res) => {
@@ -155,19 +145,19 @@ function Forgot() {
           </Form.Item>
           <Form.Item
             className="ant-input-size"
-            name="uid"
+            name="email"
             rules={[
               {
                 required: true,
-                message: "Please input your uid!",
+                message: "Please input your email!",
               },
             ]}
           >
             <Input
-              type="uid"
+              type="email"
               className="ant-icon"
               prefix={<FileProtectOutlined />}
-              placeholder="uid"
+              placeholder="email"
             />
           </Form.Item>
           <Form.Item

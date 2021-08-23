@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import axios from "../../axios";
 
 const { Content } = Layout;
 function Login() {
@@ -20,18 +20,18 @@ function Login() {
     const storageObj = JSON.parse(storage);
     if (storage !== null) {
       form.setFieldsValue({
-        username: storageObj.username,
+        email: storageObj.email,
         password: storageObj.password,
       });
     }
   }, []);
 
   const handleFormSubmit = (values) => {
-    const name = values.username,
+    const email = values.email,
       pass = values.password;
     axios
-      .post("https://api.ticket.tempserver.ir/api/token/", {
-        username: name,
+      .post("api/login/", {
+        email: email,
         password: pass,
       })
       .then((res) => {
@@ -39,28 +39,23 @@ function Login() {
           if (check === true) {
             localStorage.setItem(
               "login",
-              JSON.stringify({
-                username: name,
+              JSON.stringify({ // change object to json
+                email: email,
                 password: pass,
               })
             );
           }
           return res.data;
         } else if (res.status === 401) {
-          message.error("username or password is invalid");
+          message.error("email or password is invalid");
         }
       })
       .then((res) => {
         localStorage.setItem("auth", "true");
         localStorage.setItem("token", res.access);
-        return localStorage.setItem("username", name);
+        return localStorage.setItem("username", email);
       })
       .then(() => {
-        setTimeout(() => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("auth");
-          localStorage.removeItem("username");
-        }, 3600 * 3 * 1000);
         setred(true);
       })
       .catch((err) => {
@@ -107,7 +102,7 @@ function Login() {
                 <div className="flex-space">
                   <Form.Item
                     className="ant-input-size"
-                    name="username"
+                    name="email"
                     rules={[
                       {
                         required: true,

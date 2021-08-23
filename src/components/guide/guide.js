@@ -104,7 +104,7 @@ function Guide() {
             </div>
             <div className="or"></div>
 
-            <div>
+            <div className="programmers">
               <Button className="btn_purple" onClick={showModal1}>
                 programmers
               </Button>

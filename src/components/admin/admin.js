@@ -18,9 +18,10 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-const { Header, Content } = Layout;
 import { Bar } from "react-chartjs-2";
 import { Redirect } from "react-router-dom";
+
+const { Header, Content } = Layout; // Layout , Header, Content, Footer for ant design
 const data = {
   labels: ["comments", "tickets", "users"],
   datasets: [
@@ -56,20 +57,18 @@ function Admin() {
   const [redirect, setredirect] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
   const [formdata, setformdata] = useState({
-    active: true,
-    staff: false,
-    name: "",
-    teams: "",
+    email: "",
+    firstname: "",
     lastname: "",
     pass: "",
     confimpass: "",
-    email: "",
+    superuser: false,
+    staff: true,
   });
   const [url, seturl] = useState("https://api.ticket.tempserver.ir/api/users/");
   var token = localStorage.getItem("token");
   var username = localStorage.getItem("username");
   const deletUser = () => {};
-
   const columns = [
     {
       title: "id",
@@ -96,23 +95,21 @@ function Admin() {
       render: (text) => <a style={{ color: "#3699FF" }}>{text}</a>,
     },
     {
-      title: "team",
-      dataIndex: "team",
-    },
-    // {
-    //   title: 'superuser',
-    //   dataIndex: 'superuser',
-    //   // eslint-disable-next-line react/display-name
-    //   render: text => <a style={{color:"#3699FF"}}>{text?"yes":"no"}</a>,
-    // },
-    {
-      title: "active",
-      dataIndex: "active",
+      title: "superuser",
+      dataIndex: "superuser",
       // eslint-disable-next-line react/display-name
       render: (text) => (
         <a style={{ color: "#3699FF" }}>{text ? "yes" : "no"}</a>
       ),
     },
+    // {
+    //   title: "active",
+    //   dataIndex: "active",
+    //   // eslint-disable-next-line react/display-name
+    //   render: (text) => (
+    //     <a style={{ color: "#3699FF" }}>{text ? "yes" : "no"}</a>
+    //   ),
+    // },
     {
       title: "staff",
       dataIndex: "staff",
@@ -130,7 +127,7 @@ function Admin() {
           <>
             <Space size="middle" style={{ color: "#3699FF" }}>
               <Popconfirm
-                title="Do you want to delete this ticket?"
+                title="Do you want to delete this user?"
                 onConfirm={() => {
                   deletUser(record.key);
                 }}
@@ -167,17 +164,16 @@ function Admin() {
         resul.map((val) => {
           itsme = "";
           if (val.username === username) {
-            itsme = " (you)";
+            itsme = "(you)";
           }
           arr.push({
             id: val.id,
             firstname: val.first_name,
             lastname: val.last_name,
-            team: val.team,
             username: val.username + itsme,
-            active: val.is_active,
+            // active: val.is_active,
             email: val.email,
-            // superuser:val.is_superuser,
+            superuser: val.is_superuser,
             staff: val.is_staff,
           });
         });
@@ -193,13 +189,11 @@ function Admin() {
     e.preventDefault();
     const senddata = {
       email: formdata.email,
-      username: formdata.name,
-      first_name: formdata.name,
+      username: formdata.firstname,
+      first_name: formdata.firstname,
       last_name: formdata.lastname,
-      // is_superuser:formdata.superuser,
+      is_superuser: formdata.superuser,
       is_staff: formdata.staff,
-      is_active: formdata.active,
-      team: formdata.teams,
       password: formdata.pass,
     };
     console.log(senddata);
@@ -218,13 +212,12 @@ function Admin() {
         alert(JSON.stringify(result));
         setformdata({
           email: "",
-          name: "",
-          active: true,
-          staff: false,
-          teams: "",
+          firstname: "",
           lastname: "",
           pass: "",
           confimpass: "",
+          superuser: false,
+          staff: true,
         });
         setchange((prev) => !prev);
       })
@@ -240,7 +233,7 @@ function Admin() {
     );
     setchange((prev) => !prev);
   };
-  let redirectelem = "";
+  let redirectelem = ""; //!
   if (redirect === true) {
     redirectelem = <Redirect to="/" />;
   }
@@ -248,7 +241,7 @@ function Admin() {
     <>
       {redirectelem}
       <Helmet>
-        <title>SAMA - Admin</title>
+        <title>SAMA - Admin Page</title>
       </Helmet>
       <Layout className="layout">
         <Header>
@@ -307,7 +300,7 @@ function Admin() {
             <Button
               key="back"
               onClick={() => setmodalOpen(false)}
-              className="btn-cancel  btn-modal"
+              className="btn-cancel btn-modal"
             >
               Cancel
             </Button>,
@@ -343,7 +336,7 @@ function Admin() {
                   return { ...prev, name: e.target.value };
                 });
               }}
-              placeholder="Name"
+              placeholder="First Name"
               className="ant-icon"
               prefix={<UserOutlined />}
             />
@@ -391,30 +384,22 @@ function Admin() {
             />
             <br />
             <br />
-            <Input
-              value={formdata.teams}
-              onChange={(e) => {
-                setformdata((prev) => {
-                  return { ...prev, teams: e.target.value };
-                });
-              }}
-              size="large"
-              placeholder="teams"
-              className="ant-icon"
-              prefix={<UserOutlined />}
-            />
-            <br />
-            <br />
-            {/* <div className="b-border">
-                        <span className="m-r">superuser </span>
-                        <Radio.Group onChange={(e)=>{
-                      setformdata((prev)=>{
-                      return {...prev,superuser:e.target.value}
-                    })}} value={formdata.superuser} >
-                        <Radio value={true}>yes</Radio>
-                        <Radio value={false}>no</Radio>
-                        </Radio.Group>
-                    </div> */}
+            <br/>
+            <div className="b-border">
+              <span className="m-r">superuser </span>
+              <Radio.Group
+                onChange={(e) => {
+                  setformdata((prev) => {
+                    return { ...prev, superuser: e.target.value };
+                  });
+                }}
+                value={formdata.superuser}
+              >
+                <Radio value={true}>yes</Radio>
+                <Radio value={false}>no</Radio>
+              </Radio.Group>
+            </div>
+            <br/>
             <div className="b-border">
               <span className="m-r">staff</span>
               <Radio.Group
@@ -429,7 +414,7 @@ function Admin() {
                 <Radio value={false}>no</Radio>
               </Radio.Group>
             </div>
-            <div>
+            {/* <div>
               <span className="m-r">active</span>
               <Radio.Group
                 onChange={(e) => {
@@ -442,7 +427,7 @@ function Admin() {
                 <Radio value={true}>yes</Radio>
                 <Radio value={false}>no</Radio>
               </Radio.Group>
-            </div>
+            </div> */}
           </form>
         </Modal>
       </Layout>

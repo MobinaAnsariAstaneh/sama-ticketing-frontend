@@ -33,8 +33,16 @@ Footer img {
 a {
   color: #b53471 !important;
 }
+.programmers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .ProgrammingLanguages {
   padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn_purple {
   color: black !important;
@@ -69,6 +77,12 @@ a {
   justify-content: center;
   align-items: center;
 }
+/* .communications { 
+  color: red;
+  font-size: large;
+  font-weight: bold;
+  padding: "1px 6px 4px 0px" ;
+} */
 @media screen and (max-width: 767px) {
   main.ant-layout-content {
     padding: 0 30px;

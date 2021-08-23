@@ -6,9 +6,17 @@ import imagelogin from "../../assets/MS.svg";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
+import axios from "../../axios";
 
 const { Content } = Layout;
 const onFinish = (values) => {
+  axios.post("api/register", {
+    first_name: values.name,
+    last_name: values.LastName,
+    email: values.email,
+    password: values.password,
+    password_confirm: values.confirm_password,
+  });
   console.log("Received values of form: ", values);
   console.log(values);
 };
@@ -118,7 +126,7 @@ function Register() {
                   </Form.Item>
                   <Form.Item
                     className="ant-input-size"
-                    name="confirm-password"
+                    name="confirm_password"
                     rules={[
                       {
                         required: true,

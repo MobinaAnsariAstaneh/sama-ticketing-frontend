@@ -11,7 +11,7 @@ import image from "../../assets/MS_header.svg";
 import { Menu, Dropdown, message } from "antd";
 import AddTicket from "../add ticket/add-ticket";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Popconfirm } from "antd";
 const { Header } = Layout;
 
@@ -59,6 +59,48 @@ function Head(props) {
       </Menu.Item>
     </Menu>
   );
+  let newTicketElem = "";
+  let guide = "";
+  let userElem = (
+    <Link to="/login">
+      <a className="login">login</a>
+    </Link>
+  );
+  const token = localStorage.getItem("auth");
+  if (token) {
+    guide = (
+      <QuestionCircleOutlined
+        style={{ padding: "0 13px" }}
+        onClick={routeChange}
+      />
+    );
+    newTicketElem = (
+      <PlusSquareOutlined
+        style={{ padding: "0 14px" }}
+        onClick={() => {
+          setNewTicket(true);
+        }}
+      />
+    );
+    userElem = (
+      <Dropdown
+        overlay={menu}
+        visible={dropdown}
+        onVisibleChange={(e) => {
+          setDropdown(e);
+        }}
+        placement="bottomRight"
+      >
+        <span className="username-style">
+          {username}
+          <UserOutlined
+            style={{ fontSize: "20px", padding: "0px 0px 0px 12px" }}
+          />
+        </span>
+      </Dropdown>
+    );
+  }
+
   return (
     <>
       <Layout className="layout">
@@ -78,31 +120,9 @@ function Head(props) {
             <Col>
               {" "}
               <div className="icons-list">
-                <PlusSquareOutlined
-                  style={{ padding: "0 14px" }}
-                  onClick={() => {
-                    setNewTicket(true);
-                  }}
-                />
-                <QuestionCircleOutlined
-                  style={{ padding: "0 13px" }}
-                  onClick={routeChange}
-                />
-                <Dropdown
-                  overlay={menu}
-                  visible={dropdown}
-                  onVisibleChange={(e) => {
-                    setDropdown(e);
-                  }}
-                  placement="bottomRight"
-                >
-                  <span className="username-style">
-                    {username}
-                    <UserOutlined
-                      style={{ fontSize: "20px", padding: "0px 0px 0px 12px" }}
-                    />
-                  </span>
-                </Dropdown>
+                {newTicketElem}
+                {guide}
+                {userElem}
               </div>
             </Col>
           </Row>

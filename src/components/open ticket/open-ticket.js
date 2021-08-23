@@ -5,7 +5,7 @@ import { Comment, Avatar, message } from "antd";
 import { useRef } from "react";
 import JoditEditor from "jodit-react";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import axios from "axios";
+import axios from "../../axios";
 import Gravatar from "react-gravatar";
 
 const ExampleComment1 = (props) => {
@@ -45,7 +45,6 @@ const ExampleComment1 = (props) => {
 };
 
 function OpenTicket(props) {
-  const token = localStorage.getItem("token");
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([{ ticket: 0 }]);
@@ -70,19 +69,13 @@ function OpenTicket(props) {
   const answered = (tag) => {
     axios
       .put(
-        "https://api.ticket.tempserver.ir/api/ticket/" + props.data.key + "/",
+        "api/ticket/" + props.data.key + "/",
         {
           subject: props.data.subject,
           priority: props.data.priority,
           description: props.data.description,
           team: props.data.team.id,
           tag: tag,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-            AUTHORIZATION: "Bearer " + token,
-          },
         }
       )
       .then((res) => {
@@ -109,18 +102,12 @@ function OpenTicket(props) {
     setSpiner(true);
     axios
       .post(
-        "https://api.ticket.tempserver.ir/api/comment/",
+        "api/comment/",
         {
           body: content,
           file01: "",
           file02: "",
           ticket: comment[0].ticket,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-            AUTHORIZATION: "Bearer " + token,
-          },
         }
       )
       .then((res) => {

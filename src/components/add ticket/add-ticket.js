@@ -1,17 +1,14 @@
 import "./add-ticket.css";
 import { Modal, Button } from "antd";
 import React, { useState } from "react";
-import { Input } from "antd";
-import { Radio } from "antd";
-import { message } from "antd";
-import { useRef } from "react";
-import JoditEditor from "jodit-react";
-import axios from "axios";
+import { Input, Radio, message, useRef } from "antd";
+import JoditEditor from "jodit-react"; // description
+import axios from "axios"; // API
 
 function AddTicket(props) {
-  const [value1, setValue1] = React.useState("normal");
-  const [value2, setValue2] = React.useState(1);
-  const [value3, setValue3] = React.useState("");
+  const [value1, setValue1] = useState("issue"); // type
+  const [value2, setValue2] = useState("normal"); // priority
+  const [value3, setValue3] = useState(" "); // subject
   const onChange1 = (e) => {
     setValue1(e.target.value);
   };
@@ -20,7 +17,7 @@ function AddTicket(props) {
   };
 
   const editor = useRef(null);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(""); // description
 
   function Modalhidefunc() {
     props.hidefunc();
@@ -28,24 +25,25 @@ function AddTicket(props) {
   }
 
   function AddTicket(e) {
+    // Add ticket
     e.preventDefault();
-    if (content.trim() === "") {
+    if (value3.trim() === "") {
       message.error("Please fill in the subject field");
       return false;
     }
-    if (value3.trim() === "") {
-      message.error("Please fill in the message field");
+    if (content.trim() === "") {
+      message.error("Please fill in the description field");
       return false;
     }
+
     const token = localStorage.getItem("token");
     const dataset = {
+      type: value1,
+      priority: value2,
       subject: value3,
-      priority: value1,
-      description: content,
-      team: "2",
-      file01: "",
-      file02: "",
+      description: content
     };
+
     axios
       .post(
         "https://api.ticket.tempserver.ir/api/ticket/",
@@ -60,12 +58,12 @@ function AddTicket(props) {
         }
       )
       .then((res) => {
-        setContent("");
-        setValue3("");
+        setContent(""); // description
+        setValue3(""); // subject
         if (res.status === 201 || res.status === 200) {
           message.success("Tickets added");
-          props.changeTicket();
-          return res.data;
+          props.changeTicket(); //!
+          return res.data; 
         } else {
           message.error("something wrong");
           return res;
@@ -80,6 +78,7 @@ function AddTicket(props) {
   const config = {
     readonly: false, // all options from https://xdsoft.net/jodit/doc/
   };
+
   return (
     <>
       <Modal
@@ -87,8 +86,8 @@ function AddTicket(props) {
           <div key="1">
             <p>Add ticket</p>
             <Input
-              value={value3}
-              onChange={(e) => setValue3(e.target.value)}
+              value={value3} // subject
+              onChange={(e) => setValue3(e.target.value)} // onChange for input, change if event occurs 
               placeholder="Subject"
             />
           </div>,
@@ -100,7 +99,7 @@ function AddTicket(props) {
           <Button
             key="back"
             onClick={Modalhidefunc}
-            className="btn-cancel  btn-modal"
+            className="btn-cancel btn-modal"
           >
             Cancel
           </Button>,
@@ -116,8 +115,8 @@ function AddTicket(props) {
         <div className="b-border">
           <span className="m-r">Type : </span>
           <Radio.Group onChange={onChange1} value={value1}>
-            <Radio value={1}>Issue</Radio>
-            <Radio value={2}>Task</Radio>
+            <Radio value={"issue"}>Issue</Radio>
+            <Radio value={"task"}>Task</Radio>
           </Radio.Group>
         </div>
         <br />

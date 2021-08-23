@@ -7,7 +7,7 @@ import { LockOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import axios from "../../axios";
 import Gravatar from "react-gravatar";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -25,7 +25,6 @@ function Profile() {
     confimpass: "",
     oldpass: "",
   });
-  const token = localStorage.getItem("token");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -40,11 +39,9 @@ function Profile() {
 
     console.log(senddata);
     axios
-      .post("https://api.ticket.tempserver.ir/api/changepassword/", senddata, {
-        "content-type": "application/json",
-        "WWW-Authenticate": "Bearer " + token,
-      })
-      .then(() => {
+      .post("api/changepassword/", senddata)
+      .then((res) => {
+        console.log(res)
         setformdata({
           email: "",
           name: "",
@@ -59,12 +56,7 @@ function Profile() {
   };
   useEffect(() => {
     axios
-      .get("https://api.ticket.tempserver.ir/api/users/", {
-        headers: {
-          "content-type": "application/json",
-          AUTHORIZATION: "Bearer " + token,
-        },
-      })
+      .get("api/users/")
       .then((res) => {
         if (res.status === 200) {
           return res.data;
