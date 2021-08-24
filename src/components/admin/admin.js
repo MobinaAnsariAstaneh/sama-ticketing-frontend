@@ -4,6 +4,7 @@ import {
   Radio,
   Modal,
   Input,
+  Form,
   Space,
   Popconfirm,
   Pagination,
@@ -19,8 +20,7 @@ import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Bar } from "react-chartjs-2";
-
-import axios from "axios";
+import axios from "../../axios";
 
 const { Header, Content } = Layout; // Layout , Header, Content, Footer for ant design
 const data = {
@@ -66,7 +66,7 @@ function Admin() {
     superuser: false,
     staff: true,
   });
-  const [url, seturl] = useState("https://api.ticket.tempserver.ir/api/users/");
+  const [url, seturl] = useState("api/users/");
   var token = localStorage.getItem("token");
   var username = localStorage.getItem("username");
   const deletUser = () => {};
@@ -144,12 +144,7 @@ function Admin() {
   var arr = [];
   useEffect(() => {
     axios
-      .get(url, {
-        headers: {
-          "content-type": "application/json",
-          AUTHORIZATION: "Bearer " + token,
-        },
-      })
+      .get(url)
       .then((res) => {
         setcurentData(res.data.count);
         if (res.status === 200) {
@@ -157,6 +152,7 @@ function Admin() {
         } else {
           setredirect(true);
         }
+        
       })
       .then((result) => {
         arr = [];
@@ -182,7 +178,7 @@ function Admin() {
       })
       .catch((err) => {
         console.log(err.message);
-        setredirect(true);
+        setredirect(false);
       });
   }, [chnage]);
 
@@ -198,7 +194,6 @@ function Admin() {
       password: formdata.pass,
     };
     console.log(senddata);
-
     axios
       .post("https://api.ticket.tempserver.ir/api/users/", senddata, {
         "content-type": "application/json",
@@ -235,7 +230,7 @@ function Admin() {
     setchange((prev) => !prev);
   };
   let redirectelem = ""; //!
-  if (redirect === true) {
+  if (redirect === false) {
     redirectelem = <Redirect to="/" />;
   }
   return (
@@ -314,7 +309,20 @@ function Admin() {
             </Button>,
           ]}
         >
-          <form>
+          <Form>
+          <Form.Item
+             name="email"
+             rules={[
+              {
+                required: true,
+                message: "Please input your Email!",
+              },
+              {
+                type: 'email',
+                message: "Your email is invalid!",
+              },
+            ]}
+            >
             <Input
               value={formdata.email}
               onChange={(e) => {
@@ -327,8 +335,15 @@ function Admin() {
               className="ant-icon"
               prefix={<MailOutlined />}
             />
-            <br />
-            <br />
+            </Form.Item>
+            <Form.Item
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your First Name!",
+                },
+              ]}>
             <Input
               size="large"
               value={formdata.name}
@@ -341,8 +356,16 @@ function Admin() {
               className="ant-icon"
               prefix={<UserOutlined />}
             />
-            <br />
-            <br />
+              </Form.Item>
+            <Form.Item
+             name="LastName"
+             rules={[
+               {
+                 required: true,
+                 message: "Please input your Last Name!",
+               },
+             ]}
+            >
             <Input
               value={formdata.lastname}
               onChange={(e) => {
@@ -355,8 +378,19 @@ function Admin() {
               className="ant-icon"
               prefix={<UserOutlined />}
             />
-            <br />
-            <br />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Password!",
+                },
+                {
+                  min: 8,
+                }
+              ]}
+            >
             <Input
               value={formdata.pass}
               onChange={(e) => {
@@ -369,8 +403,19 @@ function Admin() {
               className="ant-icon"
               prefix={<LockOutlined />}
             />
-            <br />
-            <br />
+            </Form.Item>
+            <Form.Item
+               name="confirm_password"
+               rules={[
+                 {
+                   required: true,
+                   message: "Please enter your password again!",
+                 },
+                 {
+                   min: 8,
+                 }
+               ]}
+              >
             <Input
               value={formdata.confimpass}
               onChange={(e) => {
@@ -383,9 +428,7 @@ function Admin() {
               className="ant-icon"
               prefix={<LockOutlined />}
             />
-            <br />
-            <br />
-            <br/>
+            </Form.Item>
             <div className="b-border">
               <span className="m-r">superuser </span>
               <Radio.Group
@@ -429,7 +472,7 @@ function Admin() {
                 <Radio value={false}>no</Radio>
               </Radio.Group>
             </div> */}
-          </form>
+            </Form>
         </Modal>
       </Layout>
     </>

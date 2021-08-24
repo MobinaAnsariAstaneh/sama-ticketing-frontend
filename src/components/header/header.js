@@ -5,6 +5,7 @@ import {
   PlusSquareOutlined,
   QuestionCircleOutlined,
   UserOutlined,
+  IdcardOutlined,
 } from "@ant-design/icons";
 import { Layout, Row, Col, Menu, Dropdown, message, Popconfirm } from "antd";
 import image from "../../assets/MS_header.svg";
@@ -63,21 +64,44 @@ function Head(props) {
       <a className="login">login</a>
     </Link>
   );
+
+  let btnAdmin = "";
+  if (localStorage.getItem("superuser") == "true") {
+    btnAdmin = (
+      <Link to="/admin" title="Admin Page">
+        <a className="link">
+          <IdcardOutlined
+            twoToneColor="white"
+            style={{ padding: "0 14px" }}
+          />
+        </a>
+      </Link>
+    );
+  }
+
   const token = localStorage.getItem("auth");
   if (token) {
     guide = (
+      <Link to="/guide" title="Guide page">
+      <a className="link">
       <QuestionCircleOutlined
         style={{ padding: "0 13px" }}
         onClick={routeChange}
       />
+      </a>
+      </Link>
     );
     newTicketElem = (
+      <Link to="/add ticket" title="Add Ticket">
+      <a className="link">
       <PlusSquareOutlined
         style={{ padding: "0 14px" }}
         onClick={() => {
           setNewTicket(true);
         }}
       />
+      </a>
+      </Link>
     );
     userElem = (
       <Dropdown
@@ -105,6 +129,7 @@ function Head(props) {
           <Row wrap={false} className="display">
             <Col flex="none">
               <div>
+              <Link to="/dashboard" title="Dashboard page">
                 <img
                   src={image}
                   width="40px"
@@ -112,12 +137,14 @@ function Head(props) {
                   alt="logo"
                   onClick={dashboard}
                 />
+                </Link>
               </div>
             </Col>
             <Col>
               {" "}
               <div className="icons-list">
                 {newTicketElem}
+                {btnAdmin}  
                 {guide}
                 {userElem}
               </div>

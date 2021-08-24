@@ -118,7 +118,7 @@ function Guide() {
                       cover={<img alt="Mobina Ansari" src={Ansari} />}
                     >
                       <h4>
-                        <a href={"https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/"}>Mobina Ansari Astaneh</a>
+                        <a className="programmer_info" href={"https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/" }>Mobina Ansari Astaneh</a>
                       </h4>
                       <InstagramOutlined
                         style={{ padding: "1px 6px 4px 0px" }}
@@ -139,7 +139,7 @@ function Guide() {
                       cover={<img alt="Sepideh Maghami" src={Maghami} />}
                     >
                       <h4>
-                        <a href={"https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"}>Sepideh Darban Maghami</a>
+                        <a  className="programmer_info" href={"https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"}>Sepideh Darban Maghami</a>
                       </h4>
                       <InstagramOutlined
                         style={{ padding: "1px 6px 4px 0px" }}
@@ -251,18 +251,18 @@ function Guide() {
                 onCancel={handleCancel}
               >
                 <p>{modalText}</p> <br />
-                <MailOutlined style={{ padding: "1px 6px 4px 0px", color: "red"  }} />
+                <MailOutlined style={{ padding: "1px 6px 4px 0px", color: "purple"  }} />
                 Email : <br />
-                <Paragraph copyable>mobinaansariit@gmail.com</Paragraph>
-                <Paragraph copyable>sepideh@gmail.com</Paragraph>
-                <PhoneOutlined style={{ padding: "1px 6px 4px 0px", color: "red"  }} />
+                <Paragraph copyable className="copy">mobinaansariit@gmail.com</Paragraph>
+                <Paragraph copyable className="copy">sepideh@gmail.com</Paragraph>
+                <PhoneOutlined style={{ padding: "1px 6px 4px 0px", color: "purple"  }} />
                       Phone Number :{" "}
-                      <Paragraph copyable>+98 915 445 0822</Paragraph>
-                      <Paragraph copyable>+98 915 066 0935</Paragraph>
-                      <SendOutlined style={{ padding: "1px 6px 4px 0px" , color: "red" }} />
+                      <Paragraph copyable className="copy">+98 915 445 0822</Paragraph>
+                      <Paragraph copyable className="copy">+98 915 066 0935</Paragraph>
+                      <SendOutlined style={{ padding: "1px 6px 4px 0px" , color: "purple" }} />
                 Telegram : <br />
-                <Paragraph copyable>@M_Ansari_Astaneh</Paragraph>
-                <Paragraph copyable>@S_darban_maghami</Paragraph>
+                <Paragraph copyable className="copy">@M_Ansari_Astaneh</Paragraph>
+                <Paragraph copyable className="copy">@S_darban_maghami</Paragraph>
               </Modal>
             </div>
           </div>

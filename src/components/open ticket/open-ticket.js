@@ -1,5 +1,6 @@
 import "./open-ticket.css";
-import { Drawer, Button, Spin, Comment, Avatar, message} from "antd";
+
+import { Drawer, Button, Spin, message, Comment, Avatar} from "antd";
 import React, { useState, useEffect, useRef, memo } from "react";
 import JoditEditor from "jodit-react";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -60,24 +61,19 @@ function OpenTicket(props) {
     setComment(props.comments);
     setLoad(true);
   }, [Load]);
-  useEffect(() => {
-    // message.success("Ticket open");
-  }, []);
 
-  const answered = (tag) => {
+//tag
+  const answered = () => {
     axios
       .put(
         "api/ticket/" + props.data.key + "/",
         {
           subject: props.data.subject,
           priority: props.data.priority,
-          description: props.data.description,
-          team: props.data.team.id,
-          tag: tag,
+          description: props.data.description
         }
       )
       .then((res) => {
-        console.log(res);
         if (res.status === 200 || res.status === 201) {
           props.changeComment();
         }
@@ -99,18 +95,14 @@ function OpenTicket(props) {
     }
     setSpiner(true);
     axios
-      .post(
-        "api/comment/",
+      .put(
+        "api/ticket/" + props.data.key + "/",
         {
-          body: content,
-          file01: "",
-          file02: "",
-          ticket: comment[0].ticket,
+          content: content
         }
       )
       .then((res) => {
-        console.log(res);
-        if (res.status === 200 || res.status === 201) {
+        if (res.status === 202 || res.status === 201) {
           const tag = props.data.status[0] === "open" ? "answered" : "open";
           answered(tag);
           setContent("");
@@ -144,16 +136,18 @@ function OpenTicket(props) {
         <ExampleComment1
           reply={replyfunc}
           key={key}
-          name={val.user.username}
+          name={val.user_id}
           date={val.updated_at}
-          email={val.user.email}
+          email={val.email}
           message={val.body}
         ></ExampleComment1>
       );
     });
+    console.log(props.data)
   } else {
-    commented = "";
+    commented = "Bye";
   }
+
   let elem, attr, classStatus, elemTicketrm;
   if (spiner) {
     attr = { disabled: true };

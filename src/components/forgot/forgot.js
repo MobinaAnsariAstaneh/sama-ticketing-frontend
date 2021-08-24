@@ -1,6 +1,6 @@
 import "./forgot.css";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { Layout, message, Row, Col, Form, Input, Button } from "antd";
 import {
   MailOutlined,
@@ -16,12 +16,19 @@ const { Content } = Layout;
 
 function Forgot() {
   const history = useHistory();
+  const location = useLocation();
+  const [stge, setstage] = useState(false);
+  useEffect(() => {
+    if (location.search.match("token")){
+      setstage(true);
+    }
+  }, []);
   const register = () => {
     message.success("Register page");
     history.push("./register");
   };
 
-  const [stge, setstage] = useState(false);
+  
   const onFinished = (values) => {
     axios
       .post(
@@ -31,10 +38,9 @@ function Forgot() {
         }
       )
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           setstage(true);
-          message.success(res.data.message);
+          message.success("Email was successfully sent to you");
         }
         return res.data;
       })
@@ -45,12 +51,18 @@ function Forgot() {
   };
 
   const onFinished2 = (values) => {
+    const token = location.search.split("&")[0].split("=")[1];
+    const email = location.search.split("&")[1].split("=")[1];
+    if(values.password !== values.confirm_password){
+      return message.error("password and confirm password doesn't match");
+    }
+    
     axios
       .post(
         "api/reset_password",
         {
-          token: values.token,
-          email: values.email,
+          token: token,
+          email: email,
           password: values.password,
         }
       )
@@ -60,9 +72,9 @@ function Forgot() {
         }
         return res.data;
       })
-      .then((result) => {
-        alert(JSON.stringify(result));
-        console.log(result);
+      .then(() => {
+        message.success("Your password changed successfully");
+        history.push("./login");
       })
       .catch((err) => console.log(err.message));
   };
@@ -85,6 +97,10 @@ function Forgot() {
               required: true,
               message: "Please input your Email!",
             },
+            {
+              type: 'email',
+              message: "Your email is invalid!",
+            },
           ]}
         >
           <Input
@@ -94,7 +110,7 @@ function Forgot() {
           />
         </Form.Item>
         <Form.Item>
-          <Button htmlType="submit" className="login-form-button-purple">
+          <Button htmlType="submit" className="login-form-button-purple submit-forgot">
             Submit
           </Button>
         </Form.Item>
@@ -124,41 +140,7 @@ function Forgot() {
         onFinish={onFinished2}
       >
         <div className="flex-space">
-          <Form.Item
-            className="ant-input-size"
-            name="token"
-            rules={[
-              {
-                required: true,
-                message: "Please input your token!",
-              },
-            ]}
-          >
-            <Input
-              type="token"
-              className="ant-icon"
-              prefix={<FileProtectOutlined />}
-              placeholder="token"
-            />
-          </Form.Item>
-          <Form.Item
-            className="ant-input-size"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input
-              type="email"
-              className="ant-icon"
-              prefix={<FileProtectOutlined />}
-              placeholder="email"
-            />
-          </Form.Item>
-          <Form.Item
+        <Form.Item
             className="ant-input-size"
             name="password"
             rules={[
@@ -166,6 +148,9 @@ function Forgot() {
                 required: true,
                 message: "Please input your new password!",
               },
+              {
+                min: 8,
+              }
             ]}
           >
             <Input.Password
@@ -175,9 +160,30 @@ function Forgot() {
               placeholder="new password"
             />
           </Form.Item>
+          <Form.Item
+            className="ant-input-size"
+            name="confirm_password"
+            rules={[
+              {
+                required: true,
+                message: "Please confirm your password!",
+              },
+              {
+                min: 8,
+              }
+            ]}
+          >
+            <Input.Password
+              type="confirm password"
+              className="ant-icon"
+              prefix={<FileProtectOutlined />}
+              placeholder="confirm password"
+            />
+          </Form.Item>
+          
 
           <Form.Item>
-            <Button htmlType="submit" className="login-form-button-purple">
+            <Button htmlType="submit" className="login-form-button-purple submit-forgot">
               Submit
             </Button>
           </Form.Item>

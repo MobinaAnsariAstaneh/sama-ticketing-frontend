@@ -1,25 +1,31 @@
-import './register.css';
+import "./register.css";
 import { Layout, Row, Col, Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import { useHistory } from 'react-router-dom';
 import imgLogin from "../../assets/login.jpg";
 import imagelogin from "../../assets/MS.svg";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";
 
 const { Content } = Layout;
-const onFinish = (values) => {
-  axios.post("api/register", {
-    first_name: values.name,
-    last_name: values.LastName,
-    email: values.email,
-    password: values.password,
-    password_confirm: values.confirm_password,
-  });
-  console.log("Received values of form: ", values);
-  console.log(values);
-};
 
 function Register() {
+  const history = useHistory();
+  const onFinish = (values) => {
+    axios.post("api/register", {
+      first_name: values.name,
+      last_name: values.LastName,
+      email: values.email,
+      password: values.password,
+      password_confirm: values.confirm_password,
+    })
+    .then(()=>{
+      history.push("./login");
+    })
+    console.log("Received values of form: ", values);
+    console.log(values);
+  };
+  
   return (
     <>
       <Helmet>
@@ -40,7 +46,7 @@ function Register() {
               </p>
 
               <Form
-                name="normal_login"
+                name="normal_register"
                 className="login-form"
                 initialValues={{
                   remember: true,
@@ -56,6 +62,10 @@ function Register() {
                         required: true,
                         message: "Please input your First Name!",
                       },
+                      {
+                        min: 2,
+                        max: 15
+                      }
                     ]}
                   >
                     <Input
@@ -75,6 +85,10 @@ function Register() {
                         required: true,
                         message: "Please input your Last Name!",
                       },
+                      {
+                        min: 2,
+                        max: 20,
+                      }
                     ]}
                   >
                     <Input
@@ -94,6 +108,10 @@ function Register() {
                         required: true,
                         message: "Please input your Email!",
                       },
+                      {
+                        type: 'email',
+                        message: "Your email is invalid!",
+                      },
                     ]}
                   >
                     <Input
@@ -112,6 +130,9 @@ function Register() {
                         required: true,
                         message: "Please input your Password!",
                       },
+                      {
+                        min: 8,
+                      }
                     ]}
                   >
                     <Input.Password
@@ -130,6 +151,9 @@ function Register() {
                         required: true,
                         message: "Please enter your password again!",
                       },
+                      {
+                        min: 8,
+                      }
                     ]}
                   >
                     <Input.Password
@@ -144,7 +168,7 @@ function Register() {
                     <Button
                       type="primary"
                       htmlType="submit"
-                      className="login-form-button "
+                      className="login-form-button submit-register"
                     >
                       Create Account
                     </Button>

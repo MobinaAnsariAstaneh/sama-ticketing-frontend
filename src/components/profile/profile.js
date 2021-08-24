@@ -1,7 +1,7 @@
-import './profile.css';
+import "./profile.css";
 import Head from "../header/header";
 import { useState, useEffect } from "react";
-import { Layout, message, Row, Col, Input, Button} from "antd";
+import { Layout, message, Row, Col, Input, Form, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
 import Gravatar from "react-gravatar";
@@ -10,6 +10,7 @@ import axios from "../../axios";
 const { Header, Content } = Layout;
 
 function Profile() {
+  const [form] = Form.useForm();
   const [user, setuser] = useState({
     name: "",
     email: "",
@@ -19,41 +20,42 @@ function Profile() {
   const [formdata, setformdata] = useState({
     pass: "",
     confimpass: "",
-    oldpass: "",
   });
-
-  const submitHandler = (e) => {
+  const validetion = (e) => {
     e.preventDefault();
-    if (formdata.pass !== formdata.confimpass) {
+    if (formdata.password !== formdata.confim_password) {
       message.error("password and confirm password not equal");
       return false;
     }
+  };
+  const submitHandler = (id) => {
     const senddata = {
-      old_password: formdata.oldpass,
+      name: formdata.name,
+      lastname: formdata.lastname,
+      oldpass: formdata.confimpass,
       password: formdata.pass,
     };
 
     console.log(senddata);
     axios
-      .post("api/changepassword/", senddata)
-      .then((res) => {
-        console.log(res)
+      .put("api/user/" + id, senddata)
+      .then(() => {
         setformdata({
-          email: "",
           name: "",
           lastname: "",
           pass: "",
           confimpass: "",
         });
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch(() => {
+        message.error("Your information didn't update");
       });
   };
   useEffect(() => {
     axios
       .put("api/user/")
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           return res.data;
         } else {
@@ -68,10 +70,10 @@ function Profile() {
           return arr.username === localStorage.getItem("username");
         });
         setuser({
-          name: user.username,
-          email: user.email,
-          last_name: user.last_name,
-          first_name: user.first_name,
+          name: user.name,
+          lastname: user.lastname,
+          oldpass: user.confimpass,
+          password: user.pass,
         });
       })
       .catch((err) => {
@@ -111,93 +113,128 @@ function Profile() {
                 className="form-con"
                 style={{ margin: "50px", marginBottom: "0px" }}
               >
-                <form
-                  onSubmit={(e) => {
-                    submitHandler(e);
+                <Form
+                  name="normal_login"
+                  className="login-form"
+                  form={form}
+                  initialValues={{
+                    remember: true,
                   }}
+                  onFinish={submitHandler}
                 >
                   <h2>User Information change</h2>
-                  <Input
-                    size="large"
-                    value={formdata.name}
-                    onChange={(e) => {
-                      setformdata((prev) => {
-                        return { ...prev, name: e.target.value };
-                      });
+                  <Form.Item
+                    name="name"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your First Name!",
+                      },
+                      {
+                        min: 2,
+                        max: 15,
+                      },
+                    ]}
+                  >
+                    <Input
+                      value={formdata.name}
+                      onChange={(e) => {
+                        setformdata((prev) => {
+                          return { ...prev, name: e.target.value };
+                        });
+                      }}
+                      placeholder="First name"
+                      type="text"
+                      className="ant-icon"
+                      prefix={<UserOutlined />}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="LastName"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your Last Name!",
+                      },
+                      {
+                        min: 3,
+                        max: 20,
+                      },
+                    ]}
+                  >
+                    <Input
+                      value={formdata.lastname}
+                      onChange={(e) => {
+                        setformdata((prev) => {
+                          return { ...prev, lastname: e.target.value };
+                        });
+                      }}
+                      placeholder="Last Name"
+                      type="text"
+                      className="ant-icon"
+                      prefix={<UserOutlined />}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your Password!",
+                      },
+                      {
+                        min: 8,
+                      },
+                    ]}
+                  >
+                    <Input.Password
+                      value={formdata.pass}
+                      onChange={(e) => {
+                        setformdata((prev) => {
+                          return { ...prev, pass: e.target.value };
+                        });
+                      }}
+                      placeholder="Password"
+                      type="password"
+                      className="ant-icon"
+                      prefix={<LockOutlined />}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="confirm_password"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your password again!",
+                      },
+                      {
+                        min: 8,
+                      },
+                    ]}
+                  >
+                    <Input.Password
+                      value={formdata.confimpass}
+                      onChange={(e) => {
+                        setformdata((prev) => {
+                          return { ...prev, confimpass: e.target.value };
+                        });
+                      }}
+                      placeholder="Confirm Password"
+                      className="ant-icon"
+                      prefix={<LockOutlined />}
+                    />
+                  </Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button button"
+                    onSubmit={(e) => {
+                      validetion(e);
                     }}
-                    placeholder="Name"
-                    className="ant-icon"
-                    prefix={<UserOutlined />}
-                  />
-                  <br />
-                  <br />
-                  <Input
-                    value={formdata.lastname}
-                    onChange={(e) => {
-                      setformdata((prev) => {
-                        return { ...prev, lastname: e.target.value };
-                      });
-                    }}
-                    size="large"
-                    placeholder="Last Name"
-                    className="ant-icon"
-                    prefix={<UserOutlined />}
-                  />
-                  <br />
-                  <br />
-                  <Input
-                    value={formdata.oldpass}
-                    onChange={(e) => {
-                      setformdata((prev) => {
-                        return { ...prev, oldpass: e.target.value };
-                      });
-                    }}
-                    size="large"
-                    placeholder="old password"
-                    className="ant-icon"
-                    prefix={<LockOutlined />}
-                  />
-                  <br />
-                  <br />
-                  <Input
-                    value={formdata.pass}
-                    onChange={(e) => {
-                      setformdata((prev) => {
-                        return { ...prev, pass: e.target.value };
-                      });
-                    }}
-                    size="large"
-                    placeholder="Password"
-                    className="ant-icon"
-                    prefix={<LockOutlined />}
-                  />
-                  <br />
-                  <br />
-                  <Input
-                    value={formdata.confimpass}
-                    onChange={(e) => {
-                      setformdata((prev) => {
-                        return { ...prev, confimpass: e.target.value };
-                      });
-                    }}
-                    size="large"
-                    placeholder="Confirm Password"
-                    className="ant-icon"
-                    prefix={<LockOutlined />}
-                  />
-                  <br />
-                  <br />
-                  <div className="btn-position">
-                    <Button
-                      className="button"
-                      key="submit"
-                      htmlType="submit"
-                      ghost
-                    >
-                      Save
-                    </Button>
-                  </div>
-                </form>
+                  >
+                    Save
+                  </Button>
+                </Form>
               </Col>
             </Row>
           </div>

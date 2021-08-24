@@ -30,8 +30,8 @@ Footer img {
 .language-margin {
   margin: 5px 10px 0px 0px;
 }
-a {
-  color: #b53471 !important;
+.programmer_info {
+   color: #d980fa;
 }
 .programmers {
   display: flex;
@@ -87,6 +87,16 @@ a {
   font-weight: bold;
   padding: "1px 6px 4px 0px" ;
 } */
+.copy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6b3f8;
+}
+.title {
+  color: #e6b3f8;
+  font-weight: bold;
+}
 @media screen and (max-width: 767px) {
   main.ant-layout-content {
     padding: 0 30px;

@@ -1,6 +1,19 @@
 import Head from "../header/header";
 import "./dashboard.css";
-import { Layout, Breadcrumb, Table, Tag, Row, Col, Pagination, message, Input, Space, Popconfirm, Button} from "antd";
+import {
+  Layout,
+  Breadcrumb,
+  Table,
+  Tag,
+  Row,
+  Col,
+  Pagination,
+  message,
+  Input,
+  Space,
+  Popconfirm,
+  Button,
+} from "antd";
 import { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import OpenTicket from "../open ticket/open-ticket";
@@ -24,74 +37,62 @@ function Home() {
   const [url, seturl] = useState("api/ticket");
   const deletTicket = (id) => {
     axios
-      .delete("api/ticket/" + id + "/")
-      .then((res) => res.data)
+      .put("api/ticket/" + id , {
+        status: "Done"
+      })
       .then((result) => {
-        if (result.message === "OK") {
+        if (result.status === 202) {
           message.success("Ticket " + id + " deleted");
           setchange((prev) => !prev);
-        } else {
-          console.log(result);
-          message.error("somthing wrong");
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch(() => message.error("Operation failed"));
   };
   const addArchive = (id) => {
     axios
-      .post(`api/ticket/${id}/`)
+      .put(`api/ticket/${id}`,{
+        archived:true
+      })
       .then((res) => {
-        if (res.status === 200) {
-          return res.data;
-        } else {
-          message.error("try agin");
-        }
+        if (res.status === 202) {
+          message.success("ticket " + id + " archived");
+        } 
       })
-      .then((result) => {
-        message.success(result.message);
-      })
-      .catch((err) => {
-        console.log(err.message);
+      .catch(() => {
+        message.error("Ticket wasn't archive");
       });
   };
 
   const showArchive = () => {
-    const urlArchive = archive ? "ticketarchive/" : "ticket/";
-    seturl("api/" + urlArchive);
+    const urlArchive = archive ? "?archived=1" : "";
+    seturl("api/ticket" + urlArchive);
     setchange((prev) => !prev);
     setarchive((prev) => !prev);
   };
   const history = useHistory();
   const openTicketfunc = (id) => {
     axios
-      .get(
-        "/api/ticket/" + id )
+      .put("/api/ticket/" + id)
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 202) {
           return res.data;
         } else {
           message.error("try agin");
         }
       })
-      .then((result) => {
-        console.log(result);
-        return result.results;
-      })
-      .then((find) => {
-        history.push("/" + id);
-        console.log(find);
+      .then(([find]) => {
+        history.push("/" + find.id);
         setidTiketOpen({
           key: find.id,
-          description: find.description,
+          description: "find.contents",
           priority: find.priority,
-          task: find.task,
-          status: [find.tag],
+          task: find.type,
+          status: [find.status],
           subject: find.subject,
           created: find.created_at,
-          created2: +new Date(find.created_at),
-          requester: find.user.username,
+          requester: "find.user.username",
         });
-        setcommentTicket(find.comments);
+        setcommentTicket(find.contents);
         setOpenTicket(true);
         setOpenTicketTime(true);
       })
@@ -108,7 +109,7 @@ function Home() {
         <span>
           {status.map((tag) => {
             var color = "green";
-            if (tag === "done") {
+            if (tag === "Done") {
               color = "red";
             } else if (tag === "open") {
               color = "yellow";
@@ -165,17 +166,21 @@ function Home() {
       title: "Priority",
       dataIndex: "priority",
       // eslint-disable-next-line react/display-name
-      render: (tag) => {
-        var color = "green";
-        if (tag === "urgent") {
-          color = "blue";
-        } else if (tag === "critical") {
-          color = "red";
+      render: (priority) => {
+        var color = "green" ; 
+        if (priority === "High") {
+          color = "red"
+        }
+        else if (priority === "Normal") {
+          color = "blue"
+        }
+        else if(priority === "Low") {
+          color = "green"
         }
         return (
           <span>
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
+            <Tag color={color} key={priority}>
+              {priority.toUpperCase()}
             </Tag>
           </span>
         );
@@ -183,37 +188,54 @@ function Home() {
 
       filters: [
         {
-          text: "Normal",
-          value: "normal",
+          text: "Critical",
+          value: "Critical",
         },
         {
           text: "Urgent",
-          value: "urgent",
+          value: "Urgent",
         },
         {
-          text: "Critical",
-          value: "critical",
+          text: "Normal",
+          value: "Normal",
         },
       ],
       onFilter: (value, record) => {
-        return record.status.indexOf(value) === 0;
+        return record.priority.indexOf(value) === 0;
       },
-    },
-    {
+    },{
       title: "Type",
       dataIndex: "type",
+      // eslint-disable-next-line react/display-name
+      render: (type) => {
+        var color = "green" ; 
+        if (type === "Issue") {
+          color = "red"
+        }
+        else if (type === "Task") {
+          color = "purple"
+        }
+        return (
+          <span>
+            <Tag color={color} key={type}>
+              {type.toUpperCase()}
+            </Tag>
+          </span>
+        );
+      },
+
       filters: [
         {
           text: "Issue",
-          value: "issue",
+          value: "Issue",
         },
         {
           text: "Task",
-          value: "task",
+          value: "Task",
         },
       ],
       onFilter: (value, record) => {
-        return record.status.indexOf(value) === 0;
+        return record.type.indexOf(value) === 0;
       },
     },
     {
@@ -285,7 +307,6 @@ function Home() {
     axios
       .get(url)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           return res.data;
         } else {
@@ -293,28 +314,23 @@ function Home() {
         }
       })
       .then((result) => {
-        console.log(result);
-        setcurentData(result.count);
-        return result.results;
+        setcurentData(result.total);
+        return result.data;
       })
       .then((result) => {
         arr = [];
         const resul = [...result];
-        console.log(resul);
-
         resul.map((val) => {
           arr.push({
             key: val.id,
-            priority: val.priority,
-            task: val.task,
-            status: [val.tag],
+            priority: val.priority == "High" ? "Critical" : val.priority == "normal" ? "Urgent" : "Normal",
+            type: val.type == 0 ? "Issue" : "Task",
+            status: [val.status],
             number: val.id,
             subject: val.subject,
             created: val.created_at.split(".")[0],
-            created2: +new Date(val.created_at.split(".")[0]),
-            requester: val.user.username,
+            requester: val.user_id,
             updated: val.updated_at.split(".")[0],
-            updated2: +new Date(val.updated_at.split(".")[0]),
           });
         });
         return result;
@@ -359,65 +375,24 @@ function Home() {
 
   const onSearch = debounce((value) => {
     if (value.target.value.trim() !== "") {
-      axios
-        .get(
-          "api/ticket/?limit=10000&search=" +
-            value.target.value,
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            return res.data;
-          } else {
-            message.error("try agin");
-          }
-        })
-        .then((result) => {
-          return result.results;
-        })
-        .then((result) => {
-          arr = [];
-          const resul = [...result];
-          resul.map((val) => {
-            arr.push({
-              key: val.id,
-              status: [val.tag],
-              priority: val.priority,
-              task: val.task,
-              number: arr.length + 1,
-              subject: val.subject,
-              created: val.created_at,
-              created2: +new Date(val.created_at),
-              requester: val.user.username,
-              updated: val.updated_at,
-              updated2: +new Date(val.updated_at),
-            });
-          });
-          return result;
-        })
-        .then(() => {
-          setdata1(arr);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      seturl("api/ticket?subject=" + value.target.value)
+      setchange((prev) => !prev)
     } else if (value.target.value.trim() === "") {
+      seturl("api/ticket");
       setchange((prev) => !prev);
     }
-  }, 1000);
+  }, 500);
 
   const changePage = (curent) => {
-    let ofset = (curent - 1) * 10;
     const urlArchive = archive ? "ticket/" : "ticketarchive/";
-    seturl(
-      `api/${urlArchive}?limit=10&offset=${ofset}`
-       );
+    seturl(`api/${urlArchive}?page=${curent}`);
     setchange((prev) => !prev);
   };
   const textArchive = archive ? "Archive" : "Ticket";
   return (
     <>
       <Helmet>
-        <title>SAMA - Dashboard</title>
+        <title>SAMA - Dashboard Page</title>
       </Helmet>
       <Layout className="layout">
         <Header>

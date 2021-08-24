@@ -92,7 +92,7 @@
     width: 430px;
 }
 
-[type="submit"]:not(:disabled) {
+.submit-forgot {
     width: 430px !important;
 }
 
@@ -131,7 +131,7 @@
     .ant-input-size {
         width: 350px !important;
     }
-    [type="submit"]:not(:disabled) {
+    .submit-forgot {
         width: 350px !important;
     }
     .width-style {
@@ -146,7 +146,7 @@
     .ant-input-size {
         width: 300px !important;
     }
-    [type="submit"]:not(:disabled) {
+    .submit-forgot {
         width: 300px !important;
     }
     .width-style {
@@ -161,7 +161,7 @@
     .ant-input-size {
         width: 250px !important;
     }
-    [type="submit"]:not(:disabled) {
+    .submit-forgot {
         width: 250px !important;
     }
     .width-style {
@@ -176,7 +176,7 @@
     .ant-input-size {
         width: 230px !important;
     }
-    [type="submit"]:not(:disabled) {
+    .submit-forgot {
         width: 230px !important;
     }
     .width-style {

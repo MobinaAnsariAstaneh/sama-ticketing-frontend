@@ -10,7 +10,6 @@ import axios from "../../axios";
 
 const { Content } = Layout;
 function Login() {
-  const [red, setred] = useState(false);
   const [check, setcheck] = useState(false);
   const [form] = Form.useForm();
   const storage = localStorage.getItem("login");
@@ -23,7 +22,7 @@ function Login() {
       });
     }
   }, []);
-
+  const history = useHistory();
   const handleFormSubmit = (values) => {
     const email = values.email,
       pass = values.password;
@@ -51,19 +50,17 @@ function Login() {
       .then((res) => {
         localStorage.setItem("auth", "true");
         localStorage.setItem("token", res.token);
-        return localStorage.setItem("username", email);
+        localStorage.setItem("id", res.id);
+        return localStorage.setItem("username", res.name);
       })
       .then(() => {
-        setred(true);
+        history.replace("/dashboard");
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-  const history = useHistory();
-  if (red) {
-    history.push("/");
-  }
+  
   const register = () => {
     message.success("Register page");
     history.push("/register");
@@ -106,6 +103,10 @@ function Login() {
                         required: true,
                         message: "Please input your Email!",
                       },
+                      {
+                        type: 'email',
+                        message: "Your email is invalid!",
+                      },
                     ]}
                   >
                     <Input
@@ -123,6 +124,9 @@ function Login() {
                         required: true,
                         message: "Please input your Password!",
                       },
+                      {
+                        min: 8,
+                      }
                     ]}
                   >
                     <Input.Password
@@ -137,7 +141,7 @@ function Login() {
                     <Button
                       type="primary"
                       htmlType="submit"
-                      className="login-form-button "
+                      className="login-form-button submit-login"
                     >
                       Login
                     </Button>

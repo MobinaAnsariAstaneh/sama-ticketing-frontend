@@ -1,187 +1,211 @@
 .item_center {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
 .grayscale {
-  filter: grayscale(100%);
-  position: relative;
-  width: 100%;
-  /* for IE 6 */
+    filter: grayscale(100%);
+    position: relative;
+    width: 100%;
+    /* for IE 6 */
 }
+
 .para {
-  position: absolute;
-  bottom: 5%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 0px 80px;
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0px 80px;
 }
+
 .para span {
-  color: #000;
-  padding: 10px;
-  width: 80%;
+    color: #000;
+    padding: 10px;
+    width: 80%;
 }
+
 .imglogo {
-  width: 80px !important;
-  height: 80px !important;
-  margin-bottom: -15px;
+    width: 80px !important;
+    height: 80px !important;
+    margin-bottom: -15px;
 }
+
 .login-form-button {
-  border: purple !important;
-  background-color: purple !important;
-  color: #fff !important;
-  width: 100%;
+    border: purple !important;
+    background-color: purple !important;
+    color: #fff !important;
+    width: 100%;
 }
+
 .ant-checkbox-inner {
-  border: 1px solid purple !important;
+    border: 1px solid purple !important;
 }
+
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: purple !important;
+    background-color: purple !important;
 }
+
 .p-size {
-  margin-top: 10px;
-  font-size: 25px;
+    margin-top: 10px;
+    font-size: 25px;
 }
+
 .login-form-forgot {
-  color: black !important;
-  text-decoration: none !important;
+    color: black !important;
+    text-decoration: none !important;
 }
+
 .a-style {
-  color: purple !important;
-  text-decoration: underline !important;
+    color: purple !important;
+    text-decoration: underline !important;
 }
+
 .ant-form {
-  width: 60%;
+    width: 60%;
 }
+
 .ant-input-size {
-  width: 430px;
+    width: 430px;
 }
-[type="submit"]:not(:disabled) {
-  width: 430px !important;
+
+.submit-register {
+    width: 430px !important;
 }
+
 .width-style {
-  width: 430px;
-  margin-bottom: 25%;
+    width: 430px;
+    margin-bottom: 25%;
 }
+
 .ant-form label {
-  margin-right: 45%;
+    margin-right: 45%;
 }
+
 .botoom-border {
-  text-align-last: center;
+    text-align-last: center;
 }
+
 .login__right-image {
-  min-height: 100vh !important;
+    min-height: 100vh !important;
 }
-.login__right-image > div {
-  height: 100%;
+
+.login__right-image>div {
+    height: 100%;
 }
+
 .login__right-image img {
-  height: 100vh;
+    height: 100vh;
 }
+
 .flex-space {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
 @media screen and (max-width: 930px) {
-  .ant-input-size {
-    width: 350px !important;
-  }
-  [type="submit"]:not(:disabled) {
-    width: 350px !important;
-  }
-  .width-style {
-    width: 348px;
-  }
-  .ant-form label {
-    margin-right: 35%;
-  }
+    .ant-input-size {
+        width: 350px !important;
+    }
+    .submit-register {
+        width: 350px !important;
+    }
+    .width-style {
+        width: 348px;
+    }
+    .ant-form label {
+        margin-right: 35%;
+    }
 }
+
 @media screen and (max-width: 735px) {
-  .ant-input-size {
-    width: 300px !important;
-  }
-  [type="submit"]:not(:disabled) {
-    width: 300px !important;
-  }
-  .width-style {
-    width: 300px;
-  }
-  .ant-form label {
-    margin-right: 24%;
-  }
+    .ant-input-size {
+        width: 300px !important;
+    }
+    .submit-register {
+        width: 300px !important;
+    }
+    .width-style {
+        width: 300px;
+    }
+    .ant-form label {
+        margin-right: 24%;
+    }
 }
+
 @media screen and (max-width: 640px) {
-  .ant-input-size {
-    width: 250px !important;
-  }
-  [type="submit"]:not(:disabled) {
-    width: 250px !important;
-  }
-  .width-style {
-    width: 250px;
-  }
-  .ant-form label {
-    margin-right: 9%;
-  }
+    .ant-input-size {
+        width: 250px !important;
+    }
+    .submit-register {
+        width: 250px !important;
+    }
+    .width-style {
+        width: 250px;
+    }
+    .ant-form label {
+        margin-right: 9%;
+    }
 }
+
 @media screen and (max-width: 540px) {
-  .ant-input-size {
-    width: 230px !important;
-  }
-  [type="submit"]:not(:disabled) {
-    width: 230px !important;
-  }
-  .width-style {
-    width: 230px;
-  }
-  .ant-form label {
-    margin-right: 1.5%;
-  }
+    .ant-input-size {
+        width: 230px !important;
+    }
+    .submit-register {
+        width: 230px !important;
+    }
+    .width-style {
+        width: 230px;
+    }
+    .ant-form label {
+        margin-right: 1.5%;
+    }
 }
+
 @media screen and (max-width: 767px) {
-  .ant-col-12 {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-  body {
-    position: relative;
-    z-index: 2;
-  }
-  .grayscale {
-    position: absolute !important;
-    bottom: 0;
-    opacity: 0.1;
-    z-index: 0;
-  }
-  .item_center {
-    position: relative;
-    z-index: 5;
-  }
-  .width-style {
-    margin-bottom: 4%;
-  }
-  .para {
-    position: relative;
-    padding: 0px 17px;
-  }
-  .botoom-border {
-    padding-bottom: 25px !important;
-    border-bottom: 1px solid purple;
-  }
-  .para span {
-    padding: 10px;
-  }
-  .ant-layout-content.login__layout {
-    padding: 0 !important;
-  }
-  .login__right-image {
-    position: unset !important;
-    height: 0;
-    min-height: 0 !important;
-    max-height: 0;
-  }
+    .ant-col-12 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    body {
+        position: relative;
+        z-index: 2;
+    }
+    .grayscale {
+        position: absolute !important;
+        bottom: 0;
+        opacity: 0.1;
+        z-index: 0;
+    }
+    .item_center {
+        position: relative;
+        z-index: 5;
+    }
+    .width-style {
+        margin-bottom: 4%;
+    }
+    .para {
+        position: relative;
+        padding: 0px 17px;
+    }
+    .botoom-border {
+        padding-bottom: 25px !important;
+        border-bottom: 1px solid purple;
+    }
+    .para span {
+        padding: 10px;
+    }
+    .ant-layout-content.login__layout {
+        padding: 0 !important;
+    }
+    .login__right-image {
+        position: unset !important;
+        height: 0;
+        min-height: 0 !important;
+        max-height: 0;
+    }
 }
