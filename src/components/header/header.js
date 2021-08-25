@@ -20,26 +20,26 @@ function Head(props) {
   const username = localStorage.getItem("username");
 
   const routeChange = () => {
-    message.success("Guide page");
+    message.success("Welcome to contact us");
     history.push("/guide");
   };
   const dashboard = () => {
-    message.success("Dashboard page");
+    message.success("Welcome to your Dashboard");
     history.push("/dashboard");
   };
   const Profile = () => {
-    message.success("profile page");
+    message.success("Welcome to to your profile");
     history.push("/profile");
   };
   const logOut = () => {
-    message.success("Log out");
+    message.success("successfully logged out");
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("auth");
     history.push("/login");
   };
   const cancel = () => {
-    message.error("Log out canceled");
+    message.success("You are still with us");
   };
   const menu = (
     <Menu>
@@ -48,7 +48,7 @@ function Head(props) {
       </Menu.Item>
       <Menu.Item key="2">
         <Popconfirm
-          title="Sure to logout?"
+          title="do you want to get off this page??"
           onConfirm={logOut}
           onCancel={cancel}
         >

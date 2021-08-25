@@ -61,11 +61,11 @@ function Login() {
   };
   
   const register = () => {
-    message.success("Register page");
+    message.success("Welcome to register a new user");
     history.push("/register");
   };
   const forgotpass = () => {
-    message.success("Forgotten Password page");
+    message.success("You can change your password");
     history.push("./forgot");
   };
 

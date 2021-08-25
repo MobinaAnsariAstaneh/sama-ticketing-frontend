@@ -20,18 +20,18 @@ function AddTicket(props) {
 
   function Modalhidefunc() {
     props.hidefunc();
-    message.error("Ticket canceled");
+    message.error("No ticket was sent");
   }
 
   function AddTicket(e) {
     // Add ticket
     e.preventDefault();
     if (value3.trim() === "") {
-      message.error("Please fill in the subject field");
+      message.error("Please complete the subject field");
       return false;
     }
     if (content.trim() === "") {
-      message.error("Please fill in the description field");
+      message.error("Please complete the description field");
       return false;
     }
 
@@ -52,12 +52,12 @@ function AddTicket(props) {
       .then(() => {
         setContent(""); // description
         setValue3(""); // subject
-          message.success("Tickets added");
+          message.success("Ticket has been successfully registered");
           props.changeTicket(); //!
           // return res.data;
       })
       .catch(() => {
-        message.error("something wrong");
+        message.error("something wrong, No ticket was sent");
       });
     props.hidefunc();
   }

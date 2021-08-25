@@ -81,7 +81,7 @@ function OpenTicket(props) {
 
   const submited = () => {
     if (content.trim() === "") {
-      message.error("plase type somthing");
+      message.error("There is no content to post, Enter the your comment");
       return false;
     }
     setSpiner(true);
@@ -98,9 +98,9 @@ function OpenTicket(props) {
           props.changeComment();
           setLoad(true);
           setSpiner(false);
-          message.success("Tickets sent");
+          message.success("Ticket has been successfully sent");
         } else {
-          message.error("somthing Wrong");
+          message.error("somthing Wrong, Problem during sending ticket");
         }
       })
       .catch((err) => {

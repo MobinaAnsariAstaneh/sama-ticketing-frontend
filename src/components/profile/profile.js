@@ -33,11 +33,11 @@ function Profile() {
       .then((res) => {
         if (res.status == 200 || res.status == 202) {
           setchange((prev) => !prev);
-          message.success("Your information updated successfully :)");
-        } else message.error("operation failed");
+          message.success("Perfect, Your information updated successfully :)");
+        } else message.error("Your personal information has not been updated");
       })
       .catch(() => {
-        message.error("Your information didn't update");
+        message.error("Your personal information has not been updated");
       });
   };
   useEffect(() => {
@@ -47,7 +47,7 @@ function Profile() {
         if (res.status === 200 || res.status === 202) {
           return res.data;
         } else {
-          message.error("something wrong to fetch data user");
+          message.error("something wrong to fetch user's data");
         }
       })
       .then((user) => {

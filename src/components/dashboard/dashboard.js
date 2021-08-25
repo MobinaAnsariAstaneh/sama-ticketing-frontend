@@ -42,11 +42,11 @@ function Home() {
       })
       .then((result) => {
         if (result.status === 202) {
-          message.success("Ticket " + id + " deleted");
+          message.success("Ticket " + id + " was successfully deleted");
           setchange((prev) => !prev);
         }
       })
-      .catch(() => message.error("Operation failed"));
+      .catch(() => message.error("This ticket is still NOT archived"));
   };
   const addArchive = (id) => {
     axios
@@ -55,11 +55,11 @@ function Home() {
       })
       .then((res) => {
         if (res.status === 202) {
-          message.success("ticket " + id + " archived");
+          message.success("ticket " + id + " was successfully archived");
         }
       })
       .catch(() => {
-        message.error("Ticket wasn't archive");
+        message.error("Ticket is still NOT archived");
       });
   };
 
@@ -77,7 +77,7 @@ function Home() {
         if (res.status === 200 || res.status === 202) {
           return res.data;
         } else {
-          message.error("try agin");
+          message.error("No tickets have been archived");
         }
       })
       .then(([find]) => {
@@ -312,7 +312,7 @@ function Home() {
         if (res.status === 200) {
           return res.data;
         } else {
-          message.error("try agin");
+          message.error("operation failed");
         }
       })
       .then((result) => {

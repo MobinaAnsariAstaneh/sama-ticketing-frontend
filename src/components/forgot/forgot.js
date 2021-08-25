@@ -24,7 +24,7 @@ function Forgot() {
     }
   }, []);
   const register = () => {
-    message.success("Register page");
+    message.success("Welcome to register a new user");
     history.push("./register");
   };
 

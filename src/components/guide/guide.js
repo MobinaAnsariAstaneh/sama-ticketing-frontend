@@ -2,7 +2,7 @@ import "./guide.css";
 import Head from "../header/header";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Layout, Card, Col, Row, Modal, Button, Typography} from "antd";
+import { Layout, Card, Col, Row, Modal, Typography} from "antd";
 import {
   PhoneOutlined,
   SendOutlined,
@@ -79,7 +79,7 @@ function Guide() {
           <Head />
         </Header>
 
-        <Content style={{ padding: "0 100px" }}>
+        <Content style={{ padding: "0 100px" , marginBottom:"15px"}}>
           <div className="site-layout-content">
             <div>
               <h4 className="goal">Team&apos;s Goal : </h4>
@@ -97,9 +97,9 @@ function Guide() {
             <div className="or"></div>
 
             <div className="programmers">
-              <Button className="btn_purple" onClick={showModal1}>
-                programmers
-              </Button>
+              <button className=" btn custom-btn" onClick={showModal1}>
+              <span>programmers</span>
+              </button>
               <Modal
                 title="programmers information"
                 visible={isModalVisible1}
@@ -155,9 +155,9 @@ function Guide() {
               </Modal>
             </div>
             <div className="ProgrammingLanguages">
-              <Button className="btn_purple" onClick={showModal2}>
-                Programming Languages
-              </Button>
+              <button className=" btn custom-btn" onClick={showModal2}>
+               <span>Programming Languages</span>
+              </button>
               <Modal
                 title="Programming Languages"
                 visible={isModalVisible2}
@@ -240,9 +240,9 @@ function Guide() {
             <div className="or"></div>
             <img src={imagelogin} alt="" className="logo"/>
             <div className="center">
-              <Button onClick={showModal} className="btn_purple">
-                How to contact with supporter?
-              </Button>
+              <button onClick={showModal} className=" btn custom-btn">
+               <span> How to contact with supporter?</span>
+              </button>
               <Modal
                 title="Contact with us : "
                 visible={visible}
