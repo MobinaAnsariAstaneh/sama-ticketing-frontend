@@ -1,0 +1,20 @@
+.site-result-demo-error-icon {
+  color: red;
+}
+/* .card{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+} */
+.email {
+  padding-top: 150px;
+  padding-left: 42%;
+}
+.notif {
+  padding-top: 3%;
+  color: rgb(14, 85, 238);
+}
+.successfully{
+  color: rgb(16, 156, 63);
+}

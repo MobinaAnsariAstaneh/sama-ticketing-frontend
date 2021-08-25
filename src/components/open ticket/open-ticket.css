@@ -14,8 +14,8 @@
 }
 .btn-drwer {
   background-color: white !important;
-  border: 1px solid purple !important;
-  color: purple !important;
+  border: 1px solid #5c0099 !important;
+  color: #5c0099 !important;
 }
 .btn-cancel {
   border: none !important;
@@ -59,25 +59,39 @@
   font-size: 15px;
   margin-bottom: 10px;
 }
+
 .ant-tag-yellow {
-  color: yellow;
-  background-color: rgba(255, 255, 0, 0.479);
-  border-color: yellow;
+  color: white;
+  background-color: #fca311 ;
+  border-color: #fca311;
+  /* rgba(255, 255, 0, 0.479) */
 }
 .ant-tag-blue {
-  color: blue;
-  background-color: rgba(0, 0, 255, 0.514);
-  border-color: blue;
+  color: white;
+  background-color: #05299e ;
+  border-color: #05299e;
+  /* rgba(0, 0, 255, 0.514) */
 }
 .ant-tag-purple {
-  color: purple;
-  background-color: rgba(187, 14, 135, 0.514);
-  border-color: purple;
+  color: white;
+  background-color: #5c0099;
+  border-color: #5c0099; 
+  /* rgba(187, 14, 135, 0.514) */
+}
+.ant-tag-red {
+  color: white;
+  background-color: #d00000;
+  border-color: #ca0505;
+}
+.ant-tag-green {
+  color: white;
+  background-color: #0ead69;
+  border-color: #0ead69;
 }
 .ant-tag-purple:hover {
   color: #ffffff !important;
-  background: #9212a3 !important;
-  border-color: #4c0870 !important;
+  background: #5c0099 !important;
+  border-color: #5c0099 !important;
 }
 .header_open_ticket {
   display: flex;
@@ -85,6 +99,9 @@
 }
 .pending {
   margin-right: 15px;
+}
+.table tr,.table td{
+  border: 1px solid black;
 }
 @media screen and (max-width: 767px) {
   .ant-drawer-content-wrapper {

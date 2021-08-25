@@ -1,5 +1,4 @@
 import "./open-ticket.css";
-
 import { Drawer, Button, Spin, message, Comment, Avatar} from "antd";
 import React, { useState, useEffect, useRef, memo } from "react";
 import JoditEditor from "jodit-react";
@@ -13,6 +12,7 @@ const ExampleComment1 = (props) => {
   if (usernameSet !== props.name) {
     notuser = "active";
   }
+  console.log("props", props);
   return (
     <Comment
       className={notuser}
@@ -36,7 +36,7 @@ const ExampleComment1 = (props) => {
           <Gravatar email={props.email} className="CustomAvatar-image" />
         </Avatar>
       }
-      content={<pre dangerouslySetInnerHTML={{ __html: props.message }}></pre>}
+      content={<pre className="table" dangerouslySetInnerHTML={{ __html: props.message }}></pre>}
     >
       {props.children}
     </Comment>
@@ -49,6 +49,7 @@ function OpenTicket(props) {
   const [comment, setComment] = useState([{ ticket: 0 }]);
   const [Load, setLoad] = useState(false);
   const [spiner, setSpiner] = useState(false);
+  const admin = localStorage.getItem("admin");
 
   function onClose() {
     props.hidefunc();
@@ -66,15 +67,10 @@ function OpenTicket(props) {
   const answered = () => {
     axios
       .put(
-        "api/ticket/" + props.data.key + "/",
-        {
-          subject: props.data.subject,
-          priority: props.data.priority,
-          description: props.data.description
-        }
+        "api/ticket/" + props.data.key + "/?status=In Progress"
       )
       .then((res) => {
-        if (res.status === 200 || res.status === 201) {
+        if (res.status === 200 || res.status === 202) {
           props.changeComment();
         }
       })
@@ -82,11 +78,6 @@ function OpenTicket(props) {
         console.log(err.message);
       });
   };
-  useEffect(() => {
-    if (props.data.status[0] === "new") {
-      answered("open");
-    }
-  }, []);
 
   const submited = () => {
     if (content.trim() === "") {
@@ -103,8 +94,6 @@ function OpenTicket(props) {
       )
       .then((res) => {
         if (res.status === 202 || res.status === 201) {
-          const tag = props.data.status[0] === "open" ? "answered" : "open";
-          answered(tag);
           setContent("");
           props.changeComment();
           setLoad(true);
@@ -120,7 +109,7 @@ function OpenTicket(props) {
       });
   };
   const deletingTicket = () => {
-    props.deletTicket(comment[0].ticket);
+    props.deletTicket(comment[0].ticket_id);
     onClose();
   };
   const replyfunc = () => {
@@ -132,6 +121,7 @@ function OpenTicket(props) {
   let commented;
   if (Load) {
     commented = props.comments.map((val, key) => {
+      console.log("val",val)
       return (
         <ExampleComment1
           reply={replyfunc}
@@ -182,15 +172,33 @@ function OpenTicket(props) {
       </Button>
     </>
   );
-  if (props.data.status[0] === "done") {
+
+  elemTicketrm = "";
+  if (props.data.status[0] === "Done") {
     classStatus = "ant-tag-red";
-    elemTicketrm = "";
   } else if (props.data.status[0] === "open") {
     classStatus = "ant-tag-yellow";
-  } else if (props.data.status[0] === "answered") {
+  } else if (props.data.status[0] === "Answered") {
     classStatus = "ant-tag-blue";
-  } else if (props.data.status[0] === "inprogres") {
+  } else if (props.data.status[0] === "In Progress") {
     classStatus = "ant-tag-purple Progress-btn";
+  } else if (props.data.status[0] === "new") {
+    classStatus = "ant-tag-green";
+  }
+  let adminElement = "";
+  if(admin == 1){
+    adminElement = (
+      <div>
+              <span>
+                <Button
+                  onClick={() => answered("")}
+                  className="ant-tag-purple"
+                >
+                  In Progress
+                </Button>
+              </span>
+            </div>
+    )
   }
   return (
     <>
@@ -218,16 +226,7 @@ function OpenTicket(props) {
                 <span className="color-name"></span>
               </span>
             </div>
-            <div>
-              <span>
-                <Button
-                  onClick={() => answered("inprogres")}
-                  className="ant-tag-purple"
-                >
-                  In Progress
-                </Button>
-              </span>
-            </div>
+            {adminElement}
           </div>,
         ]}
         width={720}

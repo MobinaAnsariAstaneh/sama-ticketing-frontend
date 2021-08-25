@@ -11,41 +11,30 @@ const { Header, Content } = Layout;
 
 function Profile() {
   const [form] = Form.useForm();
+  const [change, setchange] = useState(true);
   const [user, setuser] = useState({
-    name: "",
+    identity_number: "",
     email: "",
     first_name: "",
     last_name: "",
   });
-  const [formdata, setformdata] = useState({
-    pass: "",
-    confimpass: "",
-  });
-  const validetion = (e) => {
-    e.preventDefault();
-    if (formdata.password !== formdata.confim_password) {
-      message.error("password and confirm password not equal");
-      return false;
-    }
-  };
-  const submitHandler = (id) => {
+  const submitHandler = (value) => {
     const senddata = {
-      name: formdata.name,
-      lastname: formdata.lastname,
-      oldpass: formdata.confimpass,
-      password: formdata.pass,
+      first_name: value.name,
+      last_name: value.LastName,
+      password_confirm: value.confirm_password,
+      password: value.password,
     };
-
-    console.log(senddata);
+    console.log("value", value);
+    console.log("data which sent to backend",senddata);
+    const id_user = localStorage.getItem("id");
     axios
-      .put("api/user/" + id, senddata)
-      .then(() => {
-        setformdata({
-          name: "",
-          lastname: "",
-          pass: "",
-          confimpass: "",
-        });
+      .put("api/user/" + id_user, senddata)
+      .then((res) => {
+        if (res.status == 200 || res.status == 202) {
+          setchange((prev) => !prev);
+          message.success("Your information updated successfully :)");
+        } else message.error("operation failed");
       })
       .catch(() => {
         message.error("Your information didn't update");
@@ -53,33 +42,26 @@ function Profile() {
   };
   useEffect(() => {
     axios
-      .put("api/user/")
+      .get("api/user")
       .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
+        if (res.status === 200 || res.status === 202) {
           return res.data;
         } else {
           message.error("something wrong to fetch data user");
         }
       })
-      .then((res) => {
-        return res.results;
-      })
-      .then((result) => {
-        const user = result.find((arr) => {
-          return arr.username === localStorage.getItem("username");
-        });
+      .then((user) => {
         setuser({
-          name: user.name,
-          lastname: user.lastname,
-          oldpass: user.confimpass,
-          password: user.pass,
+          name: user.first_name,
+          lastname: user.last_name,
+          email: user.email,
+          identity_number: user.id,
         });
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [change]);
   return (
     <>
       <Helmet>
@@ -101,9 +83,8 @@ function Profile() {
                     className="CustomAvatar-image"
                   />
                 </div>
-                <p className="user-name">{user.name}</p>
-                <p>{user.first_name}</p>
-                <p>{user.last}</p>
+                <p className="user-name">{user.identity_number}</p>
+                <p>{user.name + " " + user.lastname}</p>
                 <p>{user.email}</p>
               </Col>
 
@@ -137,12 +118,6 @@ function Profile() {
                     ]}
                   >
                     <Input
-                      value={formdata.name}
-                      onChange={(e) => {
-                        setformdata((prev) => {
-                          return { ...prev, name: e.target.value };
-                        });
-                      }}
                       placeholder="First name"
                       type="text"
                       className="ant-icon"
@@ -163,12 +138,6 @@ function Profile() {
                     ]}
                   >
                     <Input
-                      value={formdata.lastname}
-                      onChange={(e) => {
-                        setformdata((prev) => {
-                          return { ...prev, lastname: e.target.value };
-                        });
-                      }}
                       placeholder="Last Name"
                       type="text"
                       className="ant-icon"
@@ -188,12 +157,6 @@ function Profile() {
                     ]}
                   >
                     <Input.Password
-                      value={formdata.pass}
-                      onChange={(e) => {
-                        setformdata((prev) => {
-                          return { ...prev, pass: e.target.value };
-                        });
-                      }}
                       placeholder="Password"
                       type="password"
                       className="ant-icon"
@@ -213,12 +176,6 @@ function Profile() {
                     ]}
                   >
                     <Input.Password
-                      value={formdata.confimpass}
-                      onChange={(e) => {
-                        setformdata((prev) => {
-                          return { ...prev, confimpass: e.target.value };
-                        });
-                      }}
                       placeholder="Confirm Password"
                       className="ant-icon"
                       prefix={<LockOutlined />}
@@ -228,9 +185,6 @@ function Profile() {
                     type="primary"
                     htmlType="submit"
                     className="login-form-button button"
-                    onSubmit={(e) => {
-                      validetion(e);
-                    }}
                   >
                     Save
                   </Button>

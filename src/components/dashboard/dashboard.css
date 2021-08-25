@@ -5,13 +5,13 @@
   display: flex;
 }
 .color-orange {
-    color: #f0932b !important;
+    color: #fca311 !important;
   }
   .color-blue {
-    color: #22a6b3 !important;
+    color: #05299e !important;
   }
   .color-register {
-    color: #05c46b !important;
+    color: #0ead69!important;
   }
 .ant-table-pagination {
   display: none !important;

@@ -51,9 +51,8 @@ function Login() {
         localStorage.setItem("auth", "true");
         localStorage.setItem("token", res.token);
         localStorage.setItem("id", res.id);
-        return localStorage.setItem("username", res.name);
-      })
-      .then(() => {
+        localStorage.setItem("admin", res.admin);
+        localStorage.setItem("username", res.name);
         history.replace("/dashboard");
       })
       .catch((err) => {

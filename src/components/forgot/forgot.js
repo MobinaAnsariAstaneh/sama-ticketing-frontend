@@ -41,6 +41,7 @@ function Forgot() {
         if (res.status === 200) {
           setstage(true);
           message.success("Email was successfully sent to you");
+          history.push("./email");
         }
         return res.data;
       })

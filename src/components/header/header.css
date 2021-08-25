@@ -29,6 +29,9 @@ Header,
 .link{
   color:aliceblue;
 }
+.link:hover{
+  color: pink;
+}
 @media screen and (max-width: 767px) {
   .ant-layout-header {
     padding: 0 20px !important;

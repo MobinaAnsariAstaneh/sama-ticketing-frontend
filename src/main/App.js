@@ -5,6 +5,7 @@ import Dashboard from "../components/dashboard/dashboard";
 import Forgot from "../components/forgot/forgot";
 import Register from "../components/register/register";
 import Admin from "../components/admin/admin";
+import Email from "../components/Result/email";
 import "antd/dist/antd.css";
 import {
   Route,
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/forgot">
             <Forgot />
+          </Route>
+          <Route path="/email">
+            <Email />
           </Route>
           <Route path="/guide">
             <Guide />

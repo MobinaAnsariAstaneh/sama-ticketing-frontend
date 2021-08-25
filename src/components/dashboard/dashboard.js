@@ -37,8 +37,8 @@ function Home() {
   const [url, seturl] = useState("api/ticket");
   const deletTicket = (id) => {
     axios
-      .put("api/ticket/" + id , {
-        status: "Done"
+      .put("api/ticket/" + id, {
+        status: "Done",
       })
       .then((result) => {
         if (result.status === 202) {
@@ -50,13 +50,13 @@ function Home() {
   };
   const addArchive = (id) => {
     axios
-      .put(`api/ticket/${id}`,{
-        archived:true
+      .put(`api/ticket/${id}`, {
+        archived: true,
       })
       .then((res) => {
         if (res.status === 202) {
           message.success("ticket " + id + " archived");
-        } 
+        }
       })
       .catch(() => {
         message.error("Ticket wasn't archive");
@@ -72,9 +72,9 @@ function Home() {
   const history = useHistory();
   const openTicketfunc = (id) => {
     axios
-      .put("/api/ticket/" + id)
+      .get("/api/ticket/" + id)
       .then((res) => {
-        if (res.status === 202) {
+        if (res.status === 200 || res.status === 202) {
           return res.data;
         } else {
           message.error("try agin");
@@ -91,6 +91,8 @@ function Home() {
           subject: find.subject,
           created: find.created_at,
           requester: "find.user.username",
+          created2: +new Date(find.created_at),
+          updated2: +new Date(find.updated_at),
         });
         setcommentTicket(find.contents);
         setOpenTicket(true);
@@ -108,15 +110,15 @@ function Home() {
       render: (status) => (
         <span>
           {status.map((tag) => {
-            var color = "green";
+            var color = "#0ead69";
             if (tag === "Done") {
-              color = "red";
+              color = "#d00000";
             } else if (tag === "open") {
-              color = "yellow";
-            } else if (tag === "answered") {
-              color = "blue";
-            } else if (tag === "inprogres") {
-              color = "purple";
+              color = "#fca311";
+            } else if (tag === "Answered") {
+              color = "#05299e";
+            } else if (tag === "In Progress") {
+              color = "#5c0099";
             }
             return (
               <Tag color={color} key={tag}>
@@ -134,11 +136,11 @@ function Home() {
         },
         {
           text: "In Progress",
-          value: "inprogres",
+          value: "In Progress",
         },
         {
           text: "Answered",
-          value: "answered",
+          value: "Answered",
         },
         {
           text: "Open",
@@ -167,15 +169,15 @@ function Home() {
       dataIndex: "priority",
       // eslint-disable-next-line react/display-name
       render: (priority) => {
-        var color = "green" ; 
-        if (priority === "High") {
-          color = "red"
+        var color = "#0ead69";
+        if (priority === "Critical") {
+          color = "#ff6700"
         }
         else if (priority === "Normal") {
-          color = "blue"
+          color = "#3bceac"
         }
-        else if(priority === "Low") {
-          color = "green"
+        else if(priority === "Urgent") {
+          color = "#fad643"
         }
         return (
           <span>
@@ -203,17 +205,17 @@ function Home() {
       onFilter: (value, record) => {
         return record.priority.indexOf(value) === 0;
       },
-    },{
+    },
+    {
       title: "Type",
       dataIndex: "type",
       // eslint-disable-next-line react/display-name
       render: (type) => {
-        var color = "green" ; 
+        var color = "#0ead69";
         if (type === "Issue") {
-          color = "red"
-        }
-        else if (type === "Task") {
-          color = "purple"
+          color = "#ee6055";
+        } else if (type === "Task") {
+          color = "#134074";
         }
         return (
           <span>
@@ -288,7 +290,7 @@ function Home() {
                   onClick={() => {
                     addArchive(record.key);
                   }}
-                  className="color-blue "
+                  className="color-blue"
                 >
                   add archive
                 </a>
@@ -323,7 +325,12 @@ function Home() {
         resul.map((val) => {
           arr.push({
             key: val.id,
-            priority: val.priority == "High" ? "Critical" : val.priority == "normal" ? "Urgent" : "Normal",
+            priority:
+              val.priority == "critical"
+                ? "Critical"
+                : val.priority == "normal"
+                ? "Normal"
+                : "Urgent",
             type: val.type == 0 ? "Issue" : "Task",
             status: [val.status],
             number: val.id,
@@ -331,6 +338,8 @@ function Home() {
             created: val.created_at.split(".")[0],
             requester: val.user_id,
             updated: val.updated_at.split(".")[0],
+            created2: +new Date(val.created_at.split(".")[0]),
+            updated2: +new Date(val.updated_at.split(".")[0]),
           });
         });
         return result;
@@ -375,8 +384,8 @@ function Home() {
 
   const onSearch = debounce((value) => {
     if (value.target.value.trim() !== "") {
-      seturl("api/ticket?subject=" + value.target.value)
-      setchange((prev) => !prev)
+      seturl("api/ticket?subject=" + value.target.value);
+      setchange((prev) => !prev);
     } else if (value.target.value.trim() === "") {
       seturl("api/ticket");
       setchange((prev) => !prev);

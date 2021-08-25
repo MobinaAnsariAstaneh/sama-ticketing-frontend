@@ -66,9 +66,9 @@ function Head(props) {
   );
 
   let btnAdmin = "";
-  if (localStorage.getItem("superuser") == "true") {
+  if (localStorage.getItem("admin") == 1) {
     btnAdmin = (
-      <Link to="/admin" title="Admin Page">
+      <Link to="/admin" title="Admin">
         <a className="link">
           <IdcardOutlined
             twoToneColor="white"
@@ -82,7 +82,7 @@ function Head(props) {
   const token = localStorage.getItem("auth");
   if (token) {
     guide = (
-      <Link to="/guide" title="Guide page">
+      <Link to="/guide" title="Guide">
       <a className="link">
       <QuestionCircleOutlined
         style={{ padding: "0 13px" }}
@@ -129,7 +129,7 @@ function Head(props) {
           <Row wrap={false} className="display">
             <Col flex="none">
               <div>
-              <Link to="/dashboard" title="Dashboard page">
+              <Link to="/dashboard" title="Dashboard">
                 <img
                   src={image}
                   width="40px"
