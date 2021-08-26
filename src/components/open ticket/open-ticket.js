@@ -1,5 +1,5 @@
 import "./open-ticket.css";
-import { Drawer, Button, Spin, message, Comment, Avatar} from "antd";
+import { Drawer, Button, Spin, message, Comment, Avatar } from "antd";
 import React, { useState, useEffect, useRef, memo } from "react";
 import JoditEditor from "jodit-react";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -8,9 +8,9 @@ import axios from "../../axios";
 
 const ExampleComment1 = (props) => {
   let usernameSet = localStorage.getItem("username"),
-    notuser = "";
+    notuser = "text_align_left";
   if (usernameSet !== props.name) {
-    notuser = "active";
+    notuser = "active text_align_left";
   }
   console.log("props", props);
   return (
@@ -36,7 +36,12 @@ const ExampleComment1 = (props) => {
           <Gravatar email={props.email} className="CustomAvatar-image" />
         </Avatar>
       }
-      content={<pre className="table" dangerouslySetInnerHTML={{ __html: props.message }}></pre>}
+      content={
+        <pre
+          className="table"
+          dangerouslySetInnerHTML={{ __html: props.message }}
+        ></pre>
+      }
     >
       {props.children}
     </Comment>
@@ -63,12 +68,12 @@ function OpenTicket(props) {
     setLoad(true);
   }, [Load]);
 
-//tag
+  //tag
   const answered = () => {
     axios
       .put(
         "api/ticket/" + props.data.key + "/?status=In Progress"
-      )
+        )
       .then((res) => {
         if (res.status === 200 || res.status === 202) {
           props.changeComment();
@@ -87,10 +92,10 @@ function OpenTicket(props) {
     setSpiner(true);
     axios
       .put(
-        "api/ticket/" + props.data.key + "/",
-        {
-          content: content
-        }
+        "api/ticket/" + props.data.key + "/", 
+      {
+        content: content,
+      }
       )
       .then((res) => {
         if (res.status === 202 || res.status === 201) {
@@ -121,7 +126,7 @@ function OpenTicket(props) {
   let commented;
   if (Load) {
     commented = props.comments.map((val, key) => {
-      console.log("val",val)
+      console.log("val", val);
       return (
         <ExampleComment1
           reply={replyfunc}
@@ -133,9 +138,9 @@ function OpenTicket(props) {
         ></ExampleComment1>
       );
     });
-    console.log(props.data)
+    console.log(props.data);
   } else {
-    commented = "Bye";
+    commented = " ";
   }
 
   let elem, attr, classStatus, elemTicketrm;
@@ -143,7 +148,7 @@ function OpenTicket(props) {
     attr = { disabled: true };
     elem = <Spin />;
   }
-  classStatus = "ant-tag-green";
+
   elemTicketrm = (
     <>
       <p className="align-text">Add Comment </p>
@@ -173,32 +178,29 @@ function OpenTicket(props) {
     </>
   );
 
-  elemTicketrm = "";
   if (props.data.status[0] === "Done") {
     classStatus = "ant-tag-red";
+    elemTicketrm = "";
   } else if (props.data.status[0] === "open") {
     classStatus = "ant-tag-yellow";
   } else if (props.data.status[0] === "Answered") {
-    classStatus = "ant-tag-blue";
+    classStatus = "ant-tag-purple";
   } else if (props.data.status[0] === "In Progress") {
-    classStatus = "ant-tag-purple Progress-btn";
+    classStatus = "ant-tag-blue Progress-btn";
   } else if (props.data.status[0] === "new") {
     classStatus = "ant-tag-green";
   }
   let adminElement = "";
-  if(admin == 1){
+  if (admin == 1) {
     adminElement = (
       <div>
-              <span>
-                <Button
-                  onClick={() => answered("")}
-                  className="ant-tag-purple"
-                >
-                  In Progress
-                </Button>
-              </span>
-            </div>
-    )
+        <span>
+          <Button onClick={() => answered("")} className="ant-tag-blue">
+            In Progress
+          </Button>
+        </span>
+      </div>
+    );
   }
   return (
     <>

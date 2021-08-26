@@ -2,7 +2,7 @@
   text-align: left !important;
 }
 .color-name {
-  color: #1890ff;
+  color: #1984e7;
 }
 .font-span {
   font-size: 13px;
@@ -10,12 +10,12 @@
 }
 .ant-drawer-header,
 .ant-drawer-body {
-  border-bottom: 1px solid rgb(236, 32, 236);
+  border-bottom: 1px solid rgb(84, 86, 236);
 }
 .btn-drwer {
   background-color: white !important;
-  border: 1px solid #5c0099 !important;
-  color: #5c0099 !important;
+  border: 1px solid #05299e !important;
+  color: #05299e !important;
 }
 .btn-cancel {
   border: none !important;
@@ -26,7 +26,7 @@
 }
 .ant-comment-nested {
   padding: 5px 15px;
-  background-color: rgb(255, 230, 230);
+  background-color: rgb(162, 247, 247) !important;
 }
 .b-color {
   background-color: gray !important;
@@ -36,7 +36,7 @@
   padding-top: 0px !important;
 }
 .ant-comment.active {
-  background-color: rgba(246, 68, 68, 0.1);
+  background-color: rgba(24, 141, 236, 0.1);
   padding: 0 10px;
 }
 .icon-back {
@@ -61,37 +61,38 @@
 }
 
 .ant-tag-yellow {
-  color: white;
-  background-color: #fca311 ;
-  border-color: #fca311;
-  /* rgba(255, 255, 0, 0.479) */
-}
-.ant-tag-blue {
-  color: white;
-  background-color: #05299e ;
-  border-color: #05299e;
-  /* rgba(0, 0, 255, 0.514) */
+  color: white !important;
+  background-color: #fca311 !important;
+  border-color: #fca311 !important;
 }
 .ant-tag-purple {
-  color: white;
-  background-color: #5c0099;
-  border-color: #5c0099; 
-  /* rgba(187, 14, 135, 0.514) */
+  color: white !important;
+  background-color: #5c0099 !important;
+  border-color: #5c0099 !important;
+}
+
+/* #05299e blue*/
+/* #5c0099 purple */
+
+.ant-tag-blue {
+  color: white !important;
+  background-color: #05299e !important;
+  border-color: #05299e !important; 
 }
 .ant-tag-red {
-  color: white;
-  background-color: #d00000;
-  border-color: #ca0505;
+  color: white !important;
+  background-color: #d00000 !important;
+  border-color: #ca0505 !important;
 }
 .ant-tag-green {
-  color: white;
-  background-color: #0ead69;
-  border-color: #0ead69;
+  color: white !important;
+  background-color: #0ead69 !important;
+  border-color: #0ead69 !important;
 }
-.ant-tag-purple:hover {
-  color: #ffffff !important;
-  background: #5c0099 !important;
-  border-color: #5c0099 !important;
+.ant-tag-blue:hover {
+  color: #ffffff;
+  background: #05299e;
+  border-color: #05299e;
 }
 .header_open_ticket {
   display: flex;
@@ -99,6 +100,9 @@
 }
 .pending {
   margin-right: 15px;
+}
+.text_align_left {
+  text-align: left !important;
 }
 .table tr,.table td{
   border: 1px solid black;

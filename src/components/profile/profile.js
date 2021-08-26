@@ -55,7 +55,7 @@ function Profile() {
           name: user.first_name,
           lastname: user.last_name,
           email: user.email,
-          identity_number: user.id,
+          identity_number: user.first_name,
         });
       })
       .catch((err) => {
@@ -107,10 +107,10 @@ function Profile() {
                   <Form.Item
                     name="name"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please input your First Name!",
-                      },
+                      // {
+                      //   required: true,
+                      //   message: "Please input your First Name!",
+                      // },
                       {
                         min: 2,
                         max: 15,
@@ -127,10 +127,10 @@ function Profile() {
                   <Form.Item
                     name="LastName"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please input your Last Name!",
-                      },
+                      // {
+                      //   required: true,
+                      //   message: "Please input your Last Name!",
+                      // },
                       {
                         min: 3,
                         max: 20,
@@ -147,10 +147,10 @@ function Profile() {
                   <Form.Item
                     name="password"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please input your Password!",
-                      },
+                      // {
+                      //   required: true,
+                      //   message: "Please input your Password!",
+                      // },
                       {
                         min: 8,
                       },
@@ -166,10 +166,10 @@ function Profile() {
                   <Form.Item
                     name="confirm_password"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please enter your password again!",
-                      },
+                      // {
+                      //   required: true,
+                      //   message: "Please enter your password again!",
+                      // },
                       {
                         min: 8,
                       },

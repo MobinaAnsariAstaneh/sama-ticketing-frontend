@@ -37,24 +37,23 @@ function AddTicket(props) {
 
     // const token = localStorage.getItem("token");
     const dataset = {
-      type: value1 == 'issue' ? false : true,
+      type: value1 == "issue" ? false : true,
       priority: value2,
       subject: value3,
-      content: content
+      content: content,
     };
     axios
-      .post(
-        "api/ticket",
-        {
-          ...dataset,
-        }
-      )
+      .post("api/ticket", {
+        ...dataset,
+      })
       .then(() => {
         setContent(""); // description
         setValue3(""); // subject
-          message.success("Ticket has been successfully registered");
-          props.changeTicket(); //!
-          // return res.data;
+        message.success(
+          "Your ticket registered and it will be reviewed by the programming team at the first opportunity"
+        );
+        props.changeTicket(); //!
+        // return res.data;
       })
       .catch(() => {
         message.error("something wrong, No ticket was sent");
@@ -74,7 +73,7 @@ function AddTicket(props) {
             <p>Add ticket</p>
             <Input
               value={value3} // subject
-              onChange={(e) => setValue3(e.target.value)} // onChange for input, change if event occurs 
+              onChange={(e) => setValue3(e.target.value)} // onChange for input, change if event occurs
               placeholder="Subject"
             />
           </div>,

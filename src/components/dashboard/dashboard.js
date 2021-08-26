@@ -102,7 +102,9 @@ function Home() {
         console.log(err.message);
       });
   };
-  const columns = [
+
+  
+  let columns = [
     {
       title: "Status",
       dataIndex: "status",
@@ -116,9 +118,9 @@ function Home() {
             } else if (tag === "open") {
               color = "#fca311";
             } else if (tag === "Answered") {
-              color = "#05299e";
-            } else if (tag === "In Progress") {
               color = "#5c0099";
+            } else if (tag === "In Progress") {
+              color = "#05299e";
             }
             return (
               <Tag color={color} key={tag}>
@@ -171,13 +173,11 @@ function Home() {
       render: (priority) => {
         var color = "#0ead69";
         if (priority === "Critical") {
-          color = "#ff6700"
-        }
-        else if (priority === "Normal") {
-          color = "#3bceac"
-        }
-        else if(priority === "Urgent") {
-          color = "#fad643"
+          color = "#ff6700";
+        } else if (priority === "Normal") {
+          color = "#3bceac";
+        } else if (priority === "Urgent") {
+          color = "#fad643";
         }
         return (
           <span>
@@ -244,8 +244,15 @@ function Home() {
       title: "Created",
       dataIndex: "created",
       sorter: (x, y) => x.created2 - y.created2,
+      // eslint-disable-next-line react/display-name
+      render: function (props) {
+        return (
+          <>
+            <span dangerouslySetInnerHTML={{ __html: props }}></span>
+          </>
+        );
+      },
     },
-
     {
       title: "Requester",
       dataIndex: "requester",
@@ -260,6 +267,14 @@ function Home() {
       title: "Updated",
       dataIndex: "updated",
       sorter: (a, b) => a.updated2 - b.updated2,
+      // eslint-disable-next-line react/display-name
+      render: function (props) {
+        return (
+          <>
+            <span dangerouslySetInnerHTML={{ __html: props }}></span>
+          </>
+        );
+      },
     },
     {
       title: "Action",
@@ -274,6 +289,7 @@ function Home() {
                 onConfirm={() => {
                   deletTicket(record.key);
                 }}
+                className="color-red"
               >
                 <a>Done {record.name}</a>
               </Popconfirm>
@@ -304,6 +320,10 @@ function Home() {
     },
   ];
 
+  if (localStorage.getItem("admin") == 0) {
+    columns.splice(6,1)
+  }
+
   var arr = [];
   useEffect(() => {
     axios
@@ -331,19 +351,23 @@ function Home() {
                 : val.priority == "normal"
                 ? "Normal"
                 : "Urgent",
-            type: val.type == 0 ? "Issue" : "Task",
-            status: [val.status],
-            number: val.id,
-            subject: val.subject,
-            created: val.created_at.split(".")[0],
-            requester: val.user_id,
-            updated: val.updated_at.split(".")[0],
-            created2: +new Date(val.created_at.split(".")[0]),
-            updated2: +new Date(val.updated_at.split(".")[0]),
-          });
-        });
-        return result;
-      })
+                type: val.type == 0 ? "Issue" : "Task",
+                status: [val.status],
+                number: val.id,
+                subject: val.subject,
+                created: val.created_at.split(".")[0].split("T").join("<br/>"),
+                requester: val.user_id,
+                updated: val.updated_at.split(".")[0].split("T").join("<br/>"),
+                created2: +new Date(
+                  val.created_at.split(".")[0].split("T").join("\n")
+                ),
+                updated2: +new Date(
+                  val.updated_at.split(".")[0].split("T").join("\n")
+                ),
+              });
+            });
+            return result;
+          })
       .then(() => {
         setdata1(arr);
       })
@@ -414,7 +438,7 @@ function Home() {
 
         <Content style={{ padding: "0 100px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Row wrap={false} className="display">
+          <Row wrap={false} className="display">
               <Col flex="none">
                 <div>
                   <Button type="dashed" onClick={() => showArchive()} primary>
@@ -422,12 +446,13 @@ function Home() {
                   </Button>
                 </div>
               </Col>
-              <Col>
+              <Col className="right_information">
                 <div className="search-table">
                   <Search
                     onChange={(e) => onSearch(e)}
-                    style={{ width: 200, height: 30, marginRight: "20px" }}
+                    style={{ width: 200, height: 30, marginRight: "20px", paddingLeft: "20px" }}
                   />
+
                   <Pagination
                     defaultCurrent={1}
                     onChange={changePage}

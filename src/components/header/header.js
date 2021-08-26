@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import Clock from "../clock/clock";
 import "./header.css";
 import {
   PlusSquareOutlined,
@@ -70,10 +71,7 @@ function Head(props) {
     btnAdmin = (
       <Link to="/admin" title="Admin">
         <a className="link">
-          <IdcardOutlined
-            twoToneColor="white"
-            style={{ padding: "0 14px" }}
-          />
+          <IdcardOutlined twoToneColor="white" style={{ padding: "0 14px" }} />
         </a>
       </Link>
     );
@@ -83,26 +81,27 @@ function Head(props) {
   if (token) {
     guide = (
       <Link to="/guide" title="Guide">
-      <a className="link">
-      <QuestionCircleOutlined
-        style={{ padding: "0 13px" }}
-        onClick={routeChange}
-      />
-      </a>
+        <a className="link">
+          <QuestionCircleOutlined
+            style={{ padding: "0 13px" }}
+            onClick={routeChange}
+          />
+        </a>
       </Link>
     );
     newTicketElem = (
       <Link to="/add ticket" title="Add Ticket">
-      <a className="link">
-      <PlusSquareOutlined
-        style={{ padding: "0 14px" }}
-        onClick={() => {
-          setNewTicket(true);
-        }}
-      />
-      </a>
+        <a className="link">
+          <PlusSquareOutlined
+            style={{ padding: "0 14px" }}
+            onClick={() => {
+              setNewTicket(true);
+            }}
+          />
+        </a>
       </Link>
     );
+
     userElem = (
       <Dropdown
         overlay={menu}
@@ -125,26 +124,29 @@ function Head(props) {
   return (
     <>
       <Layout className="layout">
-        <Header>
+        <div className="ant-image-header1"></div>
+        <Header className="ant-layout-header1">
           <Row wrap={false} className="display">
             <Col flex="none">
-              <div>
-              <Link to="/dashboard" title="Dashboard">
-                <img
-                  src={image}
-                  width="40px"
-                  height="40px"
-                  alt="logo"
-                  onClick={dashboard}
-                />
+              <div className="left_header">
+                <Link to="/dashboard" title="Dashboard">
+                  <img
+                    className="dashboard_logo"
+                    src={image}
+                    width="120px"
+                    height="120px"
+                    alt="logo"
+                    onClick={dashboard}
+                  />
                 </Link>
+                <Clock />
               </div>
             </Col>
-            <Col>
+            <Col className="ant-col1">
               {" "}
               <div className="icons-list">
                 {newTicketElem}
-                {btnAdmin}  
+                {btnAdmin}
                 {guide}
                 {userElem}
               </div>

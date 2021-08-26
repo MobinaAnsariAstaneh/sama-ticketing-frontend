@@ -34,18 +34,18 @@
 }
 
 .login-form-button {
-    border: purple !important;
-    background-color: purple !important;
+    border: #05299e !important;
+    background-color: #05299e !important;
     color: #fff !important;
     width: 100%;
 }
 
 .ant-checkbox-inner {
-    border: 1px solid purple !important;
+    border: 1px solid #05299e !important;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: purple !important;
+    background-color: #05299e !important;
 }
 
 .p-size {
@@ -59,7 +59,7 @@
 }
 
 .a-style {
-    color: purple !important;
+    color: #05299e !important;
     text-decoration: underline !important;
 }
 
@@ -194,7 +194,7 @@
     }
     .botoom-border {
         padding-bottom: 25px !important;
-        border-bottom: 1px solid purple;
+        border-bottom: 1px solid #05299e;
     }
     .para span {
         padding: 10px;

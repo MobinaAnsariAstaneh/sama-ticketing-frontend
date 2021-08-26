@@ -82,8 +82,8 @@ function Guide() {
         <Content style={{ padding: "0 100px" , marginBottom:"15px"}}>
           <div className="site-layout-content">
             <div>
-              <h4 className="goal">Team&apos;s Goal : </h4>
-              <h5 className="goal_context">
+              <h2 className="goal">Team&apos;s Goal : </h2>
+              <h3 className="goal_context">
                 This is a platform for communication between the employer and
                 the company&apos;s programming team. In this context,
                 programmers are required to support projects implemented by
@@ -92,7 +92,7 @@ function Guide() {
                 create his question on this site as a task or issue and
                 determine its priority level. The programming team will evaluate
                 the ticket at the first opportunity and solve it.
-              </h5>
+              </h3>
             </div>
             <div className="or"></div>
 
@@ -251,15 +251,15 @@ function Guide() {
                 onCancel={handleCancel}
               >
                 <p>{modalText}</p> <br />
-                <MailOutlined style={{ padding: "1px 6px 4px 0px", color: "purple"  }} />
+                <MailOutlined style={{ padding: "1px 6px 4px 0px", color: "#3fa7d6"  }} />
                 Email : <br />
                 <Paragraph copyable className="copy">mobinaansariit@gmail.com</Paragraph>
                 <Paragraph copyable className="copy">sepideh@gmail.com</Paragraph>
-                <PhoneOutlined style={{ padding: "1px 6px 4px 0px", color: "purple"  }} />
+                <PhoneOutlined style={{ padding: "1px 6px 4px 0px", color: "#3fa7d6"  }} />
                       Phone Number :{" "}
                       <Paragraph copyable className="copy">+98 915 445 0822</Paragraph>
                       <Paragraph copyable className="copy">+98 915 066 0935</Paragraph>
-                      <SendOutlined style={{ padding: "1px 6px 4px 0px" , color: "purple" }} />
+                      <SendOutlined style={{ padding: "1px 6px 4px 0px" , color: "#3fa7d6" }} />
                 Telegram : <br />
                 <Paragraph copyable className="copy">@M_Ansari_Astaneh</Paragraph>
                 <Paragraph copyable className="copy">@S_darban_maghami</Paragraph>

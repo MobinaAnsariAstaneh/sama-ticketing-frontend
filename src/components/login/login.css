@@ -9,7 +9,6 @@
     filter: grayscale(100%);
     position: relative;
     width: 100%;
-    /* for IE 6 */
 }
 
 .para {
@@ -33,21 +32,6 @@
     margin-bottom: -15px;
 }
 
-.login-form-button {
-    border: purple !important;
-    background-color: purple !important;
-    color: #fff !important;
-    width: 100%;
-}
-
-.ant-checkbox-inner {
-    border: 1px solid purple !important;
-}
-
-.ant-checkbox-checked .ant-checkbox-inner {
-    background-color: purple !important;
-}
-
 .p-size {
     margin-top: 10px;
     font-size: 25px;
@@ -56,11 +40,6 @@
 .login-form-forgot {
     color: black !important;
     text-decoration: none !important;
-}
-
-.a-style {
-    color: purple !important;
-    text-decoration: underline !important;
 }
 
 .ant-form {

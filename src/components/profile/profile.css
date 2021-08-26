@@ -1,5 +1,5 @@
 .left-border {
-    border-left: 1px solid purple;
+    border-left: 1px solid #05299e;
 }
 
 h2 {
@@ -13,7 +13,7 @@ h2 {
 }
 
 .ant-icon {
-    color: purple !important;
+    color: #05299e !important;
 }
 
 .layout {
@@ -21,7 +21,7 @@ h2 {
 }
 
 .ant-input-affix-wrapper {
-    border: 1px solid purple !important;
+    border: 1px solid #05299e !important;
 }
 
 .avatar {
@@ -30,7 +30,7 @@ h2 {
 }
 
 .ant-avatar-circle {
-    background-color: purple !important;
+    background-color: #05299e !important;
 }
 
 .avatar-icon {
@@ -42,7 +42,7 @@ p {
 }
 
 .user-name {
-    color: purple;
+    color: #05299e;
     font-size: large;
     margin-top: 40px;
 }

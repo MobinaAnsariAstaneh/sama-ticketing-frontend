@@ -8,7 +8,7 @@
 
 .goal {
     padding-top: 30px;
-    color: purple;
+    color: #05299e;
 }
 
 .goal_context {
@@ -41,7 +41,7 @@ Footer img {
 }
 
 .programmer_info {
-    color: #d980fa;
+    color: #2c57e2;
 }
 
 .programmers {
@@ -58,7 +58,8 @@ Footer img {
 }
 
 .logo {
-    width: 250px !important;
+    width: 100px !important;
+    height: 100px !important;
     position: relative;
     left: 50%;
     transform: translate(-50%);
@@ -71,7 +72,7 @@ Footer img {
     height: 1px;
     border-bottom: 1px solid #dee3e4;
     position: relative;
-    margin: 35px 0;
+    margin: 25px 0;
 }
 
 .or:before {
@@ -101,7 +102,7 @@ Footer img {
 }
 
 .title {
-    color: #e6b3f8;
+    color: #829ffc;
     font-weight: bold;
 }
 
@@ -123,12 +124,12 @@ Footer img {
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
-    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px 0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
+    box-shadow: linear-gradient(to right, #242f40,#057af0, #3498db); 
     outline: none;
 }
 
 .btn {
-    background: linear-gradient(to right, #cc2b5e, #753a88);
+    background: linear-gradient(to right, #242f40, #030d9e, #3498db); 
     ;
     line-height: 42px;
     padding: 0;
@@ -149,8 +150,8 @@ Footer img {
     content: "";
     right: 0;
     bottom: 0;
-    background: #cc2b5e;
-    box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, .9), -4px -4px 5px 0px rgba(255, 255, 255, .9), 7px 7px 20px 0px rgba(0, 0, 0, .2), 4px 4px 5px 0px rgba(0, 0, 0, .3);
+    background: #05299e;
+    box-shadow: linear-gradient(to right, #057af0, #3498db); 
     transition: all 0.3s ease;
 }
 
@@ -165,7 +166,7 @@ Footer img {
 }
 
 .btn:hover {
-    color: #cc2b5e;
+    color: #05299e;
     background: transparent;
 }
 
@@ -183,8 +184,8 @@ Footer img {
     content: "";
     left: 0;
     top: 0;
-    background: #753a88;
-    box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, .9), -4px -4px 5px 0px rgba(255, 255, 255, .9), 7px 7px 20px 0px rgba(0, 0, 0, .2), 4px 4px 5px 0px rgba(0, 0, 0, .3);
+    background: #05299e;
+    box-shadow: linear-gradient(to right, #030d9e, #0328a1); 
     transition: all 0.3s ease;
 }
 
