@@ -3,11 +3,28 @@ import { Modal, Button, message, Radio, Input } from "antd";
 import React, { useState, useRef } from "react";
 import JoditEditor from "jodit-react"; // description
 import axios from "../../axios"; // API
+import { useTranslation } from 'react-i18next';
+import i18n from "../../utilies/i18n";
+
 
 function AddTicket(props) {
+
+  const {t} = useTranslation();
+  const [isfa , setfa] = useState(false);
+  const Detectfa = (lng) => {
+    if (lng === 'fa')
+       setfa(true);
+    else
+       setfa(false);
+  }
+
+  i18n.on('languageChanged', (lng) => {
+    Detectfa(lng);
+  });
+  
   const [value1, setValue1] = useState("issue"); // type
   const [value2, setValue2] = useState("normal"); // priority
-  const [value3, setValue3] = useState(" "); // subject
+  const [value3, setValue3] = useState(""); // subject
   const onChange1 = (e) => {
     setValue1(e.target.value);
   };
@@ -20,18 +37,18 @@ function AddTicket(props) {
 
   function Modalhidefunc() {
     props.hidefunc();
-    message.error("No ticket was sent");
+    message.error(t('message.failed-add'));
   }
 
   function AddTicket(e) {
     // Add ticket
     e.preventDefault();
     if (value3.trim() === "") {
-      message.error("Please complete the subject field");
+      message.error(t('message.subject'));
       return false;
     }
     if (content.trim() === "") {
-      message.error("Please complete the description field");
+      message.error(t('message.description'));
       return false;
     }
 
@@ -50,13 +67,13 @@ function AddTicket(props) {
         setContent(""); // description
         setValue3(""); // subject
         message.success(
-          "Your ticket registered and it will be reviewed by the programming team at the first opportunity"
+          t('message.success-add')
         );
         props.changeTicket(); //!
         // return res.data;
       })
       .catch(() => {
-        message.error("something wrong, No ticket was sent");
+        message.error(t('message.failed-add'));
       });
     props.hidefunc();
   }
@@ -70,11 +87,12 @@ function AddTicket(props) {
       <Modal
         title={[
           <div key="1">
-            <p>Add ticket</p>
+            <p className={isfa ? 'add-fa' : 'add'}>{t('add.add')}</p>
             <Input
-              value={value3} // subject
+                className={isfa ? 'subject-fa' : 'subject'}
+                placeholder={t('subject.subject')}
+                value={value3} // subject
               onChange={(e) => setValue3(e.target.value)} // onChange for input, change if event occurs
-              placeholder="Subject"
             />
           </div>,
         ]}
@@ -85,37 +103,38 @@ function AddTicket(props) {
           <Button
             key="back"
             onClick={Modalhidefunc}
-            className="btn-cancel btn-modal"
+            className={isfa ? 'cancel-btn-fa' : 'cancel-btn'}
           >
-            Cancel
+            {t('cancel.cancel')}
           </Button>,
           <Button
             key="submit"
             onClick={(e) => AddTicket(e)}
-            className="btn-modal"
+            className={isfa ? 'add-btn-fa' : 'add-btn'}
           >
-            Add
+            {t('add.add-ticket')}
           </Button>,
         ]}
       >
-        <div className="b-border">
-          <span className="m-r">Type : </span>
+        <div className={isfa ? 'm-r-fa' : 'm-r'}>
+          <span className={isfa ? 'type-priority-mr-fa' : 'type-priority-mr'}>{t('type.type')}</span>
           <Radio.Group onChange={onChange1} value={value1}>
-            <Radio value={"issue"}>Issue</Radio>
-            <Radio value={"task"}>Task</Radio>
+            <Radio value={"issue"} className={isfa ? 'type-priority-fa' : 'type-priority'}>{t('type.issue')}</Radio>
+            <Radio value={"task"} className={isfa ? 'type-priority-fa' : 'type-priority'}>{t('type.task')}</Radio>
           </Radio.Group>
         </div>
         <br />
-        <div className="b-border">
-          <span className="m-r">Priority : </span>
+        <div className={isfa ? 'm-r-fa' : 'm-r'}>
+          <span className={isfa ? 'type-priority-mr-fa' : 'type-priority-mr'}>{t('priority.priority')}</span>
           <Radio.Group onChange={onChange2} value={value2}>
-            <Radio value={"normal"}>Normal</Radio>
-            <Radio value={"urgent"}>Urgent</Radio>
-            <Radio value={"critical"}>Critical</Radio>
+            <Radio value={"normal"} className={isfa ? 'type-priority-fa' : 'type-priority'}>{t('priority.normal')}</Radio>
+            <Radio value={"urgent"} className={isfa ? 'type-priority-fa' : 'type-priority'}>{t('priority.urgent')}</Radio>
+            <Radio value={"critical"} className={isfa ? 'type-priority-fa' : 'type-priority'}>{t('priority.critical')}</Radio>
           </Radio.Group>
         </div>
         <br />
-        <p className="m-r align-text">Description </p>
+        {/* className="m-r align-text" */}
+        <p className={isfa ? 'description-fa' : 'description'}>{t('description.content')}</p>
         <JoditEditor
           ref={editor}
           value={content}

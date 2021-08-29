@@ -1,7 +1,22 @@
 import "./snake.css";
 import imagelogin from "../../assets/MS.png";
+import English from "../../assets/english.svg";
+import Persian from "../../assets/persian.svg";
+import chooselanguage from "../../assets/chooselanguage.svg";
+import { useTranslation } from "react-i18next";
+import i18n from "../../utilies/i18n";
+import { Helmet } from "react-helmet";
+import { Button,Dropdown,Menu} from "antd";
 
 const Snake = () => {
+
+   const { t } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    // change direrction persian -> rtl / english -> ltr
+  };
+
+
   /**
    * Namespace
    */
@@ -239,14 +254,43 @@ const Snake = () => {
     var snake = new Game.Snake("stage", { fps: 100, size: 4 });
     return snake;
   };
-
+  const menu = (
+    <Menu>
+      <Menu.Item>
+      <li onClick={() => changeLanguage("en")}>
+            <img src={English} alt="English" />
+            {t("footer.english")}
+       </li>
+      </Menu.Item>
+      <Menu.Item>
+      
+      <li onClick={() => changeLanguage("fa")}>
+            <img src={Persian} alt="Persian" />
+            {t("footer.persian")}
+      </li>
+      </Menu.Item>
+    </Menu>
+  );
   return (
-    <div>
+    
+    <div className="snake-game">
+    <Helmet>
+        <title>{t('title.snake')}</title>
+      </Helmet>
       <a href={"./dashboard"}>
       <img src={imagelogin} alt="" className="logo" />
       </a>
-      <h1 className="title">SAMA WEB</h1>
-      <h2 className="game">Snake Game</h2>
+
+  {/* Bilingual */}
+  <Dropdown overlay={menu} placement="bottomCenter" arrow>
+          <Button className="btn-footer">  
+            <img src={chooselanguage} alt="Choose Language" />
+            {t("footer.language")}
+          </Button>
+        </Dropdown>
+
+      <h1 className="title">{t('title.game')}</h1>
+      <h2 className="game">{t('title.snake')}</h2>
       <canvas id="stage" height="350" width="700"></canvas>
     </div>
   );

@@ -11,50 +11,67 @@ import {
 import { Layout, Row, Col, Menu, Dropdown, message, Popconfirm } from "antd";
 import image from "../../assets/MS_header.svg";
 import AddTicket from "../add ticket/add-ticket";
+import { useTranslation } from "react-i18next";
+// import i18n from "../../utilies/i18n";
 
-const { Header } = Layout;
+const { Header , Sider} = Layout;
 
 function Head(props) {
   const history = useHistory();
   const [newTicket, setNewTicket] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const username = localStorage.getItem("username");
+  const { t } = useTranslation();
+  // const changeLanguage = (lng) => {
+  //   i18n.changeLanguage(lng);
+  //   // change direrction persian -> rtl / english -> ltr
+  // };
 
   const routeChange = () => {
-    message.success("Welcome to contact us");
+    message.success(t('message.guide'));
     history.push("/guide");
   };
   const dashboard = () => {
-    message.success("Welcome to your Dashboard");
+    message.success(t('message.dashboard'));
     history.push("/dashboard");
   };
   const Profile = () => {
-    message.success("Welcome to to your profile");
+    message.success(t('message.profile'));
     history.push("/profile");
   };
   const logOut = () => {
-    message.success("successfully logged out");
+    message.success(t('message.logout'));
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("auth");
     history.push("/login");
   };
   const cancel = () => {
-    message.success("You are still with us");
+    message.success(t('message.cancel-logout'));
   };
   const menu = (
     <Menu>
       <Menu.Item key="1">
-        <a onClick={Profile}>Profile</a>
+        <a onClick={Profile}>{t('page.profile')}</a>
       </Menu.Item>
       <Menu.Item key="2">
-        <Popconfirm
-          title="do you want to get off this page??"
+
+      <Popconfirm 
+      title={t('message.confirm-logout')} 
+      okText={t('message.yes')}
+      cancelText={t('message.no')}
+      onConfirm={logOut}
+      onCancel={cancel}
+      >
+          <a href={"./login"}>{t('page.logout')}</a>
+      </Popconfirm>
+        {/* <Popconfirm
+          title= {t('message.confirm-logout')}
           onConfirm={logOut}
           onCancel={cancel}
         >
-          <a href={"./login"}>Log out</a>
-        </Popconfirm>
+          <a href={"./login"}>{t('page.logout')}</a>
+        </Popconfirm> */}
       </Menu.Item>
     </Menu>
   );
@@ -62,16 +79,16 @@ function Head(props) {
   let guide = "";
   let userElem = (
     <Link to="/login">
-      <a className="login">login</a>
+      <a className="login">{t('page.login')}</a>
     </Link>
   );
 
   let btnAdmin = "";
   if (localStorage.getItem("admin") == 1) {
     btnAdmin = (
-      <Link to="/admin" title="Admin">
+      <Link to="/admin" title={t('page.admin')}>
         <a className="link">
-          <IdcardOutlined twoToneColor="white" style={{ padding: "0 14px" }} />
+          <IdcardOutlined twoToneColor="white" style={{ paddingRight:"16px" }}  />
         </a>
       </Link>
     );
@@ -80,26 +97,24 @@ function Head(props) {
   const token = localStorage.getItem("auth");
   if (token) {
     guide = (
-      <Link to="/guide" title="Guide">
+      <Link to="/guide" title={t('page.guide')}>
         <a className="link">
           <QuestionCircleOutlined
-            style={{ padding: "0 13px" }}
+            style={{ paddingRight:"5px" }}
             onClick={routeChange}
           />
         </a>
       </Link>
     );
     newTicketElem = (
-      <Link to="/add ticket" title="Add Ticket">
-        <a className="link">
+      <abbr title={t('page.addTicket')}>
           <PlusSquareOutlined
-            style={{ padding: "0 14px" }}
+            style={{ paddingRight:"16px" }}
             onClick={() => {
               setNewTicket(true);
             }}
           />
-        </a>
-      </Link>
+      </abbr>
     );
 
     userElem = (
@@ -114,7 +129,7 @@ function Head(props) {
         <span className="username-style">
           {username}
           <UserOutlined
-            style={{ fontSize: "20px", padding: "0px 0px 0px 12px" }}
+            style={{ fontSize: "20px", padding: "0px 0px 0px 3px" }}
           />
         </span>
       </Dropdown>
@@ -127,9 +142,9 @@ function Head(props) {
         <div className="ant-image-header1"></div>
         <Header className="ant-layout-header1">
           <Row wrap={false} className="display">
-            <Col flex="none">
+            <Col flex="none" className="ant-col1">
               <div className="left_header">
-                <Link to="/dashboard" title="Dashboard">
+                <Link to="/dashboard" title={t('page.dashboard')}>
                   <img
                     className="dashboard_logo"
                     src={image}
@@ -142,7 +157,18 @@ function Head(props) {
                 <Clock />
               </div>
             </Col>
-            <Col className="ant-col1">
+            <Col className="ant-col2">
+            <Sider 
+              breakpoint="lg"
+              collapsedWidth="0"
+              onBreakpoint={broken => {
+                console.log(broken);
+              }}
+              onCollapse={(collapsed, type) => {
+                console.log(collapsed, type);
+              }}
+              className="slider-position"
+      >
               {" "}
               <div className="icons-list">
                 {newTicketElem}
@@ -150,6 +176,7 @@ function Head(props) {
                 {guide}
                 {userElem}
               </div>
+              </Sider>
             </Col>
           </Row>
         </Header>

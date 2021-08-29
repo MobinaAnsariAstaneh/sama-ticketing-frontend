@@ -230,3 +230,7 @@
         max-height: 0;
     }
 }
+
+.App-label {
+    color: rgba(45, 63, 94, 0.5);
+}

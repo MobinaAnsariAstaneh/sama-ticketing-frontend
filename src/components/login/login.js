@@ -1,17 +1,27 @@
 import "./login.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Layout, message, Row, Col, Form, Input, Button, Checkbox } from "antd";
+import { Layout, message, Row, Col, Form, Input, Button, Checkbox,Dropdown,Menu} from "antd";
 import imgLogin from "../../assets/login.jpg";
 import imagelogin from "../../assets/MS.svg";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";
+import { useTranslation } from "react-i18next";
+import English from "../../assets/english.svg";
+import Persian from "../../assets/persian.svg";
+import chooselanguage from "../../assets/chooselanguage.svg";
+import i18n from "../../utilies/i18n";
 
 const { Content } = Layout;
 function Login() {
   const [check, setcheck] = useState(false);
   const [form] = Form.useForm();
+   const { t } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    // change direrction persian -> rtl / english -> ltr
+  };
   const storage = localStorage.getItem("login");
   useEffect(() => {
     const storageObj = JSON.parse(storage);
@@ -44,7 +54,7 @@ function Login() {
           }
           return res.data;
         } else if (res.status === 401) {
-          message.error("email or password is invalid");
+          message.error(t('message.invalid-login'));
         }
       })
       .then((res) => {
@@ -61,18 +71,35 @@ function Login() {
   };
   
   const register = () => {
-    message.warn("If you have not yet joined us, complete your information");
+    message.warn(t('message.joinUs'));
     history.push("/register");
   };
   const forgotpass = () => {
-    message.success("You can change your password, Just send us your email");
+    message.success(t('message.forgotten'));
     history.push("./forgot");
   };
 
+  const menu = (
+    <Menu>
+      <Menu.Item>
+      <li onClick={() => changeLanguage("en")}>
+            <img src={English} alt="English" />
+            {t("footer.english")}
+       </li>
+      </Menu.Item>
+      <Menu.Item>
+      
+      <li onClick={() => changeLanguage("fa")}>
+            <img src={Persian} alt="Persian" />
+            {t("footer.persian")}
+      </li>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       <Helmet>
-        <title>SAMA - Login Page</title>
+        <title>{t('title.login')}</title>
       </Helmet>
 
       <Layout>
@@ -82,7 +109,7 @@ function Login() {
               <div>
                 <img src={imagelogin} className="imglogo " alt="" />
               </div>
-              <p className="p-size">Welcome Back</p>
+              <p className="p-size">{t('login.welcome')}</p>
 
               <Form
                 name="normal_login"
@@ -100,11 +127,11 @@ function Login() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Email!",
+                        message: t('message.input-email'),
                       },
                       {
                         type: 'email',
-                        message: "Your email is invalid!",
+                        message: t('message.invalid'),
                       },
                     ]}
                   >
@@ -112,7 +139,7 @@ function Login() {
                       prefix={
                         <MailOutlined className="ant-icon site-form-item-icon " />
                       }
-                      placeholder="Email"
+                      placeholder={t('password.email')}
                     />
                   </Form.Item>
                   <Form.Item
@@ -121,10 +148,11 @@ function Login() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Password!",
+                        message: t('message.password')
                       },
                       {
                         min: 8,
+                        message: t('message.password-limit')
                       }
                     ]}
                   >
@@ -133,7 +161,7 @@ function Login() {
                         <LockOutlined className="ant-icon site-form-item-icon" />
                       }
                       type="password"
-                      placeholder="Password "
+                      placeholder={t('password.password')}
                     />
                   </Form.Item>
                   <Form.Item>
@@ -142,7 +170,7 @@ function Login() {
                       htmlType="submit"
                       className="login-form-button submit-login"
                     >
-                      Login
+                      {t('page.login')}
                     </Button>
                   </Form.Item>
                   <Form.Item>
@@ -153,25 +181,32 @@ function Login() {
                             setcheck(e.target.checked);
                           }}
                         >
-                          Remember me
+                          {t('login.remember')}
                         </Checkbox>
                       </Form.Item>
                       <a className="login-form-forgot" onClick={forgotpass}>
-                        Forgot password
+                        {t('login.forgot')}
                       </a>
                     </div>
                   </Form.Item>
                   <Form.Item className="botoom-border">
-                    Don&apos;t have an account?{" "}
+                    {t('links.way')}{"  "}
                     <a className="a-style" onClick={register}>
-                      Register
+                      {t('links.register')}
                     </a>
                     <br />
-                    Having an issue?{" "}
+                    {t('links.issue')}{" "}
                     <a className="a-style" href={"./guide"}>
-                      Contact us
+                      {t('links.contact')}
                     </a>
                   </Form.Item>
+                        {/* Bilingual */}
+                <Dropdown overlay={menu} placement="bottomCenter" arrow>
+          <Button className="btn-footer">  
+            <img src={chooselanguage} alt="Choose Language" />
+            {t("footer.language")}
+          </Button>
+        </Dropdown>
                 </div>
               </Form>
             </Col>
@@ -184,11 +219,11 @@ function Login() {
                   height="721vh"
                   alt=""
                 />
+
                 <p className="para">
-                  <span>SAMA WEB</span>
+                  <span>{t('company.company')}</span>
                   <div>
-                    A good platform for communication between employers and the
-                    programming team
+                    {t('company.goal')}
                   </div>
                 </p>
               </div>

@@ -1,7 +1,7 @@
 .ant-modal-title {
   text-align: center;
 }
-.m-r {
+.type-priority-mr {
   margin-right: 20px;
   margin-bottom: 15px;
 }
@@ -18,17 +18,99 @@
   padding-bottom: 15px;
   border-bottom: 1px solid rgb(218, 214, 214);
 }
-.btn-modal {
-  background-color: white !important;
-  border: 1px solid #05299e !important;
-  color: #05299e !important;
-}
-.btn-cancel {
-  border: none !important;
-}
 .jodit-toolbar-editor-collection .jodit-toolbar-button {
   display: grid;
 }
 .jodit-workplace {
   min-height: 114px !important;
+}
+
+.type-priority {
+  direction: ltr;
+  display: flex;
+  font-size: 15px !important;
+  padding: 20px 0px;
+}
+
+.type-priority-fa {
+  direction: rtl !important;
+  display: flex;
+  font-size: 15px !important;
+  padding: 20px 20px;
+}
+
+.type-priority-mr {
+  direction: ltr;
+  display: flex;
+  margin-right: 20px !important;
+  margin-bottom: 15px;
+}
+.type-priority-mr-fa {
+  direction: rtl !important;
+  display: flex;
+  margin-right: 20px !important;
+  margin-bottom: 15px;
+}
+.m-r{
+  direction: ltr;
+  display: flex;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(218, 214, 214);
+}
+.m-r-fa{
+  direction: rtl !important;
+  display: flex;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(218, 214, 214);
+}
+.description {
+  direction: ltr;
+  text-align: left;
+}
+.description-fa {
+  direction: rtl !important;
+  text-align: right;
+  margin-right: 20px;
+}
+.subject {
+  direction: ltr;
+  text-align: left;
+}
+.subject-fa {
+  direction: rtl !important;
+  text-align: right;
+}
+.add {
+  direction: ltr;
+  text-align: center;
+}
+.add-fa {
+  direction: rtl !important;
+  text-align: center;
+}
+.cancel-btn{
+  direction: let;
+  border: none !important;
+  background-color: white !important;
+  border: 1px solid #05299e !important;
+  color: #05299e !important;
+}
+.cancel-btn-fa{
+  direction: rtl !important;
+  border: none !important;
+  background-color: white !important;
+  border: 1px solid #05299e !important;
+  color: #05299e !important;
+}
+.add-btn{
+  direction: ltr;
+  background-color: white !important;
+  border: 1px solid #05299e !important;
+  color: #05299e !important;
+}
+.add-btn-fa{
+  direction: rtl !important;
+  background-color: white !important;
+  border: 1px solid #05299e !important;
+  color: #05299e !important;
 }

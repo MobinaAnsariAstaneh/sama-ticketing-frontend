@@ -7,7 +7,6 @@ import Register from "../components/register/register";
 import Admin from "../components/admin/admin";
 import Email from "../components/Result/email";
 import Snake from "../components/snake/snake";
-// import Bug from "../components/fun/fun";
 import "antd/dist/antd.css";
 import {
   Route,
@@ -39,9 +38,6 @@ function App() {
           <Route path="/snake">
             <Snake />
           </Route>
-          {/* <Route path="/fun">
-            <Bug />
-          </Route> */}
           <PrivateRoute path="/profile">
             <Profile />
           </PrivateRoute>

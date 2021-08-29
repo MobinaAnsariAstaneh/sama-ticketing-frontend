@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: radial-gradient(circle,#fff,#ccc);
+}
+h1{
+    text-align: center;
+    color: #4DB6AC;
+    font-size: 72px;
+    text-shadow: 2px 2px 1px #ccc;
+    margin-top: 10px;
+}
+#mainBox{
+    width: 600px;
+    height: 450px;
+    background-color: #4DB6AC;
+    margin:-45px auto;
+    border-radius: 10px;
+    position: relative;
+    padding: 20px;
+}
+#scoreBox{
+    background-color: #fff;
+    position: absolute;
+    padding:10px;
+    border-radius: 5px;
+    left: 500px;   
+}
+#correctBox{
+    background-color:lightgreen;
+    position: absolute;
+    padding:10px;
+    color: #fff;
+    left: 280px;
+    border-radius: 5px;
+    display: none;
+
+}
+#wrongBox{
+    background-color: lightcoral;
+    position: absolute;
+    padding: 10px;
+    color: #fff;
+    left: 280px;
+    border-radius: 5px;
+    display: none;
+}
+#questionBox{
+    background-color: lightsalmon;
+    height: 120px;
+    width: 450px;
+    margin: 50px auto 10px auto;
+    font-size: 100px;
+    color: #fff;
+    text-align: center;
+}
+#instructionBox{
+    background-color: lightslategray;
+    height: 50px;
+    width: 450px;
+    margin:10px auto;
+    text-align: center;
+    line-height: 45px;
+    color:#fff;
+}
+#choiceBox{
+    height: 100px;
+    width: 450px;
+    margin: 5px auto;
+}
+.box{
+    height: 85px;
+    width: 85px;
+    background-color: #fff;
+    float: left; 
+    margin-right: 36px;
+    cursor: pointer;
+    text-align: center;
+    line-height:80px;
+    
+}
+.box:hover , #startresetBox:hover{
+    background-color:lightblue;
+    color:#fff;
+}
+.box:active , #startresetBox:active{
+    background-color:lightgray;
+
+}
+.box:last-child{
+    margin-right: 0;
+}
+
+#startresetBox{
+    background-color: #ccc;
+    position: relative;
+    margin: 0 auto;
+    width: 85px;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+#timeremainingBox{
+    background-color: lightgreen;
+    position: absolute;
+    top: 365px;
+    width: 185px;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+#gameOverBox{
+    position: absolute;
+    height: 200px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+    font-size: 32px;
+    top: 150px;
+    left: 68px;
+    display: none;
+    
+}

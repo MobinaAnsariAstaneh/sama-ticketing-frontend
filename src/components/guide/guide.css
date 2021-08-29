@@ -9,18 +9,16 @@
 .goal {
     padding-top: 30px;
     color: #05299e;
+    margin-top: -25px;
 }
 
 .goal_context {
     color: #2a2a2a;
+    margin-top: -18px;
 }
 
 .white {
     color: white;
-}
-
-Footer img {
-    padding: 10px 80px 20px 75px;
 }
 
 .layout {
@@ -63,7 +61,7 @@ Footer img {
     position: relative;
     left: 50%;
     transform: translate(-50%);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .or {
@@ -124,12 +122,12 @@ Footer img {
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
-    box-shadow: linear-gradient(to right, #242f40,#057af0, #3498db); 
+    box-shadow: linear-gradient(to right, #242f40, #057af0, #3498db);
     outline: none;
 }
 
 .btn {
-    background: linear-gradient(to right, #242f40, #030d9e, #3498db); 
+    background: linear-gradient(to right, #242f40, #030d9e, #3498db);
     ;
     line-height: 42px;
     padding: 0;
@@ -151,7 +149,7 @@ Footer img {
     right: 0;
     bottom: 0;
     background: #05299e;
-    box-shadow: linear-gradient(to right, #057af0, #3498db); 
+    box-shadow: linear-gradient(to right, #057af0, #3498db);
     transition: all 0.3s ease;
 }
 
@@ -185,7 +183,7 @@ Footer img {
     left: 0;
     top: 0;
     background: #05299e;
-    box-shadow: linear-gradient(to right, #030d9e, #0328a1); 
+    box-shadow: linear-gradient(to right, #030d9e, #0328a1);
     transition: all 0.3s ease;
 }
 
@@ -205,4 +203,64 @@ Footer img {
 
 .btn span:hover:after {
     width: 100%;
+}
+
+.TA {
+    text-align: left;
+}
+
+.TA-fa {
+    text-align: right;
+}
+
+.goal_context-fa,
+.goal_context {
+    text-align: center;
+}
+
+.goal-fa,
+.goal {
+    text-align: center;
+}
+
+.programmers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.programmers-fa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-margin {
+    direction: "ltr";
+    margin-right: 5px;
+    text-align: left;
+}
+
+.info-margin-fa {
+    direction: "rtl";
+    margin-left: 5px;
+    text-align: right;
+}
+
+.App-label {
+    color: rgba(45, 63, 94, 0.5);
+}
+
+.ant-modal-footer{
+    text-align: center !important;
+}
+
+.icon-field { 
+    direction: ltr !important;
+    margin-right: 5px;
+}
+
+.icon-field-fa {
+    direction:rtl !important;
+    margin-left: 5px;
 }

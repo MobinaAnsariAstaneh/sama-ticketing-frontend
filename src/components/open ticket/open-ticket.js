@@ -5,6 +5,9 @@ import JoditEditor from "jodit-react";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Gravatar from "react-gravatar";
 import axios from "../../axios";
+import { useTranslation } from 'react-i18next';
+import i18n from "../../utilies/i18n";
+// import toEnglishDigits from "../../utilies/number";
 
 const ExampleComment1 = (props) => {
   let usernameSet = localStorage.getItem("username"),
@@ -12,13 +15,13 @@ const ExampleComment1 = (props) => {
   if (usernameSet !== props.name) {
     notuser = "active text_align_left";
   }
-  console.log("props", props);
+const { t } = useTranslation();
   return (
     <Comment
       className={notuser}
       actions={[
         <span key="comment-nested-reply-to" onClick={props.reply}>
-          Reply to
+          {t('action.reply')}
         </span>,
       ]}
       author={
@@ -49,12 +52,25 @@ const ExampleComment1 = (props) => {
 };
 
 function OpenTicket(props) {
+  const {t} = useTranslation();
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([{ ticket: 0 }]);
   const [Load, setLoad] = useState(false);
   const [spiner, setSpiner] = useState(false);
   const admin = localStorage.getItem("admin");
+  const [isfa , setfa] = useState(false);
+  const Detectfa = (lng) => {
+    if (lng === 'fa')
+       setfa(true);
+    else
+       setfa(false);
+  }
+
+  i18n.on('languageChanged', (lng) => {
+    Detectfa(lng);
+  });
+  
 
   function onClose() {
     props.hidefunc();
@@ -86,7 +102,7 @@ function OpenTicket(props) {
 
   const submited = () => {
     if (content.trim() === "") {
-      message.error("There is no content to post, Enter the your comment");
+      message.error(t('message.comment'));
       return false;
     }
     setSpiner(true);
@@ -103,9 +119,9 @@ function OpenTicket(props) {
           props.changeComment();
           setLoad(true);
           setSpiner(false);
-          message.success("Ticket has been successfully sent");
+          message.success(t('message.send-comment'));
         } else {
-          message.error("somthing Wrong, Problem during sending ticket");
+          message.error(t('message.failed-comment'));
         }
       })
       .catch((err) => {
@@ -151,9 +167,9 @@ function OpenTicket(props) {
 
   elemTicketrm = (
     <>
-      <p className="align-text">Add Comment </p>
+      <p className={isfa ? 'comment-fa' : 'comment'}><b>{t('add.comment')}</b></p>
       <JoditEditor
-        direction={"ltr"}
+        // direction={"ltr"}
         ref={editor}
         value={content}
         config={config}
@@ -162,17 +178,17 @@ function OpenTicket(props) {
       />
       <br />
       <Button onClick={deletingTicket} className="btn-drwer btn-cancel ">
-        Done
+        {t('done.done')}
       </Button>
       <Button
         onClick={onClose}
         style={{ marginRight: 8 }}
         className="btn-cancel btn-drwer"
       >
-        Cancel
+        {t('cancel.cancel')}
       </Button>
       <Button {...attr} onClick={submited} className="btn-drwer">
-        Send
+        {t('send.send')}
         {elem}
       </Button>
     </>
@@ -187,7 +203,7 @@ function OpenTicket(props) {
     classStatus = "ant-tag-purple";
   } else if (props.data.status[0] === "In Progress") {
     classStatus = "ant-tag-blue Progress-btn";
-  } else if (props.data.status[0] === "new") {
+  } else if (props.data.status[0] === "new" || props.data.status[0] === "New" ) {
     classStatus = "ant-tag-green";
   }
   let adminElement = "";
@@ -196,7 +212,7 @@ function OpenTicket(props) {
       <div>
         <span>
           <Button onClick={() => answered("")} className="ant-tag-blue">
-            In Progress
+            {t('filters.In Progress')}
           </Button>
         </span>
       </div>
@@ -210,7 +226,7 @@ function OpenTicket(props) {
             <div>
               <p className="p-align">
                 <ArrowLeftOutlined className="icon-back" onClick={onClose} />
-                <span className="ticket-id">ticket {props.data.key}</span>
+                <span className="ticket-id">{t('action.ticket')}{props.data.key}</span>
               </p>
               <span>
                 <span className="openTicket__subject">
@@ -219,12 +235,12 @@ function OpenTicket(props) {
               </span>
               <span>
                 <span className={"ant-tag " + classStatus}>
-                  {props.data.status[0].toUpperCase()}
+                  {t(`filters.${props.data.status[0]}`)}
                 </span>
               </span>
               <span className="font-span">
-                - Created {props.data.created.split("T")[0].replace(/-/g, "/")}{" "}
-                - Requester: {props.data.requester}
+                <div className={isfa ? 'PersianNo' : 'EnglishNo'}>{t('action.create')}{t(props.data.created.split("T")[0].replace(/-/g, "/"))}</div>
+                <div className={isfa ? 'req' : 'req-fa'}> {t('action.req')}{props.data.requester}</div>
                 <span className="color-name"></span>
               </span>
             </div>
@@ -236,11 +252,7 @@ function OpenTicket(props) {
         visible={props.open}
         bodyStyle={{ paddingBottom: 30 }}
         footer={
-          <div
-            style={{
-              textAlign: "right",
-            }}
-          >
+          <div>
             {elemTicketrm}
           </div>
         }

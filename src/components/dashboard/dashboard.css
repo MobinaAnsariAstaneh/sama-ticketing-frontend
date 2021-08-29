@@ -1,46 +1,78 @@
 .ant-layout-content {
-  background-color: white !important;
-}
+    background-color: white !important;
+} 
+
 .search-table {
-  display: flex;
+    display: flex;
 }
+
 .color-orange {
     color: #fca311 !important;
-  }
-  .color-blue {
+}
+
+.color-blue {
     color: #05299e !important;
-  }
-  .color-red {
+}
+
+.color-red {
     color: #d00000!important;
-  }
+}
+
 .ant-table-pagination {
-  display: none !important;
+    display: none !important;
 }
+
 .right_information {
-  padding: 0px;
+    padding: 0px;
 }
-.ant-table-thead > tr > th {
-  color: #676767 !important;
-  background-color: #ebe9e9 !important;
+
+.ant-table-thead>tr>th {
+    color: #676767 !important;
+    background-color: #ebe9e9 !important;
 }
-.ant-input-group > .ant-input:first-child,
+
+.ant-input-group>.ant-input:first-child,
 .ant-input-group-addon:first-child {
-  height: 32px;
+    height: 32px;
 }
-.ant-input-search
-  > .ant-input-group
-  > .ant-input-group-addon:last-child
-  .ant-input-search-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.ant-input-search>.ant-input-group>.ant-input-group-addon:last-child .ant-input-search-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
-  text-align: center !important;
+
+.ant-table-thead>tr>th,
+.ant-table-tbody>tr>td {
+    text-align: center !important;
 }
+
 @media screen and (max-width: 767px) {
-  .ant-layout-content {
-    padding: 0 15px !important;
-  }
+    .ant-layout-content {
+        padding: 0 15px !important;
+    }
+}
+
+footer {
+    background-color: #fff !important;
+}
+
+.btn-footer {
+    height: 45px !important;
+    background: linear-gradient(to right, #36d1dc, #5b99e5) !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+}
+
+.btn-footer:hover {
+    color: #05299e !important;
+}
+
+.App-label {
+    color: rgba(45, 63, 94, 0.5);
+}
+
+.footer-version {
+    color: rgba(45, 63, 94, 0.5);
+    /* padding-top: 5px; */
 }

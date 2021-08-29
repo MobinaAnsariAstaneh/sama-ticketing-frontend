@@ -1,16 +1,26 @@
 import "./register.css";
-import { Layout, Row, Col, Form, Input, Button } from "antd";
+import { Layout, Row, Col, Form, Input, Button ,Menu,Dropdown } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useHistory } from 'react-router-dom';
 import imgLogin from "../../assets/login.jpg";
 import imagelogin from "../../assets/MS.svg";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";
-
-const { Content } = Layout;
+import English from "../../assets/english.svg";
+import Persian from "../../assets/persian.svg";
+import chooselanguage from "../../assets/chooselanguage.svg";
+import { useTranslation } from "react-i18next";
+import i18n from "../../utilies/i18n";
 
 function Register() {
   const history = useHistory();
+  const { Content } = Layout;
+  const { t } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    // change direrction persian -> rtl / english -> ltr
+  };
+
   const onFinish = (values) => {
     axios.post("api/register", {
       first_name: values.name,
@@ -22,14 +32,28 @@ function Register() {
     .then(()=>{
       history.push("./login");
     })
-    console.log("Received values of form: ", values);
-    console.log(values);
   };
-  
+  const menu = (
+    <Menu>
+      <Menu.Item>
+      <li onClick={() => changeLanguage("en")}>
+            <img src={English} alt="English" />
+            {t("footer.english")}
+       </li>
+      </Menu.Item>
+      <Menu.Item>
+      
+      <li onClick={() => changeLanguage("fa")}>
+            <img src={Persian} alt="Persian" />
+            {t("footer.persian")}
+      </li>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       <Helmet>
-        <title>SAMA - Register Page</title>
+        <title>{t('title.register')}</title>
       </Helmet>
 
       <Layout>
@@ -39,10 +63,10 @@ function Register() {
               <div>
                 <img src={imagelogin} className="imglogo" alt="" />
               </div>
-              <p className="p-size">Create Account</p>
-              <p note-size>Already have an Account ?</p>
+              <p className="p-size">{t('register.account')}</p>
+              <p note-size>{t('register.have-account')}</p>
               <p>
-                <a href={"./login"}>Sign In</a>
+                <a href={"./login"}>{t('register.signIn')}</a>
               </p>
 
               <Form
@@ -60,11 +84,12 @@ function Register() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your First Name!",
+                        message: t('message.first'),
                       },
                       {
                         min: 2,
-                        max: 15
+                        max: 15,
+                        message: t('message.name-limit')
                       }
                     ]}
                   >
@@ -73,7 +98,7 @@ function Register() {
                       prefix={
                         <UserOutlined className="ant-icon site-form-item-icon" />
                       }
-                      placeholder="First Name"
+                      placeholder= {t('register.first')}
                     />
                   </Form.Item>
 
@@ -83,11 +108,12 @@ function Register() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Last Name!",
+                        message: t('message.last'),
                       },
                       {
                         min: 2,
                         max: 20,
+                        message: t('message.last-limit')
                       }
                     ]}
                   >
@@ -96,7 +122,7 @@ function Register() {
                       prefix={
                         <UserOutlined className="ant-icon site-form-item-icon" />
                       }
-                      placeholder="Last Name"
+                      placeholder={t('register.last')}
                     />
                   </Form.Item>
 
@@ -106,11 +132,11 @@ function Register() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Email!",
+                        message: t('message.email'),
                       },
                       {
                         type: 'email',
-                        message: "Your email is invalid!",
+                        message: t('message.invalid'),
                       },
                     ]}
                   >
@@ -118,7 +144,7 @@ function Register() {
                       prefix={
                         <MailOutlined className="ant-icon site-form-item-icon " />
                       }
-                      placeholder="Email"
+                      placeholder={t('register.email')}
                     />
                   </Form.Item>
 
@@ -128,10 +154,11 @@ function Register() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Password!",
+                        message: t('message.pass'),
                       },
                       {
                         min: 8,
+                        message: t('message.password-limit')
                       }
                     ]}
                   >
@@ -140,7 +167,7 @@ function Register() {
                         <LockOutlined className="ant-icon site-form-item-icon" />
                       }
                       type="password"
-                      placeholder="Password "
+                      placeholder={t('register.pass')}
                     />
                   </Form.Item>
                   <Form.Item
@@ -149,10 +176,11 @@ function Register() {
                     rules={[
                       {
                         required: true,
-                        message: "Please enter your password again!",
+                        message: t('message.conf-pass'),
                       },
                       {
                         min: 8,
+                        message: t('message.confirm-password-limit')
                       }
                     ]}
                   >
@@ -161,7 +189,7 @@ function Register() {
                         <LockOutlined className="ant-icon site-form-item-icon" />
                       }
                       type="confirm-password"
-                      placeholder="Confirm password "
+                      placeholder={t('register.conf-pass')}
                     />
                   </Form.Item>
                   <Form.Item>
@@ -170,16 +198,23 @@ function Register() {
                       htmlType="submit"
                       className="login-form-button submit-register"
                     >
-                      Create Account
+                      {t('register.account')}
                     </Button>
                   </Form.Item>
-
-                  <Form.Item className="botoom-border">
-                    Having an issue?{" "}
+                 
+                   <Form.Item className="botoom-border">
+                    {t('links.issue')}{" "}
                     <a className="a-style" href={"./guide"}>
-                      Contact us
+                      {t('links.contact')}
                     </a>
                   </Form.Item>
+                        {/* Bilingual */}
+                <Dropdown overlay={menu} placement="bottomCenter" arrow>
+          <Button className="btn-footer">  
+            <img src={chooselanguage} alt="Choose Language" />
+            {t("footer.language")}
+          </Button>
+        </Dropdown>
                 </div>
               </Form>
             </Col>
@@ -192,14 +227,15 @@ function Register() {
                   height="721vh"
                   alt=""
                 />
+
                 <p className="para">
-                  <span>SAMA WEB</span>
+                  <span>{t('company.company')}</span>
                   <div>
-                    A good platform for communication between employers and the
-                    programming team
+                    {t('company.goal')}
                   </div>
                 </p>
               </div>
+              
             </Col>
           </Row>
         </Content>

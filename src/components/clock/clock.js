@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 import './clock.css';
+import i18n from "../../utilies/i18n";
+import { useTranslation } from 'react-i18next';
+// import toEnglishDigits from "../../utilies/number";
 
 function Clock() {
+  const {t} = useTranslation();
+  const [isfa , setfa] = useState(false);
+  const Detectfa = (lng) => {
+    if (lng === 'fa')
+       setfa(true);
+    else
+       setfa(false);
+  }
+
+  i18n.on('languageChanged', (lng) => {
+    Detectfa(lng);
+  });
+
   let time = new Date().toLocaleTimeString();
   let [currentTime, settime] = useState(time);
 
@@ -20,8 +36,8 @@ function Clock() {
   return (
     <>
       <div className="main">
-            <p className="clock">{currentTime}</p>
-            <p className="date">{currentDate}</p>
+            <p className={isfa ? 'clock PersianNo' : 'clock'}>{t(currentTime)}</p>
+            <p className={isfa ? 'clock PersianNo' : 'clock'}>{t(currentDate)}</p>
       </div>
     </>
   );

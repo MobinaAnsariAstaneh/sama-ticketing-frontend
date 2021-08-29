@@ -21,6 +21,21 @@ import { Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Bar } from "react-chartjs-2";
 import axios from "../../axios";
+import { useTranslation } from 'react-i18next';
+// import i18n from "../../utilies/i18n";
+
+  
+  // const [isfa , setfa] = useState(false);
+  // const Detectfa = (lng) => {
+  //   if (lng === 'fa')
+  //      setfa(true);
+  //   else
+  //      setfa(false);
+  // }
+
+  // i18n.on('languageChanged', (lng) => {
+  //   Detectfa(lng);
+  // });
 
 const { Header, Content } = Layout; // Layout , Header, Content, Footer for ant design
 const data = {
@@ -52,6 +67,7 @@ const options = {
 };
 
 function Admin() {
+  const {t} = useTranslation();
   const [data1, setdata1] = useState([]);
   const [chnage, setchange] = useState(true);
   const [curentData, setcurentData] = useState();
@@ -72,21 +88,21 @@ function Admin() {
   const deletUser = () => {};
   const columns = [
     {
-      title: "id",
+      title: t('admin.id'),
       dataIndex: "id",
       sorter: (a, b) => a.number - b.number,
     },
     {
-      title: "username",
+      title: t('admin.username'),
       dataIndex: "username",
     },
     {
-      title: "firstname",
+      title: t('admin.first'),
       dataIndex: "firstname",
     },
 
     {
-      title: "lastname",
+      title: t('admin.last'),
       dataIndex: "lastname",
     },
     {
@@ -96,31 +112,23 @@ function Admin() {
       render: (text) => <a style={{ color: "#3699FF" }}>{text}</a>,
     },
     {
-      title: "superuser",
+      title: t('admin.super'),
       dataIndex: "superuser",
       // eslint-disable-next-line react/display-name
       render: (text) => (
-        <a style={{ color: "#3699FF" }}>{text ? "yes" : "no"}</a>
+        <a style={{ color: "#3699FF" }}>{text ? t('message.no') : t('message.no')}</a>
       ),
     },
-    // {
-    //   title: "active",
-    //   dataIndex: "active",
-    //   // eslint-disable-next-line react/display-name
-    //   render: (text) => (
-    //     <a style={{ color: "#3699FF" }}>{text ? "yes" : "no"}</a>
-    //   ),
-    // },
     {
-      title: "staff",
+      title: t('admin.staff'),
       dataIndex: "staff",
       // eslint-disable-next-line react/display-name
       render: (text) => (
-        <a style={{ color: "#3699FF" }}>{text ? "yes" : "no"}</a>
+        <a style={{ color: "#3699FF" }}>{text ? t('message.no') : t('message.no')}</a>
       ),
     },
     {
-      title: "Action",
+      title: t('admin.action'),
       dataIndex: "action",
       // eslint-disable-next-line react/display-name
       render: function (id, record) {
@@ -128,12 +136,12 @@ function Admin() {
           <>
             <Space size="middle" style={{ color: "#3699FF" }}>
               <Popconfirm
-                title="Do you want to delete this user?"
+                title= {t('admin.remove')}
                 onConfirm={() => {
                   deletUser(record.key);
                 }}
               >
-                <a>remove user</a>
+                <a>{t('admin.remove-user')}</a>
               </Popconfirm>
             </Space>
           </>
@@ -161,7 +169,7 @@ function Admin() {
         resul.map((val) => {
           itsme = "";
           if (val.username === username) {
-            itsme = "(you)";
+            itsme = t('admin.you');
           }
           arr.push({
             id: val.id,
@@ -237,7 +245,7 @@ function Admin() {
     <>
       {redirectelem}
       <Helmet>
-        <title>SAMA - Admin Page</title>
+        <title>{t('title.admin')}</title>
       </Helmet>
       <Layout className="layout">
         <Header>
@@ -258,7 +266,7 @@ function Admin() {
                     onClick={() => setmodalOpen(true)}
                     size={20}
                   >
-                    Add New User
+                    {t('admin.new')}
                   </Button>
                 </div>
               </Col>
@@ -283,12 +291,12 @@ function Admin() {
         </Content>
         <div className="chart">
           <div className="chartContainer">
-            <div className="titleChart">chart site</div>
+            <div className="titleChart">{t('admin.chart')}</div>
             <Bar data={data} options={options} />
           </div>
         </div>
         <Modal
-          title={[<h2 key="1">Add new user</h2>]}
+          title={[<h2 key="1">{t('admin.new')}</h2>]}
           centered
           visible={modalOpen}
           onCancel={() => setmodalOpen(false)}
@@ -298,14 +306,14 @@ function Admin() {
               onClick={() => setmodalOpen(false)}
               className="btn-cancel btn-modal"
             >
-              Cancel
+              {t('admin.cancel')}
             </Button>,
             <Button
               key="submit"
               onClick={(e) => submitHandler(e)}
               className="btn-modal"
             >
-              Add user
+              {t('admin.add')}
             </Button>,
           ]}
         >
@@ -315,11 +323,11 @@ function Admin() {
              rules={[
               {
                 required: true,
-                message: "Please input your Email!",
+                message: t('message.mail'),
               },
               {
                 type: 'email',
-                message: "Your email is invalid!",
+                message: t('message.invalid'),
               },
             ]}
             >
@@ -331,7 +339,7 @@ function Admin() {
                 });
               }}
               size="large"
-              placeholder="Email"
+              placeholder= {t('register.email')}
               className="ant-icon"
               prefix={<MailOutlined />}
             />
@@ -341,8 +349,13 @@ function Admin() {
               rules={[
                 {
                   required: true,
-                  message: "Please input your First Name!",
+                  message: t('message.first'),
                 },
+                {
+                  min: 2,
+                  max: 15,
+                  message: t('message.name-limit')
+                }
               ]}>
             <Input
               size="large"
@@ -352,7 +365,7 @@ function Admin() {
                   return { ...prev, name: e.target.value };
                 });
               }}
-              placeholder="First Name"
+              placeholder= {t('register.first')}
               className="ant-icon"
               prefix={<UserOutlined />}
             />
@@ -362,8 +375,13 @@ function Admin() {
              rules={[
                {
                  required: true,
-                 message: "Please input your Last Name!",
+                 message: t('message.last'),
                },
+               {
+                min: 2,
+                max: 20,
+                message: t('message.last-limit')
+              }
              ]}
             >
             <Input
@@ -374,7 +392,7 @@ function Admin() {
                 });
               }}
               size="large"
-              placeholder="Last Name"
+              placeholder= {t('register.last')}
               className="ant-icon"
               prefix={<UserOutlined />}
             />
@@ -384,10 +402,11 @@ function Admin() {
               rules={[
                 {
                   required: true,
-                  message: "Please input your Password!",
+                  message: t('message.pass'),
                 },
                 {
                   min: 8,
+                  message: t('message.password-limit')
                 }
               ]}
             >
@@ -399,7 +418,7 @@ function Admin() {
                 });
               }}
               size="large"
-              placeholder="Password"
+              placeholder= {t('register.pass')}
               className="ant-icon"
               prefix={<LockOutlined />}
             />
@@ -409,10 +428,11 @@ function Admin() {
                rules={[
                  {
                    required: true,
-                   message: "Please enter your password again!",
+                   message: t('message.conf-pass'),
                  },
                  {
                    min: 8,
+                   message: t('message.confirm-password-limit')
                  }
                ]}
               >
@@ -424,13 +444,13 @@ function Admin() {
                 });
               }}
               size="large"
-              placeholder="Confirm Password"
+              placeholder= {t('register.conf-pass')}
               className="ant-icon"
               prefix={<LockOutlined />}
             />
             </Form.Item>
             <div className="b-border">
-              <span className="m-r">superuser </span>
+              <span className="m-r">{t('admin.super')}</span>
               <Radio.Group
                 onChange={(e) => {
                   setformdata((prev) => {
@@ -445,7 +465,7 @@ function Admin() {
             </div>
             <br/>
             <div className="b-border">
-              <span className="m-r">staff</span>
+              <span className="m-r">{t('register.staff')}</span>
               <Radio.Group
                 onChange={(e) => {
                   setformdata((prev) => {
@@ -454,8 +474,8 @@ function Admin() {
                 }}
                 value={formdata.staff}
               >
-                <Radio value={true}>yes</Radio>
-                <Radio value={false}>no</Radio>
+                <Radio value={true}>{t('register.yes')}</Radio>
+                <Radio value={false}>{t('register.no')}</Radio>
               </Radio.Group>
             </div>
             {/* <div>

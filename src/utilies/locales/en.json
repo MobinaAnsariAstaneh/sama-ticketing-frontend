@@ -1,0 +1,249 @@
+{
+    "type": {
+        "type": "Type :",
+        "issue": "Issue",
+        "task": "Task"
+    },
+    "priority": {
+        "priority": "Priority :",
+        "normal": "Normal",
+        "urgent": "Urgent",
+        "critical": "Critical"
+    },
+    "description": {
+        "content": "Description"
+    },
+    "subject": {
+        "subject": "Subject :"
+    },
+    "add": {
+        "add": "Add Ticket",
+        "add-ticket": "Add",
+        "comment": "Add Comment"
+    },
+    "cancel": {
+        "cancel": "Cancel"
+    },
+    "send": {
+        "send": "Send"
+    },
+    "done": {
+        "done": "Done"
+    },
+    "TA": {
+        "discrete": "Discrete Mathematics",
+        "algebra": "Linear Algebra",
+        "logic": "Logical Circuits",
+        "network": "Network",
+        "software": "Software Engineering",
+        "iot": "Internet Of Things (IOT)"
+    },
+    "title": {
+        "guide": "SAMA - Guide Page",
+        "dashboard": "SAMA - Dashboard Page",
+        "register": "SAMA - Register Page",
+        "profile": "SAMA - Profile Page",
+        "forgot": "SAMA - Forgotten Password Page",
+        "login": "SAMA - Login Page",
+        "admin": "SAMA - admin Page",
+        "game": "SAMA - Game Page",
+        "email": "SAMA - Confirm Page",
+        "snake": "Snake Game"
+    },
+    "goal": {
+        "goal": "Team's Goal : ",
+        "goal-content": "This is a platform for communication between the employer and the company's programming team. In this context, programmers are required to support projects implemented by them, during the project or after delivery to the client. If the employer encounters any questions during the project, he can create his question on this site as a task or issue and  determine its priority level. The programming team will evaluate the ticket at the first opportunity and solve it."
+    },
+    "programmer": {
+        "front": "Front-End Developer",
+        "info": "Programmer's Information",
+        "programmers": "Programmers",
+        "mobina": "Mobina  Ansari Astaneh",
+        "sepid": "Sepideh Darban Maghami",
+        "degree": "Degree : ",
+        "uni": "University : ",
+        "academic": "Academic experience : ",
+        "ta": "Teacher Assistant",
+        "bachelor": "Bachelor",
+        "sadjad": "Sadjad University of Technology"
+    },
+    "programmering-language": {
+        "programmering-language": "Programmering Languages",
+        "title": "Programming Languages",
+        "front": "Front-End Programming Languages",
+        "back": "Back-End Programming Languages"
+    },
+    "contact": {
+        "contact": " How to contact with supporter? ",
+        "us": "Contact with us : ",
+        "email": "Email :",
+        "phone": "Phone Number :",
+        "telegram": "Telegram :"
+    },
+    "columns": {
+        "title": "Subject",
+        "status": "Status",
+        "priority": "Priority",
+        "type": "Type",
+        "req": "Requester",
+        "created": "Created",
+        "updated": "Updated",
+        "action": "Actions"
+    },
+    "filters": {
+        "new": "New",
+        "New": "New",
+        "open": "Open",
+        "In Progress": "In Progress",
+        "Answered": "Answered",
+        "Done": "Done",
+        "Issue": "Issue",
+        "Task": "Task",
+        "Normal": "Normal",
+        "Urgent": "Urgent",
+        "Critical": "Critical"
+    },
+    "action": {
+        "done": "Done",
+        "open": "Open",
+        "archive": "Add Archive",
+        "archived": "Archived Tickets",
+        "total": "All Tickets",
+        "ticket": "Ticket ",
+        "req" : "Requester : ",
+        "create" : "Created at : ",
+        "reply" : "Reply to "
+    },
+    "message": {
+        "failed-archive": "Archiving ticket {{id}} failed",
+        "success-archive": "Ticket {{id}} was suceessfully archived",
+        "failed-delete": "Deleting ticket {{id}} failed",
+        "success-delete": "Ticket {{id}} was suceessfully deleted",
+        "bug-archive": "No tickets have been archived",
+        "fail": "operation failed",
+        "confirm-done": "Do you want to Done this ticket ?",
+        "guide": "Welcome to contact us",
+        "dashboard": "Welcome to your Dashboard",
+        "profile": "Welcome to to your profile",
+        "confirm-logout": "Do you want to log out ?",
+        "logout": "You have successfully logged out",
+        "cancel-logout": "You are still with us :)",
+        "subject": "Please complete the subject field",
+        "description": "Please complete the description field",
+        "success-add": "Your ticket registered successfully",
+        "failed-add": "No ticket was sent",
+        "register": "Welcome to register a new user",
+        "success-email": "Email was successfully sent to you",
+        "failed-email": "Failed to send email",
+        "comparePassword": "password and confirm password doesn't match",
+        "changed": "Your password changed successfully",
+        "Unchanged": "Password didn't change",
+        "input-email": "Please enter your Email!",
+        "invalid": "Your email is invalid!",
+        "newPass": "Please enter your new password!",
+        "confirmPass": "Please enter your new password again!",
+        "invalid-login": "email or password is invalid",
+        "joinUs": "complete your information and join us",
+        "forgotten": "You can change your password, Just send us your email",
+        "password": "Please enter your password",
+        "first": "Please enter your First Name!",
+        "last": "Please enter your Last Name!",
+        "email": "Please enter your Email!",
+        "pass": "Please enter your password!",
+        "conf-pass": "Please enter your password again!",
+        "success-update": "Perfect, Your information updated successfully :)",
+        "failed-update": "Your personal information has not been updated",
+        "bug-update": "Your personal information has not been updated",
+        "bug-profile": "something wrong to fetch user's data",
+        "comment": "There is no content to post, Enter your comment",
+        "send-comment": "Ticket has been successfully sent",
+        "failed-comment": "somthing Wrong, Problem during sending ticket",
+        "cancel" : "Clicked cancel button",
+        "password-limit": "'Password' must be at least 8 characters",
+        "confirm-password-limit": "'Confirm Password' must be at least 8 characters",
+        "name-limit": "'Name' must be between 2 and 15 characters",
+        "last-limit": "'Last Name' must be between 2 and 20 characters",
+        "yes" : "Yes",
+        "no" : "No"
+    },
+    "page": {
+        "profile": "Profile",
+        "logout": "Log out",
+        "login": "Login",
+        "admin": "Admin",
+        "addTicket": "Add Ticket",
+        "dashboard": "Dashboard",
+        "guide": "Guide"
+    },
+    "password": {
+        "password": "Password",
+        "new": "new password",
+        "confirm": "confirm password",
+        "submit": "Submit",
+        "forgot": "Forgot your password ?",
+        "reset": "Enter your email to reset your password",
+        "email": "Email"
+    },
+    "links": {
+        "way": "Any other way?",
+        "register": "Register",
+        "issue": "Having an issue?",
+        "contact": "Contact with us!"
+    },
+    "company": {
+        "company": "SAMA WEB",
+        "goal": "A good platform for communication between employers and the programming team"
+    },
+    "login": {
+        "welcome": "Welcome to SAMA WEB",
+        "email": "Please input your Email!",
+        "remember": "Remember me",
+        "forgot": "Forgot password ?"
+    },
+    "email": {
+        "send": "Email was successfully sent to you",
+        "check": "Check your Email and join to us"
+    },
+    "register": {
+        "account": "Create Account",
+        "have-account": "Already have an Account ?",
+        "signIn": "Sign In",
+        "first": "First Name",
+        "last": "Last Name",
+        "email": "Email",
+        "pass": "Password",
+        "conf-pass": "Confirm Password",
+        "profile": "User Information change",
+        "save": "Save",
+        "close" : "Close"
+    },
+    "admin": {
+        "id" : "Identity Number",
+        "username" : "Username",
+        "first" : "First Name",
+        "last":"Last Name",
+        "super" : "Superuser",
+        "staff" : "Staff",
+        "action" : "Action",
+        "remove" : "Do you want to delete this user?",
+        "remove-user" : "Remove user",
+        "you": "(you)",
+        "new": "Add New User",
+        "chart": "Report",
+        "cancel" : "Cancel",
+        "add": "Add user",
+        "yes" : "Yes",
+        "no" : "No"
+    },
+    "footer": {
+        "english": "English",
+        "persian": "Persian",
+        "version": "Version : ",
+        "language": "Select the desired language"
+    },
+    "timer": {
+        "start": "Start",
+        "resume": "Resume",
+        "reset": "Reset"
+    }
+}

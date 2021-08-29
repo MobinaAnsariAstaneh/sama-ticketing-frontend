@@ -1,26 +1,34 @@
-body {
-  text-align: center;
-  font-family: helvetica;
-}
-canvas {
-  padding-left: 50px;
-  border: 2px solid rgb(24, 14, 14);
-}
-.title{
-	color: #05299e;
-	font-weight: bolder;
-	font-family: 'Times New Roman', Times, serif;
-}
-.game {
-	color: rgb(82, 84, 88);
-	font-family: 'Times New Roman', Times, serif;
-}
-.logo {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  margin-top: 20px;
-  width: 10px;
-  height: 230px;
-}
+ .snake-game {
+     text-align: center;
+     font-family: helvetica;
+ }
+ 
+ canvas {
+     padding-left: 50px;
+     border: 2px solid rgb(24, 14, 14);
+ }
+ 
+ .title {
+     color: #05299e;
+     font-weight: bolder;
+     font-family: 'Times New Roman', Times, serif;
+ }
+ 
+ .game {
+     color: rgb(82, 84, 88);
+     font-family: 'Times New Roman', Times, serif;
+ }
+ 
+ .logo {
+     display: flex;
+     justify-content: center;
+     justify-items: center;
+     align-items: center;
+     margin-top: 20px;
+     width: 10px;
+     height: 230px;
+ }
+ 
+ .App-label {
+     color: rgba(45, 63, 94, 0.5);
+ }

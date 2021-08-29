@@ -6,36 +6,43 @@
 
 .icons-list {
     color: white;
-    padding-top: 35px;
+    padding-top: 30px;
     font-size: 20px;
+    margin-left: -20px;
     cursor: pointer;
 }
 
 .layout {
-  position: relative;
-  margin-bottom: 50px;
-} 
+    position: relative;
+    margin-bottom: 50px;
+}
 
 .ant-image-header1 {
     background-image: url("../../assets/header.png") !important;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     position: absolute;
-    height: 500px;
+    height: 450px;
     top: -300px;
     left: 0;
     right: 0;
-} 
+}
+
 .ant-layout-header {
     height: 155px !important;
     background: white !important;
     padding: 0 0px !important;
     line-height: 64px;
+    width: 100%;
 }
 
 .ant-col1 {
-  padding-right: 50px;
+    padding-left: 20px;
+}
+
+.ant-col2 {
+    padding-right: 50px;
 }
 
 .ant-dropdown,
@@ -63,8 +70,8 @@
 }
 
 .dashboard_logo {
-  padding: 5px 15px 5px 5px;
-  padding-top: 0px;
+    padding: 5px 15px 5px 5px;
+    padding-top: 0px;
     padding-right: 15px;
 }
 
@@ -73,13 +80,45 @@
     justify-items: baseline;
 }
 
-@media screen and (max-width: 767px) {
+
+/* @media screen and (max-width: 767px) {
     .ant-layout-header {
         padding: 0 20px !important;
     }
-}
+} */
 
 Header,
 .ant-menu {
     background-color: #05299e !important;
-} 
+}
+
+.slider-position {
+    background: none !important;
+}
+
+.ant-layout-sider-zero-width-trigger {
+    top: 45px !important;
+    background-color: rgb(173, 236, 238) !important;
+}
+
+.anticon-bars {
+    color: #05299e !important;
+}
+
+@media screen and (max-width: 467px) {
+    .ant-col1 {
+        margin: auto;
+        margin-top: -10px !important;
+        padding-left: 0px;
+    }
+    .left_header {
+        margin-left: -42px;
+    }
+    .ant-col2 {
+        margin: auto;
+        margin-top: -21px;
+    }
+    .icons-list {
+        margin-bottom: -15px;
+    }
+}

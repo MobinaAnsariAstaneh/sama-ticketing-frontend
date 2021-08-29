@@ -48,7 +48,7 @@ p {
 }
 
 .form-con {
-    margin: 50px 50px 50px 0;
+    margin: 15px 50px 50px 0 !important;
 }
 
 .CustomAvatar-image {
@@ -81,5 +81,11 @@ p {
 }
 
 .ant-form {
-    width: 83% !important;
+    width: 100% !important;
 }
+
+.App-label {
+    color: rgba(45, 63, 94, 0.5);
+}
+
+.language-btn {}

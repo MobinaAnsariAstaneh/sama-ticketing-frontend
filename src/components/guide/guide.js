@@ -2,30 +2,90 @@ import "./guide.css";
 import Head from "../header/header";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Layout, Card, Col, Row, Modal, Typography} from "antd";
+import { 
+  Layout,
+  Card, 
+  Col, 
+  Row, 
+  Modal, 
+  Typography,
+  Menu, 
+  Dropdown,
+  Button
+} from "antd";
 import {
   PhoneOutlined,
   SendOutlined,
   MailOutlined,
-  InstagramOutlined,
-  SkypeOutlined,
+  DownOutlined
 } from "@ant-design/icons";
 import Maghami from "../../assets/Maghami.jpg";
 import Ansari from "../../assets/Ansari.jpg";
 import front from "../../assets/Front_End.jpg";
 import back from "../../assets/Back_End.png";
 import imagelogin from "../../assets/MS.png";
+import English from "../../assets/english.svg";
+import Persian from "../../assets/persian.svg";
+import chooselanguage from "../../assets/chooselanguage.svg";
+import { useTranslation } from "react-i18next";
+import i18n from "../../utilies/i18n";
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    // change direrction persian -> rtl / english -> ltr
+  };
 
-const { Header, Content } = Layout;
+const { Header, Content ,Footer } = Layout;
 const { Paragraph } = Typography;
 
 function Guide() {
   const [isModalVisible1, setIsModalVisible1] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [visible, setVisible] = React.useState(false);
-  const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const [modalText, setModalText] = React.useState(
-    "All ways of virtual communication with the programming group"
+  const {t} = useTranslation();
+  const [isfa , setfa] = useState(false);
+  const Detectfa = (lng) => {
+    if (lng === 'fa')
+       setfa(true);
+    else
+       setfa(false);
+  }
+
+  i18n.on('languageChanged', (lng) => {
+    Detectfa(lng);
+  });
+  
+
+  const menu1 = (
+    <Menu>
+      <Menu.Item key="0">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.discrete')}</a>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.algebra')}</a>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.network')}</a>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.logic')}</a>
+      </Menu.Item>
+      <Menu.Item key="4">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.software')}</a>
+      </Menu.Item>
+      <Menu.Item key="5">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.iot')}</a>
+      </Menu.Item>
+    </Menu>
+  );
+  const menu2 = (
+    <Menu>
+      <Menu.Item key="0">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.discrete')}</a>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.logic')}</a>
+      </Menu.Item>
+    </Menu>
   );
 
   const showModal = () => {
@@ -39,13 +99,6 @@ function Guide() {
     setIsModalVisible2(true);
   };
 
-  const handleCheckOut1 = () => {
-    setIsModalVisible1(false);
-  };
-  const handleCheckOut2 = () => {
-    setIsModalVisible2(false);
-  };
-
   const handleCancel1 = () => {
     setIsModalVisible1(false);
   };
@@ -53,26 +106,32 @@ function Guide() {
     setIsModalVisible2(false);
   };
 
-  const handleOk = () => {
-    setModalText(
-      "All ways of virtual communication with the programming group"
-    );
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-
   const handleCancel = () => {
-    console.log("Clicked cancel button");
+    console.log(t('message.cancel'));
     setVisible(false);
   };
 
+  const menu = (
+    <Menu>
+      <Menu.Item>
+      <li onClick={() => changeLanguage("en")}>
+            <img src={English} alt="English" />
+            {t("footer.english")}
+       </li>
+      </Menu.Item>
+      <Menu.Item>
+      
+      <li onClick={() => changeLanguage("fa")}>
+            <img src={Persian} alt="Persian" />
+            {t("footer.persian")}
+      </li>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       <Helmet>
-        <title>SAMA - Guide Page</title>
+        <title>{t('title.guide')}</title>
       </Helmet>
       <Layout className="layout">
         <Header>
@@ -82,73 +141,90 @@ function Guide() {
         <Content style={{ padding: "0 100px" , marginBottom:"15px"}}>
           <div className="site-layout-content">
             <div>
-              <h2 className="goal">Team&apos;s Goal : </h2>
-              <h3 className="goal_context">
-                This is a platform for communication between the employer and
-                the company&apos;s programming team. In this context,
-                programmers are required to support projects implemented by
-                them, during the project or after delivery to the client. If the
-                employer encounters any questions during the project, he can
-                create his question on this site as a task or issue and
-                determine its priority level. The programming team will evaluate
-                the ticket at the first opportunity and solve it.
+              <h2 className={isfa ? 'goal-fa' : 'goal'}>{t('goal.goal')}</h2>
+              <h3 className={isfa ? 'goal_context-fa' : 'goal_context'}>
+              {t('goal.goal-content')}
               </h3>
             </div>
             <div className="or"></div>
 
             <div className="programmers">
               <button className=" btn custom-btn" onClick={showModal1}>
-              <span>programmers</span>
+              <span>{t('programmer.programmers')}</span>
               </button>
               <Modal
-                title="programmers information"
+                title={t('programmer.info')}
                 visible={isModalVisible1}
-                onOk={handleCheckOut1}
                 onCancel={handleCancel1}
                 width={1000}
                 centered
+                footer={
+                   <Button onClick={handleCancel1} >{t('register.close')}</Button>
+                }
                 >
                 <Row className="card-center">
                   <Col flex={1}>
                     <Card
-                      title="Front-end Developer"
+                      title={t('programmer.front')}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
                       cover={<img alt="Mobina Ansari" src={Ansari} />}
                     >
                       <h4>
-                        <a className="programmer_info" href={"https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/" }>Mobina Ansari Astaneh</a>
+                        <a className="programmer_info" href={"https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/" }>{t('programmer.mobina')}</a>
                       </h4>
-                      <InstagramOutlined
-                        style={{ padding: "1px 6px 4px 0px" }}
-                      />
-                      Instagram : <br />
-                      <Paragraph copyable>m_ansari_astaneh</Paragraph>
-                      <SkypeOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Skype : <br />
-                      <Paragraph copyable>live:.cid.4d6d9e1e3adbb47a</Paragraph>
-                    </Card>
+                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/student-center.png"/>              
+                      {t('programmer.degree')}<br />
+                      </div>
+                      <Paragraph><a href="http://www.sanjesh.org/">{t('programmer.bachelor')}</a></Paragraph>
+                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                       <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/university.png"/>
+                      {t('programmer.uni')}<br />
+                      </div>
+                      <Paragraph><a href="https://www.sadjad.ac.ir/">{t('programmer.sadjad')}</a></Paragraph>
+                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/teacher.png"/>
+                      {t('programmer.academic')}<br />
+                      </div>
+                    <Dropdown overlay={menu1} trigger={['click']}>
+                        <a className="ant-dropdown-link">
+                        {t('programmer.ta')}<DownOutlined />
+                        </a>
+                      </Dropdown>
+                      </Card>
                   </Col>
                   <Col flex={1}>
                     <Card
-                      title="Front-end Developer"
+                      title={t('programmer.front')}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
                       cover={<img alt="Sepideh Maghami" src={Maghami} />}
                     >
                       <h4>
-                        <a  className="programmer_info" href={"https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"}>Sepideh Darban Maghami</a>
+                        <a  className="programmer_info" href={"https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"}>{t('programmer.sepid')}</a>
                       </h4>
-                      <InstagramOutlined
-                        style={{ padding: "1px 6px 4px 0px" }}
-                      />
-                      Instagram : <br />
-                      <Paragraph copyable>sepideh.dm</Paragraph>
-                      <SkypeOutlined style={{ padding: "1px 6px 4px 0px" }} />
-                      Skype : <br />
-                      <Paragraph copyable>live:sepideh.1378.dm</Paragraph>
+                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/student-center.png"/>              
+                      {t('programmer.degree')}<br />
+                      </div>
+                      <Paragraph><a href="http://www.sanjesh.org/">{t('programmer.bachelor')}</a></Paragraph>
+                    <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                    <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/university.png"/>
+                      {t('programmer.uni')}<br />
+                    </div>
+                      <Paragraph><a href="https://www.sadjad.ac.ir/">{t('programmer.sadjad')}</a></Paragraph>
+                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/teacher.png"/>
+                    {t('programmer.academic')}<br />
+                      </div>
+                    <Dropdown overlay={menu2} trigger={['click']}>
+                        <a className="ant-dropdown-link">
+                        {t('programmer.ta')}<DownOutlined />
+                        </a>
+                      </Dropdown>
                     </Card>
                   </Col>
                 </Row>
@@ -156,19 +232,21 @@ function Guide() {
             </div>
             <div className="ProgrammingLanguages">
               <button className=" btn custom-btn" onClick={showModal2}>
-               <span>Programming Languages</span>
+               <span>{t('programmering-language.programmering-language')}</span>
               </button>
               <Modal
-                title="Programming Languages"
+                title={t('programmering-language.title')}
                 visible={isModalVisible2}
-                onOk={handleCheckOut2}
                 onCancel={handleCancel2}
                 width={1000}
+                footer={
+                   <Button onClick={handleCancel2} >{t('register.close')}</Button>
+                }
               >
                 <Row className="card-center">
                   <Col flex={1}>
                     <Card
-                      title="Front-end Programming Languages"
+                      title={t('programmering-language.front')}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
@@ -210,7 +288,7 @@ function Guide() {
                   </Col>
                   <Col flex={1}>
                     <Card
-                      title="Back-end Programming Languages"
+                      title={t('programmering-language.back')}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
@@ -240,33 +318,53 @@ function Guide() {
             <div className="or"></div>
             <img src={imagelogin} alt="" className="logo"/>
             <div className="center">
-              <button onClick={showModal} className=" btn custom-btn">
-               <span> How to contact with supporter?</span>
+              <button onClick={showModal} className=" btn custom-btn" style={{marginBottom:"-20px"}}>
+               <span>{t('contact.contact')}</span>
               </button>
               <Modal
-                title="Contact with us : "
+                title= {t('contact.us')}
                 visible={visible}
-                onOk={handleOk}
-                confirmLoading={confirmLoading}
                 onCancel={handleCancel}
+                footer={
+                   <Button onClick={handleCancel}>{t('register.close')}</Button>
+                }
               >
-                <p>{modalText}</p> <br />
-                <MailOutlined style={{ padding: "1px 6px 4px 0px", color: "#3fa7d6"  }} />
-                Email : <br />
+
+                <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                <MailOutlined style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6"  }} />
+                {t('contact.email')}
+                </div>
+                <br />
                 <Paragraph copyable className="copy">mobinaansariit@gmail.com</Paragraph>
                 <Paragraph copyable className="copy">sepideh@gmail.com</Paragraph>
-                <PhoneOutlined style={{ padding: "1px 6px 4px 0px", color: "#3fa7d6"  }} />
-                      Phone Number :{" "}
+                <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                <PhoneOutlined style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6"  }} />
+                  {t('contact.phone')}
+                </div>
                       <Paragraph copyable className="copy">+98 915 445 0822</Paragraph>
                       <Paragraph copyable className="copy">+98 915 066 0935</Paragraph>
-                      <SendOutlined style={{ padding: "1px 6px 4px 0px" , color: "#3fa7d6" }} />
-                Telegram : <br />
+                <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
+                <SendOutlined style={{ padding: "1px 6px 4px 5px" , color: "#3fa7d6" }} />
+                {t('contact.telegram')}
+                </div>
+                <br />
                 <Paragraph copyable className="copy">@M_Ansari_Astaneh</Paragraph>
                 <Paragraph copyable className="copy">@S_darban_maghami</Paragraph>
               </Modal>
             </div>
           </div>
         </Content>
+    
+     {/* bilingual */}
+     <Footer style={{ textAlign: 'center' }}>
+        <Dropdown overlay={menu} placement="bottomCenter" arrow>
+          <Button className="btn-footer">  
+            <img src={chooselanguage} alt="Choose Language" />
+            {t("footer.language")}
+          </Button>
+        </Dropdown>
+      </Footer>
+                
       </Layout>
     </>
   );

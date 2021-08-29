@@ -31,6 +31,7 @@
     width: 80px !important;
     height: 80px !important;
     margin-bottom: -15px;
+    margin-left: -14px;
 }
 
 .login-form-button {
@@ -77,7 +78,7 @@
 
 .width-style {
     width: 430px;
-    margin-bottom: 25%;
+    margin-bottom: 15%;
 }
 
 .ant-form label {
@@ -117,7 +118,7 @@
         width: 348px;
     }
     .ant-form label {
-        margin-right: 35%;
+        margin-right: 30%;
     }
 }
 
@@ -132,7 +133,7 @@
         width: 300px;
     }
     .ant-form label {
-        margin-right: 24%;
+        margin-right: 21%;
     }
 }
 
@@ -208,4 +209,8 @@
         min-height: 0 !important;
         max-height: 0;
     }
+}
+
+.App-label {
+    color: rgba(45, 63, 94, 0.5);
 }

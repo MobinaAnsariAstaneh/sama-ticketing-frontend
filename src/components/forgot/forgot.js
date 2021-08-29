@@ -1,7 +1,7 @@
 import "./forgot.css";
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Layout, message, Row, Col, Form, Input, Button } from "antd";
+import { Layout, message, Row, Col, Form, Input, Button,Menu,Dropdown } from "antd";
 import {
   MailOutlined,
   FileProtectOutlined,
@@ -11,20 +11,30 @@ import imgLogin from "../../assets/login.jpg";
 import imagelogin from "../../assets/MS.svg";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";
+import { useTranslation } from "react-i18next";
+import English from "../../assets/english.svg";
+import Persian from "../../assets/persian.svg";
+import chooselanguage from "../../assets/chooselanguage.svg";
+import i18n from "../../utilies/i18n";
 
 const { Content } = Layout;
+
 
 function Forgot() {
   const history = useHistory();
   const location = useLocation();
   const [stge, setstage] = useState(false);
+   const { t } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
   useEffect(() => {
     if (location.search.match("token")){
       setstage(true);
     }
   }, []);
   const register = () => {
-    message.success("Welcome to register a new user");
+    message.success(t('message.register'));
     history.push("./register");
   };
 
@@ -40,7 +50,7 @@ function Forgot() {
       .then((res) => {
         if (res.status === 200) {
           setstage(true);
-          message.success("Email was successfully sent to you");
+          message.success(t('message.success-email'));
           history.push("./email");
         }
         return res.data;
@@ -48,14 +58,14 @@ function Forgot() {
       .then((result) => {
         console.log(result);
       })
-      .catch((err) => console.log(err.message));
+      .catch(() => console.log(t('message.failed-email')));
   };
 
   const onFinished2 = (values) => {
     const token = location.search.split("&")[0].split("=")[1];
     const email = location.search.split("&")[1].split("=")[1];
     if(values.password !== values.confirm_password){
-      return message.error("password and confirm password doesn't match");
+      return message.error(t('message.comparePassword'));
     }
     
     axios
@@ -74,11 +84,30 @@ function Forgot() {
         return res.data;
       })
       .then(() => {
-        message.success("Your password changed successfully");
+        message.success(t('message.changed'));
         history.push("./login");
       })
-      .catch((err) => console.log(err.message));
+      .catch(() => console.log(t('message.Unchanged')));
   };
+
+  
+        const menu = (
+          <Menu>
+            <Menu.Item>
+            <li onClick={() => changeLanguage("en")}>
+                  <img src={English} alt="English" />
+                  {t("footer.english")}
+             </li>
+            </Menu.Item>
+            <Menu.Item>
+            
+            <li onClick={() => changeLanguage("fa")}>
+                  <img src={Persian} alt="Persian" />
+                  {t("footer.persian")}
+            </li>
+            </Menu.Item>
+          </Menu>
+        );
 
   let form = (
     <Form
@@ -96,40 +125,53 @@ function Forgot() {
           rules={[
             {
               required: true,
-              message: "Please input your Email!",
+              message: t('message.input-email'),
             },
             {
               type: 'email',
-              message: "Your email is invalid!",
+              message: t('message.invalid'),
             },
           ]}
         >
           <Input
             prefix={<MailOutlined className="ant-icon site-form-item-icon" />}
             type="email"
-            placeholder="Email"
+            placeholder={t('password.email')}
           />
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit" className="login-form-button-purple submit-forgot">
-            Submit
+            {t('password.submit')}
           </Button>
         </Form.Item>
 
+
+
         <Form.Item className="botoom-border">
-          Any other way?{" "}
+          {t('links.way')}{"  "}
           <a className="a-style" onClick={register}>
-            Register
+            {t('links.register')}
           </a>
           <br />
-          Having an issue?{" "}
+          {t('links.issue')}{" "}
           <a className="a-style" href={"./guide"}>
-            Contact us
+             {t('links.contact')}
           </a>
         </Form.Item>
+        
+                {/* Bilingual */}
+          <Dropdown overlay={menu} placement="bottomCenter" arrow>
+              <Button className="btn-footer">  
+                <img src={chooselanguage} alt="Choose Language" />
+                {t("footer.language")}
+              </Button>
+          </Dropdown>
+
       </div>
     </Form>
   );
+
+
   if (stge) {
     form = (
       <Form
@@ -147,10 +189,11 @@ function Forgot() {
             rules={[
               {
                 required: true,
-                message: "Please input your new password!",
+                message: t('message.newPass'),
               },
               {
                 min: 8,
+                message: t('message.password-limit')
               }
             ]}
           >
@@ -158,7 +201,7 @@ function Forgot() {
               type="new password"
               className="ant-icon"
               prefix={<LockOutlined />}
-              placeholder="new password"
+              placeholder={t('password.new')}
             />
           </Form.Item>
           <Form.Item
@@ -167,10 +210,11 @@ function Forgot() {
             rules={[
               {
                 required: true,
-                message: "Please confirm your password!",
+                message: t('message.confirmPass'),
               },
               {
                 min: 8,
+                message: t('message.confirm-password-limit')
               }
             ]}
           >
@@ -178,25 +222,24 @@ function Forgot() {
               type="confirm password"
               className="ant-icon"
               prefix={<FileProtectOutlined />}
-              placeholder="confirm password"
+              placeholder={t('password.confirm')}
             />
           </Form.Item>
-          
-
+        
           <Form.Item>
             <Button htmlType="submit" className="login-form-button-purple submit-forgot">
-              Submit
+              {t('password.submit')}
             </Button>
           </Form.Item>
-        </div>
+         </div>
       </Form>
     );
   }
 
-  return (
+return (
     <>
       <Helmet>
-        <title>SAMA - Forgotten Password Page</title>
+        <title>{t('title.forgot')}</title>
       </Helmet>
       <Layout>
         <Content>
@@ -205,9 +248,9 @@ function Forgot() {
               <div>
                 <img src={imagelogin} className="imglogo" alt="" />
               </div>
-              <p className="p-size">Forgotten Password ?</p>
+              <p className="p-size">{t('password.forgot')}</p>
               <p className="note-size">
-                Enter your email to reset your password
+                {t('password.reset')}
               </p>
 
               {form}
@@ -221,11 +264,11 @@ function Forgot() {
                   height="721vh"
                   alt=""
                 />
+                
                 <p className="para">
-                  <span>SAMA WEB</span>
+                  <span>{t('company.company')}</span>
                   <div>
-                    A good platform for communication between employers and the
-                    programming team
+                    {t('company.goal')}
                   </div>
                 </p>
               </div>
