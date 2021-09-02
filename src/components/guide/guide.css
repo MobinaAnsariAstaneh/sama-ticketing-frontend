@@ -6,15 +6,13 @@
     background-color: white !important;
 }
 
-.goal {
-    padding-top: 30px;
-    color: #05299e;
-    margin-top: -25px;
+.ant-input-prefix {
+    margin-left: 4px !important;
 }
 
 .goal_context {
     color: #2a2a2a;
-    margin-top: -18px;
+    margin-top: 0px;
 }
 
 .white {
@@ -104,13 +102,15 @@
     font-weight: bold;
 }
 
-@media screen and (max-width: 767px) {
+
+/* @media screen and (max-width: 767px) {
     main.ant-layout-content {
         padding: 0 30px;
     }
-}
+} */
 
-.custom-btn {
+.custom-btn,
+.contact-btn {
     height: 40px;
     color: #fff;
     border-radius: 5px;
@@ -126,15 +126,20 @@
     outline: none;
 }
 
-.btn {
+.contact-btn:hover {
+    color: white !important;
+}
+
+.btn,
+.button-contact {
     background: linear-gradient(to right, #242f40, #030d9e, #3498db);
-    ;
     line-height: 42px;
     padding: 0;
     border: none;
 }
 
-.btn span {
+.btn span,
+.button-contact span {
     position: relative;
     display: block;
     width: 100%;
@@ -153,26 +158,42 @@
     transition: all 0.3s ease;
 }
 
-.btn:before {
+.button-contact:before,
+.button-contact:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    bottom: 0;
+    background: white;
+    box-shadow: white;
+    transition: all 0.3s ease;
+}
+
+.btn:before,
+.button-contact:before {
     height: 0%;
     width: 2px;
 }
 
-.btn:after {
+.btn:after,
+.button-contact:after {
     width: 0%;
     height: 2px;
 }
 
-.btn:hover {
+.btn:hover,
+.button-contact:hover {
     color: #05299e;
     background: transparent;
 }
 
-.btn:hover:before {
+.btn:hover:before,
+.button-contact:hover:before {
     height: 100%;
 }
 
-.btn:hover:after {
+.btn:hover:after,
+.button-contact:hover:after {
     width: 100%;
 }
 
@@ -187,20 +208,35 @@
     transition: all 0.3s ease;
 }
 
-.btn span:before {
+.button-contact span:before,
+.button-contact span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    background: white;
+    box-shadow: white;
+    transition: all 0.3s ease;
+}
+
+.btn span:before,
+.button-contact span:before {
     width: 2px;
     height: 0%;
 }
 
-.btn span:after {
+.btn span:after,
+.button-contact span:after {
     height: 2px;
     width: 0%;
 }
 
-.btn span:hover:before {
+.btn span:hover:before,
+.button-contact span:hover:before {
     height: 100%;
 }
 
+.button-contact span:hover:after,
 .btn span:hover:after {
     width: 100%;
 }
@@ -220,7 +256,22 @@
 
 .goal-fa,
 .goal {
+    padding-top: 140px;
     text-align: center;
+    color: #05299e;
+}
+
+.performance,
+.performance-fa {
+    color: #05299e !important;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.overview-fa,
+.overview {
+    text-align: center;
+    margin-bottom: -20px;
 }
 
 .programmers {
@@ -251,16 +302,27 @@
     color: rgba(45, 63, 94, 0.5);
 }
 
-.ant-modal-footer{
+.ant-modal-footer {
     text-align: center !important;
 }
 
-.icon-field { 
+.icon-field {
     direction: ltr !important;
     margin-right: 5px;
 }
 
 .icon-field-fa {
-    direction:rtl !important;
+    direction: rtl !important;
     margin-left: 5px;
+}
+
+.guide__content-first {
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.guide__content-first>* {
+    color: #fff !important;
+    z-index: 1;
+    position: relative;
 }

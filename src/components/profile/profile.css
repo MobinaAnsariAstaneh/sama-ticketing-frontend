@@ -1,5 +1,18 @@
+.rtl-profile {
+    padding: 0 100px;
+    direction: rtl;
+}
+
+.ltr-profile {
+    padding: 0 100px;
+}
+
 .left-border {
     border-left: 1px solid #05299e;
+}
+
+.ant-input-prefix {
+    margin-left: 4px !important;
 }
 
 h2 {

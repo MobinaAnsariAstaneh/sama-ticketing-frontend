@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./email.css";
-import email from "../../assets/email.png";
+import email from "../../assets/email1.png";
 import English from "../../assets/english.svg";
 import Persian from "../../assets/persian.svg";
 import chooselanguage from "../../assets/chooselanguage.svg";

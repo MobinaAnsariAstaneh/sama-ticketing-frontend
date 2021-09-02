@@ -31,11 +31,6 @@
     font-weight: bold;
 }
 
-.ant-comment-nested {
-    padding: 5px 15px;
-    background-color: rgb(162, 247, 247) !important;
-}
-
 .b-color {
     background-color: gray !important;
 }
@@ -46,8 +41,15 @@
 }
 
 .ant-comment.active {
-    background-color: rgba(24, 141, 236, 0.1);
+    background-color: rgba(250, 22, 6, 0.1);
     padding: 0 10px;
+    border-bottom: 2px solid rgb(209, 203, 203);
+}
+
+.ant-comment.inactive {
+    background-color: rgba(6, 230, 55, 0.1);
+    padding: 0 10px;
+    border-bottom: 2px solid rgb(209, 203, 203);
 }
 
 .icon-back {
@@ -131,17 +133,15 @@
 }
 
 .comment {
-    direction: ltr;
-    text-align-last: right !important;
+    text-align-last: left !important;
     margin-right: 5px;
 }
 
 .comment-fa {
-    direction: rtl;
-    text-align-last: left !important;
+    text-align-last: right !important;
 }
 
-.req{
+.req {
     /* direction:ltr; */
     display: flex;
 }

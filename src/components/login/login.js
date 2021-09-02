@@ -2,7 +2,7 @@ import "./login.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Layout, message, Row, Col, Form, Input, Button, Checkbox,Dropdown,Menu} from "antd";
-import imgLogin from "../../assets/login.jpg";
+import imgLogin from "../../assets/sign-in.png";
 import imagelogin from "../../assets/MS.svg";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
@@ -22,6 +22,28 @@ function Login() {
     i18n.changeLanguage(lng);
     // change direrction persian -> rtl / english -> ltr
   };
+
+    const [isfa , setfa] = useState(false);
+    const Detectfa = (lng) => {
+      if (lng === 'fa')
+         setfa(true);
+      else
+         setfa(false);
+    }
+  
+    i18n.on('languageChanged', (lng) => {
+      Detectfa(lng);
+    });
+
+    useEffect(()=>{
+      if(i18n.language == 'fa'){
+        setfa(true) 
+      }
+      else{
+        setfa(false)
+      }
+    },[])
+
   const storage = localStorage.getItem("login");
   useEffect(() => {
     const storageObj = JSON.parse(storage);
@@ -103,7 +125,7 @@ function Login() {
       </Helmet>
 
       <Layout>
-        <Content className="login__layout">
+        <Content className={isfa ? "rtl-login__layout" :"ltr-login__layout"}>
           <Row>
             <Col className="item_center" span={12}>
               <div>
@@ -180,11 +202,13 @@ function Login() {
                           onChange={(e) => {
                             setcheck(e.target.checked);
                           }}
+                          className={isfa? "rtl-remember" : "ltr-remember"}
+                          style={{fontSize:"13.5px"}}
                         >
                           {t('login.remember')}
                         </Checkbox>
                       </Form.Item>
-                      <a className="login-form-forgot" onClick={forgotpass}>
+                      <a className={isfa? "rtl-forgot" : "ltr-forgot"} onClick={forgotpass} style={{fontSize:"13px"}}>
                         {t('login.forgot')}
                       </a>
                     </div>
@@ -202,7 +226,7 @@ function Login() {
                   </Form.Item>
                         {/* Bilingual */}
                 <Dropdown overlay={menu} placement="bottomCenter" arrow>
-          <Button className="btn-footer">  
+          <Button className="btn-footer"  style={{marginBottom:"20px"}}>  
             <img src={chooselanguage} alt="Choose Language" />
             {t("footer.language")}
           </Button>
@@ -220,11 +244,8 @@ function Login() {
                   alt=""
                 />
 
-                <p className="para">
-                  <span>{t('company.company')}</span>
-                  <div>
-                    {t('company.goal')}
-                  </div>
+                <p className="para" style={{color:"blue",padding:"25px 0px"}}>
+                  <span style={{color:"blue",fontWeight:"500"}}>{t('company.company')}</span>
                 </p>
               </div>
             </Col>

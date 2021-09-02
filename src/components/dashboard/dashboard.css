@@ -1,9 +1,26 @@
+.rtl-content {
+    padding: 0 100px;
+    direction: rtl;
+}
+
+.ant-pagination-item,
+.ant-pagination-next,
+.ant-pagination-prev {
+    margin: 0px 3px !important;
+}
+
+.ltr-content {
+    padding: 0 100px;
+}
+
 .ant-layout-content {
     background-color: white !important;
-} 
+}
 
 .search-table {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .color-orange {
@@ -47,12 +64,6 @@
     text-align: center !important;
 }
 
-@media screen and (max-width: 767px) {
-    .ant-layout-content {
-        padding: 0 15px !important;
-    }
-}
-
 footer {
     background-color: #fff !important;
 }
@@ -65,7 +76,7 @@ footer {
 }
 
 .btn-footer:hover {
-    color: #05299e !important;
+    color: #ffd54f !important;
 }
 
 .App-label {
@@ -75,4 +86,9 @@ footer {
 .footer-version {
     color: rgba(45, 63, 94, 0.5);
     /* padding-top: 5px; */
+}
+
+.slider {
+    width: 100px !important;
+    padding: 0px 15px;
 }

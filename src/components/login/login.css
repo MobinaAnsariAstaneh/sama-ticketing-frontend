@@ -1,3 +1,15 @@
+.rtl-login__layout {
+    direction: rtl;
+}
+
+.ltr-login__layout {
+    direction: ltr;
+}
+
+.ant-input-prefix {
+    margin-left: 4px !important;
+}
+
 .item_center {
     display: flex !important;
     justify-content: center;
@@ -6,7 +18,7 @@
 }
 
 .grayscale {
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     position: relative;
     width: 100%;
     /* for IE 6 */
@@ -34,32 +46,47 @@
 }
 
 .login-form-button {
-    border: purple !important;
-    background-color: purple !important;
+    border: rgb(13, 0, 128) !important;
+    background-color: rgb(13, 0, 128) !important;
     color: #fff !important;
     width: 100%;
 }
 
 .ant-checkbox-inner {
-    border: 1px solid purple !important;
+    border: 1px solid rgb(13, 0, 128) !important;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: purple !important;
+    background-color: rgb(13, 0, 128) !important;
 }
 
 .p-size {
     margin-top: 10px;
     font-size: 25px;
+    color: #3867d6;
 }
 
-.login-form-forgot {
+.rtl-remember {
+    margin-right: 0px !important;
+}
+
+.ltr-remember {
+    color: #000;
+}
+
+.rtl-forgot {
+    color: black !important;
+    text-decoration: none !important;
+    margin-right: 210px;
+}
+
+.ltr-forgot {
     color: black !important;
     text-decoration: none !important;
 }
 
 .a-style {
-    color: purple !important;
+    color: blue !important;
     text-decoration: underline !important;
 }
 
@@ -113,6 +140,11 @@
     .ant-form label {
         margin-right: 35%;
     }
+    .rtl-forgot {
+        color: black !important;
+        text-decoration: none !important;
+        margin-right: 130px;
+    }
 }
 
 @media screen and (max-width:735px) {
@@ -128,6 +160,11 @@
     .ant-form label {
         margin-right: 24%;
     }
+    .rtl-forgot {
+        color: black !important;
+        text-decoration: none !important;
+        margin-right: 80px;
+    }
 }
 
 @media screen and (max-width:640px) {
@@ -142,6 +179,11 @@
     }
     .ant-form label {
         margin-right: 9%;
+    }
+    .rtl-forgot {
+        color: black !important;
+        text-decoration: none !important;
+        margin-right: 30px;
     }
 }
 
@@ -160,6 +202,11 @@
     }
     .ant-form-item {
         margin-bottom: 17px !important;
+    }
+    .rtl-forgot {
+        color: black !important;
+        text-decoration: none !important;
+        margin-right: 10px;
     }
 }
 
@@ -191,7 +238,7 @@
     }
     .botoom-border {
         padding-bottom: 25px!important;
-        border-bottom: 1px solid purple;
+        border-bottom: 1px solid rgb(13, 0, 128);
     }
     .para span {
         padding: 10px;

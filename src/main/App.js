@@ -7,6 +7,7 @@ import Register from "../components/register/register";
 import Admin from "../components/admin/admin";
 import Email from "../components/Result/email";
 import Snake from "../components/snake/snake";
+// import language_context from "../components/context/context";
 import "antd/dist/antd.css";
 import {
   Route,
@@ -22,40 +23,41 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login />
-          </Route>
+          </Route>{" "}
           <Route path="/register">
             <Register />
-          </Route>
+          </Route>{" "}
           <Route path="/forgot">
             <Forgot />
-          </Route>
-          <Route path="/email">
-            <Email />
-          </Route>
+          </Route>{" "}
           <Route path="/guide">
             <Guide />
-          </Route>
+          </Route>{" "}
           <Route path="/snake">
             <Snake />
-          </Route>
+          </Route>{" "}
           <PrivateRoute path="/profile">
             <Profile />
-          </PrivateRoute>
+          </PrivateRoute>{" "}
           <PrivateRoute path="/admin">
             <Admin />
-          </PrivateRoute>
+          </PrivateRoute>{" "}
           <PrivateRoute path="/dashboard">
             <Dashboard />
-          </PrivateRoute>
+          </PrivateRoute>{" "}
+          <PrivateRoute path="/email">
+            <Email />
+          </PrivateRoute>{" "}
           <Route path="/">
+            {" "}
             {JSON.parse(localStorage.getItem("auth")) ? (
               <Dashboard />
             ) : (
-              <Redirect to="/login" />
-            )}
-          </Route>
-        </Switch>
-      </div>
+              <Redirect to="/guide" />
+            )}{" "}
+          </Route>{" "}
+        </Switch>{" "}
+      </div>{" "}
     </Router>
   );
 }
@@ -64,7 +66,7 @@ export default App;
 
 function PrivateRoute({ children, ...rest }) {
   let variable = localStorage.getItem("auth");
-  console.log("variable" , variable);
+  console.log("variable", variable);
   return (
     <Route
       {...rest}
@@ -74,7 +76,7 @@ function PrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/guide",
               state: { from: location },
             }}
           />

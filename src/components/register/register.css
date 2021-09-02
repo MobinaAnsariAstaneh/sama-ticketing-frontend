@@ -1,3 +1,15 @@
+.rtl-register {
+    direction: rtl;
+}
+
+.ltr-register {
+    direction: ltr;
+}
+
+.ant-input-prefix {
+    margin-left: 4px !important;
+}
+
 .item_center {
     display: flex !important;
     justify-content: center;
@@ -6,7 +18,7 @@
 }
 
 .grayscale {
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     position: relative;
     width: 100%;
     /* for IE 6 */

@@ -1,22 +1,34 @@
+.rtl-admin {
+    padding: 0 100px !important;
+    direction: rtl;
+}
+
+.ltr-admin {
+    padding: 0 100px !important;
+}
+
 .chart {
-  padding: 20px;
-  background: #fff;
-  margin: 0;
-  padding: 50px 5rem;
+    padding: 20px;
+    background: #fff;
+    margin: 0;
+    padding: 50px 5rem;
 }
+
 .chartContainer {
-  padding: 1rem;
-  border: 1px solid #eee;
-  border-radius: 4px;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
 }
+
 .titleChart {
-  text-align: center;
-  font-weight: 600;
-  font-size: 25px;
-  margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 25px;
+    margin-bottom: 30px;
 }
+
 @media screen and (max-width: 767px) {
-  .chart {
-    padding: 50px 1rem;
-  }
+    .chart {
+        padding: 50px 1rem;
+    }
 }

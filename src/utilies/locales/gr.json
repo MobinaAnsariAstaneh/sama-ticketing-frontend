@@ -39,7 +39,7 @@
         "iot": "Internet Of Things (IOT)"
     },
     "title": {
-        "guide": "SAMA - SAMA Page",
+        "guide": "SAMA - Guide Page",
         "dashboard": "SAMA - Dashboard Page",
         "register": "SAMA - Register Page",
         "profile": "SAMA - Profile Page",
@@ -51,13 +51,8 @@
         "snake": "Snake Game"
     },
     "goal": {
-        "goal": "Team's Goal ? ",
-        "goal-content": "This is a platform for communication between the employer and the company's programming team. In this context, programmers are required to support projects implemented by them, during the project or after delivery to the client. If the employer encounters any questions during the project, he can create his question on this site as a task or issue and  determine its priority level. The programming team will evaluate the ticket at the first opportunity and solve it.",
-        "overview1": "You need a website or a mobile application for your business",
-        "overview2": "Let the SAMA WEB team develop the perfect solution and implement it",
-        "SAMA": "What we do?",
-        "SAMA-content": "SAMA WEB Company, considering the scope of programming and project activities in the fields of mobile application development, design and development of e-commerce websites and providing advertising strategies internationally, intends to increase communication with employers and improve its performance. In the field of programming and increasing speed to respond to problems, design a site to maximize the satisfaction of employers.",
-        "contact": "contact us "
+        "goal": "Team's Goal : ",
+        "goal-content": "This is a platform for communication between the employer and the company's programming team. In this context, programmers are required to support projects implemented by them, during the project or after delivery to the client. If the employer encounters any questions during the project, he can create his question on this site as a task or issue and  determine its priority level. The programming team will evaluate the ticket at the first opportunity and solve it."
     },
     "programmer": {
         "front": "Front-End Developer",
@@ -176,9 +171,7 @@
         "remove_user": "Unfortunetly Not deleted",
         "bug_remove": "This user is active",
         "yes": "Yes",
-        "no": "No",
-        "newuser_add": "User successfully added",
-        "newuser_fail": "The user was not added"
+        "no": "No"
     },
     "page": {
         "profile": "Profile",
@@ -253,6 +246,7 @@
     "footer": {
         "english": "English",
         "persian": "Persian",
+        "german": "German",
         "version": "Version : ",
         "language": "Select the desired language"
     },

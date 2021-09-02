@@ -1,5 +1,5 @@
-import { React, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { React, useState,useEffect } from "react";
+import { useHistory, Link , useLocation } from "react-router-dom";
 import Clock from "../clock/clock";
 import "./header.css";
 import {
@@ -12,7 +12,7 @@ import { Layout, Row, Col, Menu, Dropdown, message, Popconfirm } from "antd";
 import image from "../../assets/MS_header.svg";
 import AddTicket from "../add ticket/add-ticket";
 import { useTranslation } from "react-i18next";
-// import i18n from "../../utilies/i18n";
+import i18n from "../../utilies/i18n";
 
 const { Header , Sider} = Layout;
 
@@ -22,11 +22,25 @@ function Head(props) {
   const [dropdown, setDropdown] = useState(false);
   const username = localStorage.getItem("username");
   const { t } = useTranslation();
-  // const changeLanguage = (lng) => {
-  //   i18n.changeLanguage(lng);
-  //   // change direrction persian -> rtl / english -> ltr
-  // };
+  const [isfa, setfa] = useState(false);
+  const Detectfa = (lng) => {
+    if (lng === "fa") setfa(true);
+    else setfa(false);
+  };
 
+  i18n.on("languageChanged", (lng) => {
+    Detectfa(lng);
+  });
+  
+  useEffect(()=>{
+    if(i18n.language == 'fa'){
+      setfa(true) 
+    }
+    else{
+      setfa(false)
+    }
+  },[])
+  
   const routeChange = () => {
     message.success(t('message.guide'));
     history.push("/guide");
@@ -54,8 +68,8 @@ function Head(props) {
       <Menu.Item key="1">
         <a onClick={Profile}>{t('page.profile')}</a>
       </Menu.Item>
-      <Menu.Item key="2">
 
+      <Menu.Item key="2">
       <Popconfirm 
       title={t('message.confirm-logout')} 
       okText={t('message.yes')}
@@ -65,13 +79,6 @@ function Head(props) {
       >
           <a href={"./login"}>{t('page.logout')}</a>
       </Popconfirm>
-        {/* <Popconfirm
-          title= {t('message.confirm-logout')}
-          onConfirm={logOut}
-          onCancel={cancel}
-        >
-          <a href={"./login"}>{t('page.logout')}</a>
-        </Popconfirm> */}
       </Menu.Item>
     </Menu>
   );
@@ -82,17 +89,7 @@ function Head(props) {
       <a className="login">{t('page.login')}</a>
     </Link>
   );
-
   let btnAdmin = "";
-  if (localStorage.getItem("admin") == 1) {
-    btnAdmin = (
-      <Link to="/admin" title={t('page.admin')}>
-        <a className="link">
-          <IdcardOutlined twoToneColor="white" style={{ paddingRight:"16px" }}  />
-        </a>
-      </Link>
-    );
-  }
 
   const token = localStorage.getItem("auth");
   if (token) {
@@ -100,7 +97,7 @@ function Head(props) {
       <Link to="/guide" title={t('page.guide')}>
         <a className="link">
           <QuestionCircleOutlined
-            style={{ paddingRight:"5px" }}
+            className={isfa ? " rtl-question": "ltr-question" }
             onClick={routeChange}
           />
         </a>
@@ -109,13 +106,23 @@ function Head(props) {
     newTicketElem = (
       <abbr title={t('page.addTicket')}>
           <PlusSquareOutlined
-            style={{ paddingRight:"16px" }}
+            style={{ paddingRight:"15px" }}
             onClick={() => {
               setNewTicket(true);
             }}
           />
       </abbr>
     );
+
+    if (localStorage.getItem("admin") == 1) {
+      btnAdmin = (
+        <Link to="/admin" title={t('page.admin')}>
+          <a className="link">
+            <IdcardOutlined twoToneColor="white" style={{ padding:"0px 13px 0px 2px" }}  />
+          </a>
+        </Link>
+      );
+    }
 
     userElem = (
       <Dropdown
@@ -126,22 +133,49 @@ function Head(props) {
         }}
         placement="bottomRight"
       >
-        <span className="username-style">
+        <span className={isfa ? " rtl-username-style": "ltr-username-style" }>
           {username}
           <UserOutlined
-            style={{ fontSize: "20px", padding: "0px 0px 0px 3px" }}
+            className={isfa ? " rtl-user": "ltr-user" }
           />
         </span>
       </Dropdown>
     );
   }
+  useEffect(() => {
+  }, []);
+  var clickHave=()=>window.scrollTo({
+    top: 1000, 
+    left: 0, 
+    behavior: 'smooth' 
+});
+  var clickdo=()=>window.scrollTo({
+      top: 550, 
+      left: 0, 
+      behavior: 'smooth' 
+  });
+  const location=useLocation();
+  let elemGuide=""
+  , classimage=""
+  if(location.pathname === "/guide"){
+    classimage="ant-image-guide"
+    elemGuide=(<>
+      <Link className="link linkGuide1" onClick={clickdo}>
+        {t("goal.goal")}
+      </Link>
+      <Link className="link linkGuide2"  onClick={clickHave}>
+        {t("goal.SAMA")}
+      </Link>
+    </>
+    )
+  }
 
   return (
     <>
-      <Layout className="layout">
-        <div className="ant-image-header1"></div>
-        <Header className="ant-layout-header1">
-          <Row wrap={false} className="display">
+      <Layout className="layout" >
+        <div className={"ant-image-header1 "+classimage}></div>
+        <Header className="ant-layout-header1 ">
+          <Row wrap={false} className= {isfa ? "display rtl" : "display "}>
             <Col flex="none" className="ant-col1">
               <div className="left_header">
                 <Link to="/dashboard" title={t('page.dashboard')}>
@@ -157,7 +191,7 @@ function Head(props) {
                 <Clock />
               </div>
             </Col>
-            <Col className="ant-col2">
+            <Col className={isfa ? "rtl-ant-col2":"ltr-ant-col2" }>
             <Sider 
               breakpoint="lg"
               collapsedWidth="0"
@@ -169,8 +203,8 @@ function Head(props) {
               }}
               className="slider-position"
       >
-              {" "}
-              <div className="icons-list">
+              <div className={isfa ? "icons-list-rtl" : "icons-list-ltr"}>
+                {elemGuide}
                 {newTicketElem}
                 {btnAdmin}
                 {guide}

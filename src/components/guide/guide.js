@@ -2,88 +2,87 @@ import "./guide.css";
 import Head from "../header/header";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { 
+import {
   Layout,
-  Card, 
-  Col, 
-  Row, 
-  Modal, 
+  Card,
+  Col,
+  Row,
+  Modal,
   Typography,
-  Menu, 
+  Menu,
   Dropdown,
-  Button
+  Button,
 } from "antd";
 import {
   PhoneOutlined,
   SendOutlined,
   MailOutlined,
-  DownOutlined
+  DownOutlined,
 } from "@ant-design/icons";
 import Maghami from "../../assets/Maghami.jpg";
 import Ansari from "../../assets/Ansari.jpg";
 import front from "../../assets/Front_End.jpg";
 import back from "../../assets/Back_End.png";
-import imagelogin from "../../assets/MS.png";
+import Snake from "../../assets/snake.png";
 import English from "../../assets/english.svg";
 import Persian from "../../assets/persian.svg";
 import chooselanguage from "../../assets/chooselanguage.svg";
 import { useTranslation } from "react-i18next";
 import i18n from "../../utilies/i18n";
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    // change direrction persian -> rtl / english -> ltr
-  };
+import { Link } from "react-router-dom";
+import image from "../../assets/MS_header.svg";
+const changeLanguage = (lng) => {
+  i18n.changeLanguage(lng);
+  // change direrction persian -> rtl / english -> ltr
+};
 
-const { Header, Content ,Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 const { Paragraph } = Typography;
 
 function Guide() {
   const [isModalVisible1, setIsModalVisible1] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [visible, setVisible] = React.useState(false);
-  const {t} = useTranslation();
-  const [isfa , setfa] = useState(false);
+  const { t } = useTranslation();
+  const [isfa, setfa] = useState(false);
   const Detectfa = (lng) => {
-    if (lng === 'fa')
-       setfa(true);
-    else
-       setfa(false);
-  }
+    if (lng === "fa") setfa(true);
+    else setfa(false);
+  };
 
-  i18n.on('languageChanged', (lng) => {
+  i18n.on("languageChanged", (lng) => {
     Detectfa(lng);
   });
-  
 
   const menu1 = (
     <Menu>
       <Menu.Item key="0">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.discrete')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.discrete")}</a>
       </Menu.Item>
       <Menu.Item key="1">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.algebra')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.algebra")}</a>
       </Menu.Item>
       <Menu.Item key="2">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.network')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.network")}</a>
       </Menu.Item>
       <Menu.Item key="3">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.logic')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.logic")}</a>
       </Menu.Item>
       <Menu.Item key="4">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.software')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.software")}</a>
       </Menu.Item>
       <Menu.Item key="5">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.iot')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.iot")}</a>
       </Menu.Item>
     </Menu>
   );
   const menu2 = (
     <Menu>
       <Menu.Item key="0">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.discrete')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.discrete")}</a>
       </Menu.Item>
       <Menu.Item key="1">
-        <a className={isfa ? 'TA-fa' : 'TA'}>{t('TA.logic')}</a>
+        <a className={isfa ? "TA-fa" : "TA"}>{t("TA.logic")}</a>
       </Menu.Item>
     </Menu>
   );
@@ -107,122 +106,254 @@ function Guide() {
   };
 
   const handleCancel = () => {
-    console.log(t('message.cancel'));
+    console.log(t("message.cancel"));
     setVisible(false);
   };
 
   const menu = (
     <Menu>
       <Menu.Item>
-      <li onClick={() => changeLanguage("en")}>
-            <img src={English} alt="English" />
-            {t("footer.english")}
-       </li>
+        <li onClick={() => changeLanguage("en")}>
+          <img src={English} alt="English" />
+          {t("footer.english")}
+        </li>
       </Menu.Item>
       <Menu.Item>
-      
-      <li onClick={() => changeLanguage("fa")}>
-            <img src={Persian} alt="Persian" />
-            {t("footer.persian")}
-      </li>
+        <li onClick={() => changeLanguage("fa")}>
+          <img src={Persian} alt="Persian" />
+          {t("footer.persian")}
+        </li>
       </Menu.Item>
     </Menu>
   );
   return (
     <>
       <Helmet>
-        <title>{t('title.guide')}</title>
+        <title>{t("title.guide")}</title>
       </Helmet>
       <Layout className="layout">
         <Header>
           <Head />
         </Header>
 
-        <Content style={{ padding: "0 100px" , marginBottom:"15px"}}>
+        <Content style={{ padding: "0 100px", marginBottom: "15px" }}>
           <div className="site-layout-content">
-            <div>
-              <h2 className={isfa ? 'goal-fa' : 'goal'}>{t('goal.goal')}</h2>
-              <h3 className={isfa ? 'goal_context-fa' : 'goal_context'}>
-              {t('goal.goal-content')}
+            <div className="guide__content-first">
+              <img src={image} width="200" height="200" alt="SAMA WEB logo" />
+              <h2 className={isfa ? "overview-fa" : "overview"}>
+                {t("goal.overview1")}
+              </h2>
+              <h2 className={isfa ? "overview-fa" : "overview"}>
+                {t("goal.overview2")}
+              </h2>
+              <Link>
+                <button
+                onClick={showModal}
+                className="button-contact contact-btn"
+                style={{ marginBottom: "-10px" }}
+              >
+                <span>{t("goal.contact")}</span>
+              </button>
+              </Link>
+              <div className="center">
+              <Modal
+                title={t("contact.us")}
+                visible={visible}
+                onCancel={handleCancel}
+                footer={
+                  <Button onClick={handleCancel}>{t("register.close")}</Button>
+                }
+              >
+                <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                  <MailOutlined
+                    style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6" }}
+                  />
+                  {t("contact.email")}
+                </div>
+                <br />
+                <Paragraph copyable className="copy">
+                  mobinaansariit@gmail.com
+                </Paragraph>
+                <Paragraph copyable className="copy">
+                  sepideh@gmail.com
+                </Paragraph>
+                <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                  <PhoneOutlined
+                    style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6" }}
+                  />
+                  {t("contact.phone")}
+                </div>
+                <Paragraph copyable className="copy">
+                  +98 915 445 0822
+                </Paragraph>
+                <Paragraph copyable className="copy">
+                  +98 915 066 0935
+                </Paragraph>
+                <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                  <SendOutlined
+                    style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6" }}
+                  />
+                  {t("contact.telegram")}
+                </div>
+                <br />
+                <Paragraph copyable className="copy">
+                  @M_Ansari_Astaneh
+                </Paragraph>
+                <Paragraph copyable className="copy">
+                  @S_darban_maghami
+                </Paragraph>
+              </Modal>
+            </div>
+            </div>
+
+            <div id="have">
+              <h2 className={isfa ? "goal-fa" : "goal"}>{t("goal.goal")}</h2>
+              <h3 className={isfa ? "goal_context-fa" : "goal_context"}>
+                {t("goal.goal-content")}
               </h3>
             </div>
-            <div className="or"></div>
 
+            <div className="or"></div>
+            <div>
+              <h2 className={isfa ? "performance-fa" : "performance"}>{t("goal.SAMA")}</h2>
+              <h3 className={isfa ? "goal_context-fa" : "goal_context"}>
+                {t("goal.SAMA-content")}
+              </h3>
+            </div>
+
+            <div className="or"></div>
             <div className="programmers">
               <button className=" btn custom-btn" onClick={showModal1}>
-              <span>{t('programmer.programmers')}</span>
+                <span>{t("programmer.programmers")}</span>
               </button>
               <Modal
-                title={t('programmer.info')}
+                title={t("programmer.info")}
                 visible={isModalVisible1}
                 onCancel={handleCancel1}
                 width={1000}
-                centered
+                // centered
+                style={{marginTop:"-87px"}}
                 footer={
-                   <Button onClick={handleCancel1} >{t('register.close')}</Button>
+                  <Button onClick={handleCancel1}>{t("register.close")}</Button>
                 }
-                >
+              >
                 <Row className="card-center">
                   <Col flex={1}>
                     <Card
-                      title={t('programmer.front')}
+                      title={t("programmer.front")}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
                       cover={<img alt="Mobina Ansari" src={Ansari} />}
                     >
                       <h4>
-                        <a className="programmer_info" href={"https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/" }>{t('programmer.mobina')}</a>
+                        <a
+                          className="programmer_info"
+                          href={
+                            "https://www.linkedin.com/in/mobina-ansari-astaneh-431981213/"
+                          }
+                        >
+                          {t("programmer.mobina")}
+                        </a>
                       </h4>
-                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/student-center.png"/>              
-                      {t('programmer.degree')}<br />
+                      <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                        <img
+                          className={isfa ? "info-margin-fa" : "info-margin"}
+                          src="https://img.icons8.com/ios-filled/25/4a90e2/student-center.png"
+                        />
+                        {t("programmer.degree")}
+                        <br />
                       </div>
-                      <Paragraph><a href="http://www.sanjesh.org/">{t('programmer.bachelor')}</a></Paragraph>
-                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                       <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/university.png"/>
-                      {t('programmer.uni')}<br />
+                      <Paragraph>
+                        <a href="http://www.sanjesh.org/">
+                          {t("programmer.bachelor")}
+                        </a>
+                      </Paragraph>
+                      <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                        <img
+                          className={isfa ? "info-margin-fa" : "info-margin"}
+                          src="https://img.icons8.com/ios-filled/25/4a90e2/university.png"
+                        />
+                        {t("programmer.uni")}
+                        <br />
                       </div>
-                      <Paragraph><a href="https://www.sadjad.ac.ir/">{t('programmer.sadjad')}</a></Paragraph>
-                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/teacher.png"/>
-                      {t('programmer.academic')}<br />
+                      <Paragraph>
+                        <a href="https://www.sadjad.ac.ir/">
+                          {t("programmer.sadjad")}
+                        </a>
+                      </Paragraph>
+                      <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                        <img
+                          className={isfa ? "info-margin-fa" : "info-margin"}
+                          src="https://img.icons8.com/ios-filled/25/4a90e2/teacher.png"
+                        />
+                        {t("programmer.academic")}
+                        <br />
                       </div>
-                    <Dropdown overlay={menu1} trigger={['click']}>
+                      <Dropdown overlay={menu1} trigger={["click"]}>
                         <a className="ant-dropdown-link">
-                        {t('programmer.ta')}<DownOutlined />
+                          {t("programmer.ta")}
+                          <DownOutlined />
                         </a>
                       </Dropdown>
-                      </Card>
+                    </Card>
                   </Col>
                   <Col flex={1}>
                     <Card
-                      title={t('programmer.front')}
+                      title={t("programmer.front")}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
                       cover={<img alt="Sepideh Maghami" src={Maghami} />}
                     >
                       <h4>
-                        <a  className="programmer_info" href={"https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"}>{t('programmer.sepid')}</a>
+                        <a
+                          className="programmer_info"
+                          href={
+                            "https://www.linkedin.com/in/sepideh-darban-maghami-7bbb4b1b9/"
+                          }
+                        >
+                          {t("programmer.sepid")}
+                        </a>
                       </h4>
-                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/student-center.png"/>              
-                      {t('programmer.degree')}<br />
+                      <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                        <img
+                          className={isfa ? "info-margin-fa" : "info-margin"}
+                          src="https://img.icons8.com/ios-filled/25/4a90e2/student-center.png"
+                        />
+                        {t("programmer.degree")}
+                        <br />
                       </div>
-                      <Paragraph><a href="http://www.sanjesh.org/">{t('programmer.bachelor')}</a></Paragraph>
-                    <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                    <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/university.png"/>
-                      {t('programmer.uni')}<br />
-                    </div>
-                      <Paragraph><a href="https://www.sadjad.ac.ir/">{t('programmer.sadjad')}</a></Paragraph>
-                      <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                      <img className={isfa ? 'info-margin-fa' : 'info-margin'} src="https://img.icons8.com/ios-filled/25/4a90e2/teacher.png"/>
-                    {t('programmer.academic')}<br />
+                      <Paragraph>
+                        <a href="http://www.sanjesh.org/">
+                          {t("programmer.bachelor")}
+                        </a>
+                      </Paragraph>
+                      <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                        <img
+                          className={isfa ? "info-margin-fa" : "info-margin"}
+                          src="https://img.icons8.com/ios-filled/25/4a90e2/university.png"
+                        />
+                        {t("programmer.uni")}
+                        <br />
                       </div>
-                    <Dropdown overlay={menu2} trigger={['click']}>
+                      <Paragraph>
+                        <a href="https://www.sadjad.ac.ir/">
+                          {t("programmer.sadjad")}
+                        </a>
+                      </Paragraph>
+                      <div className={isfa ? "icon-field-fa" : "icon-field"}>
+                        <img
+                          className={isfa ? "info-margin-fa" : "info-margin"}
+                          src="https://img.icons8.com/ios-filled/25/4a90e2/teacher.png"
+                        />
+                        {t("programmer.academic")}
+                        <br />
+                      </div>
+                      <Dropdown overlay={menu2} trigger={["click"]}>
                         <a className="ant-dropdown-link">
-                        {t('programmer.ta')}<DownOutlined />
+                          {t("programmer.ta")}
+                          <DownOutlined />
                         </a>
                       </Dropdown>
                     </Card>
@@ -232,21 +363,24 @@ function Guide() {
             </div>
             <div className="ProgrammingLanguages">
               <button className=" btn custom-btn" onClick={showModal2}>
-               <span>{t('programmering-language.programmering-language')}</span>
+                <span>
+                  {t("programmering-language.programmering-language")}
+                </span>
               </button>
               <Modal
-                title={t('programmering-language.title')}
+                title={t("programmering-language.title")}
                 visible={isModalVisible2}
                 onCancel={handleCancel2}
                 width={1000}
                 footer={
-                   <Button onClick={handleCancel2} >{t('register.close')}</Button>
+                  <Button onClick={handleCancel2}>{t("register.close")}</Button>
                 }
+                style={{marginTop:"-60px"}}
               >
                 <Row className="card-center">
                   <Col flex={1}>
                     <Card
-                      title={t('programmering-language.front')}
+                      title={t("programmering-language.front")}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
@@ -288,7 +422,7 @@ function Guide() {
                   </Col>
                   <Col flex={1}>
                     <Card
-                      title={t('programmering-language.back')}
+                      title={t("programmering-language.back")}
                       bordered={false}
                       hoverable
                       style={{ width: 240 }}
@@ -315,56 +449,22 @@ function Guide() {
                 </Row>
               </Modal>
             </div>
-            <div className="or"></div>
-            <img src={imagelogin} alt="" className="logo"/>
-            <div className="center">
-              <button onClick={showModal} className=" btn custom-btn" style={{marginBottom:"-20px"}}>
-               <span>{t('contact.contact')}</span>
-              </button>
-              <Modal
-                title= {t('contact.us')}
-                visible={visible}
-                onCancel={handleCancel}
-                footer={
-                   <Button onClick={handleCancel}>{t('register.close')}</Button>
-                }
-              >
-
-                <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                <MailOutlined style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6"  }} />
-                {t('contact.email')}
-                </div>
-                <br />
-                <Paragraph copyable className="copy">mobinaansariit@gmail.com</Paragraph>
-                <Paragraph copyable className="copy">sepideh@gmail.com</Paragraph>
-                <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                <PhoneOutlined style={{ padding: "1px 6px 4px 5px", color: "#3fa7d6"  }} />
-                  {t('contact.phone')}
-                </div>
-                      <Paragraph copyable className="copy">+98 915 445 0822</Paragraph>
-                      <Paragraph copyable className="copy">+98 915 066 0935</Paragraph>
-                <div className={isfa ? 'icon-field-fa' : 'icon-field'}>
-                <SendOutlined style={{ padding: "1px 6px 4px 5px" , color: "#3fa7d6" }} />
-                {t('contact.telegram')}
-                </div>
-                <br />
-                <Paragraph copyable className="copy">@M_Ansari_Astaneh</Paragraph>
-                <Paragraph copyable className="copy">@S_darban_maghami</Paragraph>
-              </Modal>
-            </div>
+            
+            
           </div>
         </Content>
-    
-     {/* bilingual */}
-     <Footer style={{ textAlign: 'center' }}>
-        <Dropdown overlay={menu} placement="bottomCenter" arrow>
-          <Button className="btn-footer">  
-            <img src={chooselanguage} alt="Choose Language" />
-            {t("footer.language")}
-          </Button>
-        </Dropdown>
-      </Footer>
-                
+
+        <div className="or"></div>
+            <img src={Snake} alt="" className="logo" />
+        {/* bilingual */}
+        <Footer style={{ textAlign: "center" }}>
+          <Dropdown overlay={menu} placement="bottomCenter" arrow>
+            <Button className="btn-footer">
+              <img src={chooselanguage} alt="Choose Language" />
+              {t("footer.language")}
+            </Button>
+          </Dropdown>
+        </Footer>
       </Layout>
     </>
   );

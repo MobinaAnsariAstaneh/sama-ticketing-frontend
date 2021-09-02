@@ -1,8 +1,9 @@
 import "./register.css";
-import { Layout, Row, Col, Form, Input, Button ,Menu,Dropdown } from "antd";
+import React, { useState, useEffect} from "react";
+import { Layout, Row, Col, Form, Input, Button ,Menu,Dropdown, message } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { useHistory } from 'react-router-dom';
-import imgLogin from "../../assets/login.jpg";
+import { useHistory , Redirect, Link } from 'react-router-dom';
+import imgLogin from "../../assets/register.png";
 import imagelogin from "../../assets/MS.svg";
 import { Helmet } from "react-helmet";
 import axios from "../../axios";
@@ -20,6 +21,26 @@ function Register() {
     i18n.changeLanguage(lng);
     // change direrction persian -> rtl / english -> ltr
   };
+  const [isfa , setfa] = useState(false);
+  const Detectfa = (lng) => {
+    if (lng === 'fa')
+       setfa(true);
+    else
+       setfa(false);
+  }
+
+  i18n.on('languageChanged', (lng) => {
+    Detectfa(lng);
+  });
+
+  useEffect(()=>{
+    if(i18n.language == 'fa'){
+      setfa(true) 
+    }
+    else{
+      setfa(false)
+    }
+  },[])
 
   const onFinish = (values) => {
     axios.post("api/register", {
@@ -30,7 +51,13 @@ function Register() {
       password_confirm: values.confirm_password,
     })
     .then(()=>{
-      history.push("./login");
+      if(values.password !== values.password_confirm){
+        message.error("Password and Confirm Password wasn't match");
+        <Redirect to="/register" />
+      }
+      else{
+        history.push("./login");
+      }
     })
   };
   const menu = (
@@ -57,7 +84,7 @@ function Register() {
       </Helmet>
 
       <Layout>
-        <Content>
+        <Content className={isfa ? "rtl-register" : "ltr-register"}>
           <Row>
             <Col className="item_center" span={12}>
               <div>
@@ -66,7 +93,7 @@ function Register() {
               <p className="p-size">{t('register.account')}</p>
               <p note-size>{t('register.have-account')}</p>
               <p>
-                <a href={"./login"}>{t('register.signIn')}</a>
+                <Link to={"./login"}>{t('register.signIn')}</Link>
               </p>
 
               <Form
@@ -210,7 +237,7 @@ function Register() {
                   </Form.Item>
                         {/* Bilingual */}
                 <Dropdown overlay={menu} placement="bottomCenter" arrow>
-          <Button className="btn-footer">  
+          <Button className="btn-footer" style={{marginBottom:"20px"}}>  
             <img src={chooselanguage} alt="Choose Language" />
             {t("footer.language")}
           </Button>
@@ -228,11 +255,8 @@ function Register() {
                   alt=""
                 />
 
-                <p className="para">
-                  <span>{t('company.company')}</span>
-                  <div>
-                    {t('company.goal')}
-                  </div>
+                <p className="para" style={{color:"blue",padding:"50px 0px",margin:"-5px 0px"}}>
+                  <span style={{color:"blue",fontWeight:"500"}}>{t('company.company')}</span>
                 </p>
               </div>
               

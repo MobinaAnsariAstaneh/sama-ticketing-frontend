@@ -4,7 +4,16 @@
     flex-wrap: wrap-reverse !important;
 }
 
-.icons-list {
+.icons-list-ltr {
+    color: white;
+    padding-top: 30px;
+    font-size: 20px;
+    margin-left: -20px;
+    cursor: pointer;
+    text-align-last: right;
+}
+
+.icons-list-rtl {
     color: white;
     padding-top: 30px;
     font-size: 20px;
@@ -29,6 +38,14 @@
     right: 0;
 }
 
+.ant-image-guide {
+    top: 0px;
+    height: 660px;
+    opacity: 0.9;
+    overflow: hidden;
+    backface-visibility: visible;
+}
+
 .ant-layout-header {
     height: 155px !important;
     background: white !important;
@@ -38,11 +55,19 @@
 }
 
 .ant-col1 {
-    padding-left: 20px;
+    padding-left: 0px;
 }
 
-.ant-col2 {
-    padding-right: 50px;
+.rtl-ant-col2 {
+    margin: auto;
+    margin-top: -4px;
+    margin-left: 40px;
+}
+
+.ltr-ant-col2 {
+    margin: auto;
+    margin-top: -4px;
+    margin-right: 40px;
 }
 
 .ant-dropdown,
@@ -50,6 +75,16 @@
 .ant-dropdown-hidden {
     padding-top: 5px !important;
     min-width: 175px !important;
+}
+
+.rtl-username-style {
+    font-size: 15px;
+    padding: 0px;
+}
+
+.ltr-username-style {
+    font-size: 15px;
+    padding: 0px 0px 0px 10px;
 }
 
 .username-style {
@@ -70,9 +105,8 @@
 }
 
 .dashboard_logo {
-    padding: 5px 15px 5px 5px;
     padding-top: 0px;
-    padding-right: 15px;
+    padding-right: 5px;
 }
 
 .left_header {
@@ -120,5 +154,52 @@ Header,
     }
     .icons-list {
         margin-bottom: -15px;
+    }
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.rtl-user {
+    font-size: 20px;
+    padding: 0px 3px 0px 0px;
+}
+
+.ltr-user {
+    font-size: 20px;
+    padding: 0px 0px 0px 3px;
+}
+
+.ltr-question {
+    padding: 0px 2px;
+}
+
+.rtl-question {
+    padding: 0px 10px;
+}
+
+.linkGuide1 {
+    font-size: 15px;
+    margin: 0 -7px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.linkGuide2 {
+    font-size: 15px;
+    margin: 0 12px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.ant-layout-header {
+    line-height: 45px !important;
+}
+
+@media screen and (min-width: 991px) {
+    .ant-layout-sider {
+        min-width: 500px !important;
+        text-align: end;
     }
 }

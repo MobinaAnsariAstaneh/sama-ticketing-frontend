@@ -1,3 +1,11 @@
+.rtl-forgotten {
+    direction: rtl;
+}
+
+.ltr-forgotten {
+    direction: ltr;
+}
+
 .item_center {
     display: flex !important;
     justify-content: center;
